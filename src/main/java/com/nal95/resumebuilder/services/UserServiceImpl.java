@@ -2,7 +2,6 @@ package com.nal95.resumebuilder.services;
 
 
 import com.nal95.resumebuilder.DTOs.UserRequest;
-import com.nal95.resumebuilder.DTOs.UserResponse;
 import com.nal95.resumebuilder.entities.User;
 import com.nal95.resumebuilder.resumeBuilderExceptions.ResourceAlreadyExistsException;
 import com.nal95.resumebuilder.resumeBuilderExceptions.UserNotFoundException;
@@ -28,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponse createUser(UserRequest userRequest) {
+    public User createUser(UserRequest userRequest) {
 
         if (repository.existsByEmail(userRequest.getEmail())) {
             throw new ResourceAlreadyExistsException("User with email " + userRequest.getEmail() + " already exists");
@@ -36,37 +35,28 @@ public class UserServiceImpl implements UserService {
 
         User user = modelMapper.map(userRequest, User.class);
 
-        user = repository.save(user);
-
-        return modelMapper.map(user, UserResponse.class);
+        return repository.save(user);
     }
 
     @Override
-    public UserResponse getUser(Long userId) {
-
-        User user = repository.findById(userId).orElseThrow(() ->
+    public User getUser(Long userId) {
+        return repository.findById(userId).orElseThrow(() ->
                 new UserNotFoundException("User with ID " + userId + " not found"));
-
-        return modelMapper.map(user, UserResponse.class);
     }
 
     @Override
-    public List<UserResponse> getUsers() {
-        List<UserResponse> userList = new ArrayList<>();
-        repository.findAll()
-                .forEach(user -> userList.add(modelMapper.map(user, UserResponse.class)));
-
-        return userList;
+    public List<User> getUsers() {
+        return new ArrayList<>(repository.findAll());
     }
 
     @Override
-    public UserResponse updateUser(Long userId, UserRequest updatedUserRequest) {
+    public User updateUser(Long userId, UserRequest updatedUserRequest) {
         User existedUser = repository.findById(userId).orElseThrow(() ->
                 new UserNotFoundException("User with ID " + userId + " not found"));
 
         User updatedUser = mapExistedUserToUpdatedUser(existedUser, updatedUserRequest);
 
-        return modelMapper.map(repository.save(updatedUser), UserResponse.class);
+        return repository.save(updatedUser);
     }
 
     @Override

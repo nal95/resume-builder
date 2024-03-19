@@ -2,18 +2,18 @@ package com.nal95.resumebuilder.services;
 
 
 import com.nal95.resumebuilder.DTOs.UserRequest;
-import com.nal95.resumebuilder.DTOs.UserResponse;
+import com.nal95.resumebuilder.entities.User;
 
 import java.util.List;
 
 public interface UserService {
-    UserResponse createUser(UserRequest userRequest);
+    User createUser(UserRequest userRequest);
 
-    List<UserResponse> getUsers();
+    List<User> getUsers();
 
-    UserResponse updateUser(Long userId, UserRequest userRequest);
+    User updateUser(Long userId, UserRequest userRequest);
 
     void deleteUser(Long userId);
 
-    UserResponse getUser(Long userId);
+    User getUser(Long userId);
 }
