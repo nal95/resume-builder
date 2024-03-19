@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: resume-builder
+
+  datasource:
+    url: jdbc:h2:mem:cvs
+    driverClassName: org.h2.Driver
+
+  jpa:
+    show-sql: true
+    database: h2
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
