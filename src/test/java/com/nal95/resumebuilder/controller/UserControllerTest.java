@@ -12,9 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.multipart.MultipartFile;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(UserController.class)
 class UserControllerTest {
+
 
     @Autowired
     private MockMvc mockMvc;
@@ -61,10 +65,7 @@ class UserControllerTest {
 
         // Then
         response.andDo(print())
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.firstName", is(expectedUserResponse.getFirstName())))
-                .andExpect(jsonPath("$.lastName", is(expectedUserResponse.getLastName())))
-                .andExpect(jsonPath("$.email", is(expectedUserResponse.getEmail())));
+                .andExpect(status().isCreated());
 
         assertEquals(objectMapper.writeValueAsString(expectedUserResponse), response.andReturn().getResponse().getContentAsString());
     }
@@ -106,10 +107,7 @@ class UserControllerTest {
 
         // Then
         response.andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName", is(expectedUserResponse.getFirstName())))
-                .andExpect(jsonPath("$.lastName", is(expectedUserResponse.getLastName())))
-                .andExpect(jsonPath("$.email", is(expectedUserResponse.getEmail())));
+                .andExpect(status().isOk());
 
         assertEquals(objectMapper.writeValueAsString(expectedUserResponse), response.andReturn().getResponse().getContentAsString());
     }
@@ -160,10 +158,57 @@ class UserControllerTest {
 
         // Then
         response.andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName", is(expectedUserResponse.getFirstName())))
-                .andExpect(jsonPath("$.lastName", is(expectedUserResponse.getLastName())))
-                .andExpect(jsonPath("$.email", is(expectedUserResponse.getEmail())));
+                .andExpect(status().isOk());
+
+        assertEquals(objectMapper.writeValueAsString(expectedUserResponse),
+                response.andReturn().getResponse().getContentAsString());
+    }
+
+    @Test
+    void updateUserImage_Success() throws Exception {
+        // Given
+        Long userId = 1L;
+        byte[] content = "Test image data".getBytes();
+        MultipartFile image = new MockMultipartFile("file", "image.jpg", "image/jpeg", content);
+        User expectedUserResponse = responseHelper.getUser();
+        expectedUserResponse.getUserDetails().setImage(image.getBytes());
+
+        // When
+        given(userService.setUserImage(eq(userId), any(MultipartFile.class)))
+                .willReturn(expectedUserResponse);
+
+        ResultActions response = mockMvc.perform(multipart(HttpMethod.POST, "/users/{id}/image", userId)
+                .file("image", image.getBytes())
+                .contentType(MediaType.MULTIPART_FORM_DATA_VALUE));
+
+        // Then
+        response.andDo(print())
+                .andExpect(status().isOk());
+
+        assertEquals(objectMapper.writeValueAsString(expectedUserResponse),
+                response.andReturn().getResponse().getContentAsString());
+    }
+
+    @Test
+    void updateUserImage_UserNotFound() throws Exception {
+        //Given
+        String notFoundMessage = "User with ID " + 1L + " not found";
+
+        //When
+        given(userService.setUserImage(anyLong(), any(MultipartFile.class)))
+                .willThrow(new UserNotFoundException(notFoundMessage));
+
+        ResultActions response = mockMvc.perform(multipart(HttpMethod.POST, "/users/{id}/image", 1L)
+                .file("image", new byte[10])
+                .contentType(MediaType.MULTIPART_FORM_DATA_VALUE));
+
+        // Then
+        response.andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.type", is("about:blank")))
+                .andExpect(jsonPath("$.title", is("Not Found")))
+                .andExpect(jsonPath("$.status", is(404)))
+                .andExpect(jsonPath("$.detail", is(notFoundMessage)));
     }
 
     @Test
