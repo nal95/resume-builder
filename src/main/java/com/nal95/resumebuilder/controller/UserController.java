@@ -5,6 +5,7 @@ import com.nal95.resumebuilder.entities.User;
 import com.nal95.resumebuilder.resumeBuilderExceptions.ResourceAlreadyExistsException;
 import com.nal95.resumebuilder.resumeBuilderExceptions.UserNotFoundException;
 import com.nal95.resumebuilder.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -35,7 +37,8 @@ public class UserController {
             return new ResponseEntity<>(user, HttpStatus.OK);
 
         } catch (UserNotFoundException e) {
-            //TODO: log exception here
+
+            log.error(e.getMessage());
 
             ErrorResponse errorResponse = ErrorResponse.builder(e, HttpStatus.NOT_FOUND,
                     e.getMessage()).build();
@@ -51,7 +54,8 @@ public class UserController {
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 
         } catch (UserNotFoundException e) {
-            //TODO: log exception here
+
+            log.error(e.getMessage());
 
             ErrorResponse errorResponse = ErrorResponse.builder(e, HttpStatus.NOT_FOUND,
                     e.getMessage()).build();
@@ -60,7 +64,6 @@ public class UserController {
         }
     }
 
-    //TODO: test this methode
     @PostMapping("/{id}/image")
     public ResponseEntity<User> setUserImage(@PathVariable Long id, @RequestParam(value = "image", required = true) MultipartFile image) {
         try {
@@ -68,7 +71,8 @@ public class UserController {
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 
         } catch (UserNotFoundException e) {
-            //TODO: log exception here
+
+            log.error(e.getMessage());
 
             ErrorResponse errorResponse = ErrorResponse.builder(e, HttpStatus.NOT_FOUND,
                     e.getMessage()).build();
@@ -90,7 +94,8 @@ public class UserController {
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
 
         } catch (ResourceAlreadyExistsException e) {
-            //TODO: log exception here
+
+            log.error(e.getMessage());
 
             ErrorResponse errorResponse = ErrorResponse.builder(e, HttpStatus.CONFLICT,
                     e.getMessage()).build();

@@ -6,6 +6,7 @@ import com.nal95.resumebuilder.entities.User;
 import com.nal95.resumebuilder.repositories.UserRepository;
 import com.nal95.resumebuilder.resumeBuilderExceptions.ResourceAlreadyExistsException;
 import com.nal95.resumebuilder.resumeBuilderExceptions.UserNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
@@ -88,7 +90,7 @@ public class UserServiceImpl implements UserService {
             try {
                 existedUser.getUserDetails().setImage(image.getBytes());
             } catch (IOException e) {
-                //TODO log error
+                log.error("Something went wrong with MultipartFile image. Details: {}", e.getMessage());
             }
         } else {
             try {
@@ -96,9 +98,11 @@ public class UserServiceImpl implements UserService {
                 byte[] bytes = Files.readAllBytes(file.toPath());
                 existedUser.getUserDetails().setImage(bytes);
             } catch (IOException e) {
-                //TODO log error
+                log.error(e.getMessage());
+                log.error("Something went wrong with init user image please check your resources/static/ folder");
             }
         }
+
         return repository.save(existedUser);
     }
 }

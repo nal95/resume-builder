@@ -4,21 +4,20 @@ import com.nal95.resumebuilder.entities.User;
 import com.nal95.resumebuilder.helpers.Response;
 import com.nal95.resumebuilder.services.UserService;
 import org.apache.logging.log4j.util.Strings;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.system.CapturedOutput;
+import org.springframework.boot.test.system.OutputCaptureExtension;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@ExtendWith(OutputCaptureExtension.class)
 class ResumeBuilderApplicationTests {
 
     @Mock
@@ -29,27 +28,14 @@ class ResumeBuilderApplicationTests {
 
     Response responseHelper = null;
 
-    AutoCloseable autoCloseable = null;
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-
     @BeforeEach
     void Init() {
         responseHelper = new Response();
-        System.setOut(new PrintStream(outContent));
-        autoCloseable = MockitoAnnotations.openMocks(this);
-    }
-
-    @AfterEach
-    public void restoreStreams() throws Exception {
-        System.setOut(originalOut);
-        autoCloseable.close();
     }
 
 
     @Test
-    public void testRunMethod_UserFound() {
+    public void testRunMethod_UserFound(CapturedOutput output) {
         //Given
         // Prepare mock user
         byte[] image = "Test image data".getBytes();
@@ -59,24 +45,24 @@ class ResumeBuilderApplicationTests {
         //When
         when(userService.setUserImage(1L, null)).thenReturn(user);
         // Call the run method
-        application.run(Strings.EMPTY_ARRAY);
+        application.run(Strings.EMPTY);
 
         //Then
         // Verify that "User image updated successfully." is printed
-        assertEquals("User image updated successfully.", outContent.toString().trim());
+        assertThat(output).contains("Init user image updated successfully.");
     }
 
     @Test
-    public void testRunMethod_UserNotFound() {
+    public void testRunMethod_UserNotFound(CapturedOutput output) {
         //When
         // Prepare mock user
         when(userService.setUserImage(1L, null)).thenReturn(null);
         // Call the run method
-        application.run(Strings.EMPTY_ARRAY);
+        application.run(Strings.EMPTY);
 
         //Then
         // Verify that "User not found." is printed
-        assertEquals("User not found.", outContent.toString().trim());
+        assertThat(output).contains("Init user not found.");
     }
 
 }

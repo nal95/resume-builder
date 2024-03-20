@@ -2,12 +2,14 @@ package com.nal95.resumebuilder;
 
 import com.nal95.resumebuilder.entities.User;
 import com.nal95.resumebuilder.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@Slf4j
 public class ResumeBuilderApplication implements CommandLineRunner {
 
     @Autowired
@@ -21,9 +23,9 @@ public class ResumeBuilderApplication implements CommandLineRunner {
     public void run(String... args) {
         User user = userService.setUserImage(1L, null);
         if (user != null) {
-            System.out.println("User image updated successfully.");
+            System.out.println("Init user image updated successfully.");
         } else {
-            System.out.println("User not found.");
+            System.out.println("Init user not found.");
         }
     }
 
