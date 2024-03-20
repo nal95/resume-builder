@@ -28,10 +28,10 @@ public class UserController {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getUser(@PathVariable Long userId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
         try {
-            User user = userService.getUser(userId);
+            User user = userService.getUser(id);
             return new ResponseEntity<>(user, HttpStatus.OK);
 
         } catch (UserNotFoundException e) {
@@ -44,10 +44,10 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserRequest userRequest) {
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest) {
         try {
-            User updatedUser = userService.updateUser(userId, userRequest);
+            User updatedUser = userService.updateUser(id, userRequest);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 
         } catch (UserNotFoundException e) {
@@ -77,9 +77,9 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 

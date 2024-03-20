@@ -44,9 +44,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(Long userId) {
-        return repository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException("User with ID " + userId + " not found"));
+    public User getUser(Long id) {
+        return repository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with ID " + id + " not found"));
     }
 
     @Override
@@ -55,9 +55,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long userId, UserRequest updatedUserRequest) {
-        User existedUser = repository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException("User with ID " + userId + " not found"));
+    public User updateUser(Long id, UserRequest updatedUserRequest) {
+        User existedUser = repository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with ID " + id + " not found"));
 
         User updatedUser = mapExistedUserToUpdatedUser(existedUser, updatedUserRequest);
 
@@ -65,8 +65,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
-        repository.deleteById(userId);
+    public void deleteUser(Long id) {
+        repository.deleteById(id);
     }
 
     private User mapExistedUserToUpdatedUser(User existedUser, UserRequest updatedUserRequest) {
@@ -79,10 +79,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User setUserImage(Long userId, MultipartFile image) {
+    public User setUserImage(Long id, MultipartFile image) {
 
-        User existedUser = repository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException("User with ID " + userId + " not found"));
+        User existedUser = repository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User with ID " + id + " not found"));
 
         if (image != null) {
             try {

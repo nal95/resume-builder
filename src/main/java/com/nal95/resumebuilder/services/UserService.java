@@ -12,11 +12,11 @@ public interface UserService {
 
     List<User> getUsers();
 
-    User updateUser(Long userId, UserRequest userRequest);
+    User updateUser(Long id, UserRequest userRequest);
 
-    void deleteUser(Long userId);
+    void deleteUser(Long id);
 
-    User getUser(Long userId);
+    User getUser(Long id);
 
-    User setUserImage(Long userId, MultipartFile image);
+    User setUserImage(Long id, MultipartFile image);
 }

@@ -96,14 +96,14 @@ class UserControllerTest {
     @Test
     void getUser_Success() throws Exception {
         // Given
-        Long userId = 1L;
+        Long id = 1L;
         User expectedUserResponse = responseHelper.getUser();
 
         // When
-        given(userService.getUser(userId))
+        given(userService.getUser(id))
                 .willReturn(expectedUserResponse);
 
-        ResultActions response = mockMvc.perform(get("/users/{userId}", userId));
+        ResultActions response = mockMvc.perform(get("/users/{id}", id));
 
         // Then
         response.andDo(print())
@@ -115,14 +115,14 @@ class UserControllerTest {
     @Test
     void getUser_NotFound() throws Exception {
         // Given
-        Long userId = 1L;
-        String notFoundMessage = "User with ID " + userId + " not found";
+        Long id = 1L;
+        String notFoundMessage = "User with ID " + id + " not found";
 
         // When
-        given(userService.getUser(userId))
+        given(userService.getUser(id))
                 .willThrow(new UserNotFoundException(notFoundMessage));
 
-        ResultActions response = mockMvc.perform(get("/users/{userId}", userId));
+        ResultActions response = mockMvc.perform(get("/users/{id}", id));
 
         // Then
         response.andDo(print())
@@ -136,7 +136,7 @@ class UserControllerTest {
     @Test
     void updateUser_Success() throws Exception {
         // Given
-        Long userId = 1L;
+        Long id = 1L;
         UserRequest userRequest = responseHelper.getUserRequest();
         User expectedUserResponse = responseHelper.getUser();
 
@@ -149,10 +149,10 @@ class UserControllerTest {
         expectedUserResponse.setLastName("Brown");
 
         // When
-        given(userService.updateUser(eq(userId), any(UserRequest.class)))
+        given(userService.updateUser(eq(id), any(UserRequest.class)))
                 .willReturn(expectedUserResponse);
 
-        ResultActions response = mockMvc.perform(put("/users/{userId}", userId)
+        ResultActions response = mockMvc.perform(put("/users/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userRequest)));
 
@@ -167,17 +167,17 @@ class UserControllerTest {
     @Test
     void updateUserImage_Success() throws Exception {
         // Given
-        Long userId = 1L;
+        Long id = 1L;
         byte[] content = "Test image data".getBytes();
         MultipartFile image = new MockMultipartFile("file", "image.jpg", "image/jpeg", content);
         User expectedUserResponse = responseHelper.getUser();
         expectedUserResponse.getUserDetails().setImage(image.getBytes());
 
         // When
-        given(userService.setUserImage(eq(userId), any(MultipartFile.class)))
+        given(userService.setUserImage(eq(id), any(MultipartFile.class)))
                 .willReturn(expectedUserResponse);
 
-        ResultActions response = mockMvc.perform(multipart(HttpMethod.POST, "/users/{id}/image", userId)
+        ResultActions response = mockMvc.perform(multipart(HttpMethod.POST, "/users/{id}/image", id)
                 .file("image", image.getBytes())
                 .contentType(MediaType.MULTIPART_FORM_DATA_VALUE));
 
@@ -214,15 +214,15 @@ class UserControllerTest {
     @Test
     void updateUser_NotFound() throws Exception {
         // Given
-        Long userId = 1L;
+        Long id = 1L;
         UserRequest userRequest = responseHelper.getUserRequest();
-        String notFoundMessage = "User with ID " + userId + " not found";
+        String notFoundMessage = "User with ID " + id + " not found";
 
         // When
-        given(userService.updateUser(eq(userId), any(UserRequest.class)))
+        given(userService.updateUser(eq(id), any(UserRequest.class)))
                 .willThrow(new UserNotFoundException(notFoundMessage));
 
-        ResultActions response = mockMvc.perform(put("/users/{userId}", userId)
+        ResultActions response = mockMvc.perform(put("/users/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userRequest)));
 
@@ -241,7 +241,7 @@ class UserControllerTest {
         doNothing().when(userService).deleteUser(anyLong());
 
         // Perform DELETE request
-        mockMvc.perform(delete("/users/{userId}", 1L)
+        mockMvc.perform(delete("/users/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
