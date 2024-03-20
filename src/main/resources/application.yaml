@@ -15,7 +15,3 @@ spring:
   h2:
     console:
       enabled: true
-
-  freemarker:
-    template-loader-path: classpath:/templates/
-    suffix: .ftl
