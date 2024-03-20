@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @PostMapping("/{id}/image")
-    public ResponseEntity<User> setUserImage(@PathVariable Long id, @RequestParam(value = "image", required = true) MultipartFile image) {
+    public ResponseEntity<User> setUserImage(@PathVariable Long id, @RequestParam(value = "image") MultipartFile image) {
         try {
             User updatedUser = userService.setUserImage(id, image);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
