@@ -22,7 +22,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @Column(name = "user-details", columnDefinition = "json")
+    @Column(name = "user_details", columnDefinition = "json")
     @Type(JsonType.class)
     private UserDetails userDetails;
 }
