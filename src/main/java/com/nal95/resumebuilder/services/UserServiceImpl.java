@@ -3,13 +3,18 @@ package com.nal95.resumebuilder.services;
 
 import com.nal95.resumebuilder.DTOs.UserRequest;
 import com.nal95.resumebuilder.entities.User;
+import com.nal95.resumebuilder.repositories.UserRepository;
 import com.nal95.resumebuilder.resumeBuilderExceptions.ResourceAlreadyExistsException;
 import com.nal95.resumebuilder.resumeBuilderExceptions.UserNotFoundException;
-import com.nal95.resumebuilder.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,5 +76,29 @@ public class UserServiceImpl implements UserService {
         existedUser.setUserDetails(updatedUserRequest.getUserDetails());
 
         return existedUser;
+    }
+
+    @Override
+    public User setUserImage(Long userId, MultipartFile image) {
+
+        User existedUser = repository.findById(userId).orElseThrow(() ->
+                new UserNotFoundException("User with ID " + userId + " not found"));
+
+        if (image != null) {
+            try {
+                existedUser.getUserDetails().setImage(image.getBytes());
+            } catch (IOException e) {
+                //TODO log error
+            }
+        } else {
+            try {
+                File file = ResourceUtils.getFile("classpath:static/john.svg");
+                byte[] bytes = Files.readAllBytes(file.toPath());
+                existedUser.getUserDetails().setImage(bytes);
+            } catch (IOException e) {
+                //TODO log error
+            }
+        }
+        return repository.save(existedUser);
     }
 }
