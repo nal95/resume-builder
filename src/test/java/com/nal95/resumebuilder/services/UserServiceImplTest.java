@@ -13,14 +13,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
@@ -150,6 +155,7 @@ class UserServiceImplTest {
 
         // When -  action or the behaviour that we are going test
         given(userRepository.findById(1L)).willReturn(Optional.of(user));
+
         //update user-helper entities
         User expectedUser = responseHelper.getUser();
         expectedUser.setId(user.getId());
@@ -180,8 +186,9 @@ class UserServiceImplTest {
         // When -  action or the behaviour that we are going test
         given(userRepository.findById(userId)).willReturn(Optional.empty());
 
-        // Then
         UserNotFoundException exception = assertThrows(UserNotFoundException.class, () -> userService.updateUser(userId, userRequest));
+
+        // Then
         verify(userRepository, times(1)).findById(userId);
         assertEquals(exceptionMessage, exception.getMessage());
     }
@@ -195,5 +202,55 @@ class UserServiceImplTest {
 
         // Then
         verify(userRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void testUpdateUserImage_WithImage() throws IOException {
+        // Given
+        Long userId = 1L;
+        byte[] content = Files.readAllBytes(Paths.get("src/main/resources/static/john.svg"));
+        MockMultipartFile image = new MockMultipartFile("image", "john.svg", "image/svg", content);
+        User existingUser = responseHelper.getUser();
+
+        // When
+        when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
+
+        //Update user-helper entities
+        existingUser.getUserDetails().setImage(image.getBytes());
+        when(userRepository.save(existingUser)).thenReturn(existingUser);
+
+        User updatedUser = userService.setUserImage(userId, image);
+
+        // Then
+        assertSame(existingUser, updatedUser);
+        assertArrayEquals(image.getBytes(), updatedUser.getUserDetails().getImage());
+    }
+
+    @Test
+    public void testUpdateUserImage_WithoutImage() throws IOException {
+        // Given
+        Long userId = 1L;
+        byte[] defaultImageData = getDefaultImageData();
+        User existingUser = responseHelper.getUser();
+
+        // When
+        when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
+
+        //Update user-helper entities
+        existingUser.getUserDetails().setImage(null);
+        when(userRepository.save(existingUser)).thenReturn(existingUser);
+        existingUser.getUserDetails().setImage(defaultImageData);
+        when(userRepository.save(existingUser)).thenReturn(existingUser);
+
+        User updatedUser = userService.setUserImage(userId, null);
+
+        // Then
+        assertSame(existingUser, updatedUser);
+        assertArrayEquals(defaultImageData, updatedUser.getUserDetails().getImage());
+    }
+
+    private byte[] getDefaultImageData() throws IOException {
+        File file = ResourceUtils.getFile("classpath:static/john.svg");
+        return Files.readAllBytes(file.toPath());
     }
 }
