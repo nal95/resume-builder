@@ -22,5 +22,6 @@ jobs:
 
       - name: Maven Package and Test
         run: |
+          cd backend
           mvn -B clean
           mvn -B test --file pom.xml
