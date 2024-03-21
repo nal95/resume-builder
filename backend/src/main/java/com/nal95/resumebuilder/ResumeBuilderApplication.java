@@ -23,9 +23,9 @@ public class ResumeBuilderApplication implements CommandLineRunner {
     public void run(String... args) {
         User user = userService.setUserImage(1L, null);
         if (user != null) {
-            System.out.println("Init user image updated successfully.");
+            log.info("Init user image updated successfully.");
         } else {
-            System.out.println("Init user not found.");
+            log.info("Init user not found.");
         }
     }
 
