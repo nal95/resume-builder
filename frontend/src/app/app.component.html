@@ -1,8 +1,61 @@
-<main class="main">
-  <div class="content">
-    <h1>{{title}}</h1>
-  </div>
-  <app-resume-preview></app-resume-preview>
-</main>
+<main class="block m-2">
+  <nav class="navbar">
+      <div id="navMenu" class="navbar-menu">
+        <div class="navbar-brand">
+          <figure class=" navbar-item image is-64x64">
+            <img src="https://bulma.io/assets/images/placeholders/128x128.png"/>
+          </figure>
+        </div>
+        <div class="navbar-start">
+          <div class="buttons">
+            <a class="button is-light is-small">Templates modals</a>
+            <a class="button is-light is-small">Colors</a>
+          </div>
+        </div>
 
-<router-outlet />
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-dark is-small">Github</a>
+              <a class="button is-info is-small">Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </nav>
+  <div class="columns is-2">
+    <div class="column is-3">
+      <div class="box resume-side">
+        <aside class="menu">
+          <p class="menu-label has-text-black has-text-weight-semibold">Resume Details</p>
+          <!-- TODO: use component here -->
+          <ul class="menu-list">
+            <li><a>User Basic</a></li>
+            <li><a>Networks</a></li>
+            <li><a>Educations</a></li>
+            <li><a>Work Experiences</a></li>
+            <li><a>Technical Experiences</a></li>
+            <li><a>Tools</a></li>
+            <li><a>Skills</a></li>
+            <li><a>Methodologies</a></li>
+            <li><a>Hobbies And Interest</a></li>
+            <li><a>Trainings And Certifications</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+    <div class="column is-8" >
+      <section class="hero is-halfheight resume-preview ">
+          <div id="printableContent" class="page">
+            <app-preview></app-preview>
+          </div>
+      </section>
+<!--      <div class="block resume-preview">-->
+<!--        <div id="printableContent" class="page">-->
+<!--          <app-preview></app-preview>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </div>
+
+</main>
