@@ -4,11 +4,16 @@
 }
 
 .resume-preview {
-  zoom: 80%;
+  zoom: 60%;
   width: 100%;
   max-width: 100%;
   min-height: 75%;
   max-height: 75%;
   overflow-x: auto;
   overflow-y: auto;
+  margin: 0 auto;
+}
+
+.resume-preview::-webkit-scrollbar {
+  display: none;
 }
