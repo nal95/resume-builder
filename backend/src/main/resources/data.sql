@@ -17,12 +17,14 @@ VALUES ('John',
         'Doe',
         'john.doe@example.com',
         '{
-          "location": "New York",
-          "summary": "Experienced software engineer",
-          "title": "Senior Software Engineer",
-          "profession": "Software Development",
-          "mobilePhoneNumber": "+1234567890",
-          "relevantExperienceYears": 5,
+          "basic":{
+            "location": "New York",
+            "summary": "Experienced software engineer",
+            "title": "Senior Software Engineer",
+            "profession": "Software Development",
+            "mobilePhoneNumber": "+1234567890",
+            "relevantExperienceYears": 5
+          },
           "networks": [
             {
               "referenceName": "linkedin",

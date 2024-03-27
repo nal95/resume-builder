@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -88,7 +89,8 @@ public class UserServiceImpl implements UserService {
 
         if (image != null) {
             try {
-                existedUser.getUserDetails().setImage(image.getBytes());
+                String imageToSave =  Base64.getEncoder().encodeToString(image.getBytes());
+                existedUser.getUserDetails().setImage(imageToSave);
             } catch (IOException e) {
                 log.error("Something went wrong with MultipartFile image. Details: {}", e.getMessage());
             }
@@ -96,7 +98,8 @@ public class UserServiceImpl implements UserService {
             try {
                 File file = ResourceUtils.getFile("classpath:static/john.svg");
                 byte[] bytes = Files.readAllBytes(file.toPath());
-                existedUser.getUserDetails().setImage(bytes);
+                String imageToSave =  Base64.getEncoder().encodeToString(bytes);
+                existedUser.getUserDetails().setImage(imageToSave);
             } catch (IOException e) {
                 log.error(e.getMessage());
                 log.error("Something went wrong with init user image please check your resources/static/ folder");

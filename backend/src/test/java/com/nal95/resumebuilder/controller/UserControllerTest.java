@@ -19,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Base64;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -169,9 +171,11 @@ class UserControllerTest {
         // Given
         Long id = 1L;
         byte[] content = "Test image data".getBytes();
-        MultipartFile image = new MockMultipartFile("file", "image.jpg", "image/jpeg", content);
+        MultipartFile imageByte = new MockMultipartFile("file", "image.jpg", "image/jpeg", content);
         User expectedUserResponse = responseHelper.getUser();
-        expectedUserResponse.getUserDetails().setImage(image.getBytes());
+        String image =  Base64.getEncoder().encodeToString(imageByte.getBytes());
+
+        expectedUserResponse.getUserDetails().setImage(image);
 
         // When
         given(userService.setUserImage(eq(id), any(MultipartFile.class)))

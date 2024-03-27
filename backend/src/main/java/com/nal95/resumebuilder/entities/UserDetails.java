@@ -1,24 +1,17 @@
 package com.nal95.resumebuilder.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class UserDetails {
-    private String location;
-    private String summary;
-    private String title;
-    private String profession;
-    private String mobilePhoneNumber;
-    private byte[] image;
-    private int relevantExperienceYears;
+    private UserBasic basic;
+    private String image; // this is convert to base64
     private Set<Network> networks;
     private Set<Education> educations;
     private Set<WorkExperience> workExperiences;

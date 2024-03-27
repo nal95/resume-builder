@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -209,21 +210,22 @@ class UserServiceImplTest {
         // Given
         Long userId = 1L;
         byte[] content = Files.readAllBytes(Paths.get("src/main/resources/static/john.svg"));
-        MockMultipartFile image = new MockMultipartFile("image", "john.svg", "image/svg", content);
+        MockMultipartFile imageByte = new MockMultipartFile("image", "john.svg", "image/svg", content);
         User existingUser = responseHelper.getUser();
+        String image =  Base64.getEncoder().encodeToString(imageByte.getBytes());
 
         // When
         when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
 
         //Update user-helper entities
-        existingUser.getUserDetails().setImage(image.getBytes());
+        existingUser.getUserDetails().setImage(image);
         when(userRepository.save(existingUser)).thenReturn(existingUser);
 
-        User updatedUser = userService.setUserImage(userId, image);
+        User updatedUser = userService.setUserImage(userId, imageByte);
 
         // Then
         assertSame(existingUser, updatedUser);
-        assertArrayEquals(image.getBytes(), updatedUser.getUserDetails().getImage());
+        assertEquals(image, updatedUser.getUserDetails().getImage());
     }
 
     @Test
@@ -232,6 +234,7 @@ class UserServiceImplTest {
         Long userId = 1L;
         byte[] defaultImageData = getDefaultImageData();
         User existingUser = responseHelper.getUser();
+        String image =  Base64.getEncoder().encodeToString(defaultImageData);
 
         // When
         when(userRepository.findById(userId)).thenReturn(Optional.of(existingUser));
@@ -239,14 +242,14 @@ class UserServiceImplTest {
         //Update user-helper entities
         existingUser.getUserDetails().setImage(null);
         when(userRepository.save(existingUser)).thenReturn(existingUser);
-        existingUser.getUserDetails().setImage(defaultImageData);
+        existingUser.getUserDetails().setImage(image);
         when(userRepository.save(existingUser)).thenReturn(existingUser);
 
         User updatedUser = userService.setUserImage(userId, null);
 
         // Then
         assertSame(existingUser, updatedUser);
-        assertArrayEquals(defaultImageData, updatedUser.getUserDetails().getImage());
+        assertEquals(image, updatedUser.getUserDetails().getImage());
     }
 
     private byte[] getDefaultImageData() throws IOException {
