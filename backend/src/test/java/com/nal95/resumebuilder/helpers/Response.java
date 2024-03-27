@@ -2,10 +2,12 @@ package com.nal95.resumebuilder.helpers;
 
 import com.nal95.resumebuilder.DTOs.UserRequest;
 import com.nal95.resumebuilder.entities.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.Set;
 
+@Getter
 public class Response {
 
     UserRequest userRequest;
@@ -14,14 +16,6 @@ public class Response {
     public Response() {
         setUser(null);
         setUserRequest(null);
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public UserRequest getUserRequest() {
-        return userRequest;
     }
 
     public void setUser(User user) {
@@ -37,8 +31,6 @@ public class Response {
                     .userDetails(getUserDetails())
                     .build();
         }
-
-
     }
 
     public void setUserRequest(UserRequest userRequest) {
