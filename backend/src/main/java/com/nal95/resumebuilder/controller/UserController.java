@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
+@CrossOrigin() // Specify the origin of your Angular application
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
