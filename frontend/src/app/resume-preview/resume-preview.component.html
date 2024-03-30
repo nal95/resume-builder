@@ -1,0 +1,7 @@
+<div class="content is-small" *ngIf="initUserData | async as userData; else noPreview">
+  <p class="message">{{userData.firstName}}</p>
+<!--  <img [src]="getImageUrl(userData.userDetails.image)" alt="" fill>-->
+</div>
+<ng-template #noPreview>
+  <p>No data to preview now</p>
+</ng-template>

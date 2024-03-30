@@ -1,0 +1,30 @@
+<div class="field is-small">
+  <div class="field-body m-2">
+    <div class="field">
+      <input class="input control" type="text" placeholder="First Name" name="firstName"
+             [ngModel]="(initUserData | async)?.firstName" (ngModelChange)="updateFirstName($event)">
+    </div>
+    <div class="field">
+      <input class="input control" type="text" placeholder="Last Name" name="lastName"
+             [ngModel]="(initUserData | async)?.lastName" (ngModelChange)="updateLastName($event)">
+    </div>
+  </div>
+</div>
+<div class="field">
+  <div class="field-body m-2">
+    <input class="input control" type="email" placeholder="Email" name="email"
+           [ngModel]="(initUserData | async)?.email" (ngModelChange)="updateEmail($event)">
+  </div>
+</div>
+<!--TODO: Coming soon-->
+<div class="file pb-1 is-centered is-disabled">
+  <label class="file-label">
+    <input class="file-input" type="file" name="image" />
+    <span class="file-cta">
+      <span class="file-icon">
+        <i class="ri-folder-download-line"></i>
+      </span>
+      <span class="file-label"> Choose a image… </span>
+    </span>
+  </label>
+</div>

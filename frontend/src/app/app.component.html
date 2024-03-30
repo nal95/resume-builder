@@ -1,44 +1,125 @@
-<main class="block m-2">
+<main class="box">
   <nav class="navbar">
-      <div id="navMenu" class="navbar-menu">
-        <div class="navbar-brand">
-          <figure class=" navbar-item image is-64x64">
-            <img src="https://bulma.io/assets/images/placeholders/128x128.png"/>
-          </figure>
-        </div>
-        <div class="navbar-start">
-          <div class="buttons">
-            <a class="button is-light is-small">Templates modals</a>
-            <a class="button is-light is-small">Colors</a>
-          </div>
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-dark is-small">Github</a>
-              <a class="button is-info is-small">Download</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    nav hier
   </nav>
-  <div class="columns m-1">
-    <div class="column is-3">
-      <table class="table is-hoverable is-bordered is-fullwidth resume-side">
-        <tbody>
-          <tr>
-            <td>test</td>
-          </tr>
-          <tr>
-            <td>test</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="columns is-2">
+    <div class="column is-two-fifths" id="sidebar">
+      <aside class="panel">
+        <p class="panel-heading" *ngIf="initUserData | async as data">User Details {{data.id}}</p>
+        <ng-container *ngIf="showSideBar">
+          <a #user class="panel-block is-justify-content-space-between" id="User" (click)="collectDetailsOf(user)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-user-line"></i></span>
+            <span>User</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #basics class="panel-block is-justify-content-space-between" id="User Basics" (click)="collectDetailsOf(basics)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-shield-user-line"></i></span>
+            <span>User Basics</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #networks  class="panel-block is-justify-content-space-between" id="Networks" (click)="collectDetailsOf(networks)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-global-line"></i></span>
+            <span>Networks</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #educations class="panel-block is-justify-content-space-between"  id="Educations" (click)="collectDetailsOf(educations)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-book-marked-line"></i></span>
+            <span>Educations</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #work class="panel-block is-justify-content-space-between"  id="Work Experiences" (click)="collectDetailsOf(work)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-luggage-deposit-line"></i></span>
+            <span>Work Experiences</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #technical class="panel-block is-justify-content-space-between"  id="Technical Experiences" (click)="collectDetailsOf(technical)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-node-tree"></i></span>
+            <span>Technical Experiences</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #skills class="panel-block is-justify-content-space-between"  id="Skills" (click)="collectDetailsOf(skills)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-sparkling-line"></i></span>
+            <span>Skills</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #tools class="panel-block is-justify-content-space-between"  id="Tools" (click)="collectDetailsOf(tools)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-hammer-line"></i></span>
+            <span>Tools</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #methodologies class="panel-block is-justify-content-space-between"  id="Methodologies" (click)="collectDetailsOf(methodologies)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-pass-pending-line"></i></span>
+            <span>Methodologies</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #hobbies class="panel-block is-justify-content-space-between"  id="Hobbies and Interest" (click)="collectDetailsOf(hobbies)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-bubble-chart-fill"></i></span>
+            <span>Hobbies and Interest</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #trainings class="panel-block is-justify-content-space-between"  id="Trainings ans Certificate" (click)="collectDetailsOf(trainings)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-medal-line"></i></span>
+            <span>Trainings ans Certificate</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #language class="panel-block is-justify-content-space-between"  id="Language" (click)="collectDetailsOf(language)">
+          <span class="icon-text">
+            <span class="icon"><i class="ri-translate-2"></i></span>
+            <span>Language</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="!showSideBar">
+          <a class="panel-block is-justify-content-space-between" (click)="closeSection()">
+            <span class="icon-text">
+              <span class="panel-icon"><i class="ri-arrow-left-line"></i></span>
+            </span>
+            <span>{{ actualSection }}</span>
+            <span></span>
+          </a>
+        </ng-container>
+        <app-user *ngIf="!showSideBar && actualSection == 'User'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-user>
+        <app-user-basics *ngIf="!showSideBar && actualSection == 'User Basics'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-user-basics>
+        <app-networks *ngIf="!showSideBar && actualSection == 'Networks'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-networks>
+        <app-educations *ngIf="!showSideBar && actualSection == 'Educations'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-educations>
+        <app-work-experiences *ngIf="!showSideBar && actualSection == 'Work Experiences'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-work-experiences>
+        <app-tech-experiences *ngIf="!showSideBar && actualSection == 'Technical Experiences'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-tech-experiences>
+        <app-skills *ngIf="!showSideBar && actualSection == 'Skills'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-skills>
+        <app-tools *ngIf="!showSideBar && actualSection == 'Tools'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-tools>
+        <app-methodologies *ngIf="!showSideBar && actualSection == 'Methodologies'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-methodologies>
+        <app-hobbies *ngIf="!showSideBar && actualSection == 'Hobbies and Interest'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-hobbies>
+        <app-trainings *ngIf="!showSideBar && actualSection == 'Trainings ans Certificate'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-trainings>
+        <app-languages *ngIf="!showSideBar && actualSection == 'Language'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-languages>
+      </aside>
+
     </div>
-    <div class="column resume-preview">
-      <app-preview></app-preview>
+
+
+    <div class="column is-three-fifths">
+      <app-resume-preview [initUserData]="initUserData"></app-resume-preview>
     </div>
   </div>
-
 </main>
