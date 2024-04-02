@@ -1,1 +1,38 @@
-<p>networks works!</p>
+<div *ngIf="(initUserData | async)?.userDetails?.networks as networks">
+  <ng-container *ngFor="let network of networks">
+    <div class="card m-2">
+      <header class="card-header">
+        <p class="card-header-title">{{ network.referenceName }}</p>
+        <button class="card-header-icon" aria-label="more options" (click)="deleteNetwork(network)">
+          <span class="icon">
+            <i class="ri-close-line" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="card-header-icon" aria-label="more options" (click)="toggleContent(network)">
+          <span class="icon">
+            <i class="ri-arrow-down-s-line" aria-hidden="true" *ngIf="network.showContent===false"></i>
+            <i class="ri-arrow-up-s-line" aria-hidden="true" *ngIf="network.showContent===true"></i>
+          </span>
+        </button>
+      </header>
+      <div class="card-content has-text-centered" [ngClass]="{ 'is-hidden': network.showContent===false }">
+        <div class="field">
+          <div class="field-body">
+            <div class="field">
+              <input class="input control" type="text" placeholder="Username" [size]="network.name.length <= 0 ? 1 : network.name.length" [(ngModel)]="network.name">
+            </div>
+            <div class="field">
+              <input class="input control" type="text" placeholder="Network" [size]="network.referenceName.length <= 0 ? 1 : network.referenceName.length" [(ngModel)]="network.referenceName">
+            </div>
+            <div class="field">
+              <input class="input control" type="url" placeholder="Link" [size]="network.link.length <= 0 ? 1 : network.referenceName.length" [(ngModel)]="network.link">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="field m-1 p-2">
+  <button class="button control" type="submit" (click)="addNetwork()">Add Network</button>
+</div>

@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ResumeDataService } from './resume-data.service';
+import {ResumeDataService} from './resume-data.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {User} from "../resume-data/user.data";
-import {GET_USER} from "../backend/api-endpoints";
+import {User} from "../../resume-data/user.data";
+import {GET_USER} from "../../backend/api-endpoints";
 
 describe('ResumeDataService', () => {
   let service: ResumeDataService;

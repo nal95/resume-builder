@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {User} from "../../resume-data/user.data";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {AsyncPipe} from "@angular/common";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -9,7 +9,8 @@ import {FormsModule} from "@angular/forms";
   standalone: true,
   imports: [
     AsyncPipe,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'

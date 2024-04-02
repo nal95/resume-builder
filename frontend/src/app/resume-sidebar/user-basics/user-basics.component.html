@@ -1,1 +1,38 @@
-<p>user-basics works!</p>
+<div *ngIf="(initUserData | async)?.userDetails?.basic as basic">
+  <div class="field is-small" >
+    <div class="field-body m-2">
+      <input class="input control" type="text" placeholder="Title" name="title"
+             [ngModel]="basic.title" (ngModelChange)="updateTitle($event)">
+    </div>
+  </div>
+  <div class="field is-small">
+    <div class="field-body m-2">
+      <input class="input control" type="text" placeholder="Profession" name="profession"
+             [ngModel]="basic.profession" (ngModelChange)="updateProfession($event)">
+    </div>
+  </div>
+  <div class="field is-small">
+    <div class="field-body m-2">
+      <input class="input control" type="number" placeholder="Relevant experience years" name="experiences_years"
+             [ngModel]="basic.relevantExperienceYears" (ngModelChange)="updateExperiencesYears($event)">
+    </div>
+  </div>
+  <div class="field is-small">
+    <div class="field-body m-2">
+      <input class="input control" type="tel" placeholder="Mobile Phone Number" name="phone"
+             [ngModel]="basic.mobilePhoneNumber" (ngModelChange)="updatePhone($event)">
+    </div>
+  </div>
+  <div class="field is-small">
+    <div class="field-body m-2">
+      <input class="input control" type="text" placeholder="Location" name="location"
+             [ngModel]="basic.location" (ngModelChange)="updateLocation($event)">
+    </div>
+  </div>
+  <div class="field is-small">
+    <div class="field-body m-2 p-2">
+    <textarea class="textarea control is-hovered" placeholder="About me" name="summary"
+              [ngModel]="basic.summary" (ngModelChange)="updateSummary($event)"></textarea>
+    </div>
+  </div>
+</div>

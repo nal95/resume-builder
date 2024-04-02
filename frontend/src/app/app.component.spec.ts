@@ -1,8 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
-import {ResumeDataService} from "./services/resume-data.service";
-import {of} from "rxjs";
+import {Observable, of} from "rxjs";
 import {User} from "./resume-data/user.data";
+import {ResumeDataService} from "./services/resume-data/resume-data.service";
 
 describe('AppComponent', () => {
 
@@ -13,12 +13,25 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     // Stub ResumeDataService
     resumeDataServiceStub = {
-      getUserDetails: (userId: string) => of({id: userId, name: 'John Doe'} as unknown as User)
+      getUserDetails: (userId: string) => of({
+        id: userId,
+        name: 'John Doe',
+        userDetails: {
+          network: [],
+          education: [],
+          workExperience: [],
+          technicalExperience: [],
+          tools: [],
+          methodologies: [],
+          skills: [],
+          hobbiesAndInterest: [],
+          trainingsAndCertifications: []
+        }
+      } as unknown as User)
     };
 
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      // declarations: [AppComponent],
       providers: [{provide: ResumeDataService, useValue: resumeDataServiceStub}]
     }).compileComponents();
   });
@@ -33,12 +46,28 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should initialize initUserData as an Observable', () => {
+    expect(component.initUserData).toBeInstanceOf(Observable);
+  });
+
   it('should initialize with sidebar shown', () => {
     expect(component.showSideBar).toBe(true);
   });
 
   it('should initialize with empty actual section', () => {
     expect(component.actualSection).toBe('');
+  });
+
+  it('should update isSmall property on window resize', () => {
+    (window as any).innerWidth = 1300;
+    window.dispatchEvent(new Event('resize'));
+    expect(component.isSmall).toBe(false); // Initial expectation
+
+    // Simulate window resize event
+    (window as any).innerWidth = 500;
+    window.dispatchEvent(new Event('resize'));
+
+    expect(component.isSmall).toBe(true); // Expectation for small window width
   });
 
   it('should toggle sidebar and set actual section on collectDetailsOf', () => {
@@ -57,7 +86,7 @@ describe('AppComponent', () => {
   });
 
   it('should update initUserData on user data change', () => {
-    const userData: User = { name:  'tester' } as unknown as User;
+    const userData: User = {name: 'tester'} as unknown as User;
     component.onUserDataChanged(userData);
     component.initUserData.subscribe(data => {
       expect(data).toEqual(userData);

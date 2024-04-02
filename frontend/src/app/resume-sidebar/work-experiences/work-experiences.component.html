@@ -1,1 +1,88 @@
-<p>work-experiences works!</p>
+<div *ngIf="(initUserData | async)?.userDetails?.workExperiences as workExperiences">
+  <div *ngFor="let workExperience of workExperiences">
+    <div class="card m-2">
+      <header class="card-header">
+        <p class="card-header-title">{{ workExperience.company }}</p>
+        <button class="card-header-icon" aria-label="more options" (click)="deleteWorkExperience(workExperience)">
+          <span class="icon">
+            <i class="ri-close-line" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="card-header-icon" aria-label="more options" (click)="toggleWorkExperience(workExperience)">
+          <span class="icon">
+            <i class="ri-arrow-down-s-line" aria-hidden="true" *ngIf="workExperience.showContent===false"></i>
+            <i class="ri-arrow-up-s-line" aria-hidden="true" *ngIf="workExperience.showContent===true"></i>
+          </span>
+        </button>
+      </header>
+      <div class="card-content m-0 p-2" [ngClass]="{ 'is-hidden': workExperience.showContent===false }">
+        <div class="field">
+          <div class="field-body m-1 p-1">
+            <div class="field">
+              <label class="label" *ngIf="workExperience.company.length <= 0">Company</label>
+              <input class="input control is-small" type="text" placeholder="e.g Company XYZ"
+                     [(ngModel)]="workExperience.company" name="company">
+            </div>
+          </div>
+          <div class="field-body m-1 p-1">
+            <div class="field">
+              <label class="label" *ngIf="workExperience.occupiedPosition.length <= 0">Company</label>
+              <input class="input control is-small" type="text" placeholder="e.g Software Developer"
+                     [(ngModel)]="workExperience.occupiedPosition" name="position">
+            </div>
+            <div class="field">
+              <label class="label" *ngIf="workExperience.duration.length <= 0">Duration</label>
+              <input class="input control is-small" type="text" [size]="workExperience.duration.length +1"
+                     placeholder="e.g 5 years" [(ngModel)]="workExperience.duration" name="duration">
+            </div>
+          </div>
+          <div class="field-body m-1 p-1">
+            <div class="field">
+              <label class="label" *ngIf="workExperience.companyCity.length <= 0">City</label>
+              <input class="input control is-small" type="text" placeholder="e.g Berlin"
+                     [(ngModel)]="workExperience.companyCity" name="companyCity">
+            </div>
+            <div class="field">
+              <label class="label" *ngIf="workExperience.companyLink.length <= 0">Link</label>
+              <input class="input control is-small" type="text" placeholder="Company URL"
+                     [(ngModel)]="workExperience.companyLink" name="companyLink">
+            </div>
+          </div>
+          <div class="field-body m-1 p-1 is-small is-grouped">
+            <div class="field">
+              <label class="label" *ngIf="workExperience.startDate.length <= 0">Start Date</label>
+              <input class="input control is-small" type="month" [(ngModel)]="workExperience.startDate" name="startDate">
+            </div>
+            <div class="field">
+              <label class="label" *ngIf="workExperience.endDate.length <= 0">End Date</label>
+              <input class="input control is-small is-small" type="month"
+                     [(ngModel)]="workExperience.endDate" name="endDate">
+            </div>
+          </div>
+          <div class="field-body m-1 p-1">
+            <div class="field">
+              <label class="label has-icons-right">
+                 <span class="icon is-clickable">
+                    <i class="ri-add-box-line" (click)="addWorkExperienceSummary(workExperience)" aria-hidden="true"></i>
+                 </span>
+                Few points on this work experience
+              </label>
+<!--              TODO: this binding has problem get look on how to fix it  -->
+              <div class="control p-1 has-icons-right" *ngFor="let summary of workExperience.summary; let i = index;">
+                <input class="input is-small is-focused" rows="2" placeholder="work experience description"
+                          (input)="updateWS(workExperience.summary, i, $event)" [(ngModel)]="workExperience.summary[i]"   name="summary">
+                <span class="icon is-right is-clickable">
+                    <i class="ri-delete-bin-line" (click)="deleteWorkExperienceSummary(workExperience, i)" aria-hidden="true"></i>
+                 </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="field m-1 p-2">
+<button class="button control" type="submit" (click)="addWorkExperience()">Add Work Experience</button>
+</div>
+

@@ -3,7 +3,7 @@
     nav hier
   </nav>
   <div class="columns is-2">
-    <div class="column is-two-fifths" id="sidebar">
+    <div class="column" [ngClass]="{'is-one-quarter' : !isSmall, 'is-two-fifths': isSmall}" id="sidebar">
       <aside class="panel">
         <p class="panel-heading" *ngIf="initUserData | async as data">User Details {{data.id}}</p>
         <ng-container *ngIf="showSideBar">
@@ -114,11 +114,8 @@
         <app-trainings *ngIf="!showSideBar && actualSection == 'Trainings ans Certificate'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-trainings>
         <app-languages *ngIf="!showSideBar && actualSection == 'Language'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-languages>
       </aside>
-
     </div>
-
-
-    <div class="column is-three-fifths">
+    <div class="column" [ngClass]="{'is-three-quarters' : !isSmall, 'is-three-fifths': isSmall}">
       <app-resume-preview [initUserData]="initUserData"></app-resume-preview>
     </div>
   </div>

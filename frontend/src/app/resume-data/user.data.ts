@@ -1,6 +1,6 @@
 // Main export interface representing the entire user data for the resume
 export interface User {
-  id: number,
+  id?: number,
   firstName: string,
   lastName: string,
   email: string,
@@ -31,8 +31,10 @@ export interface UserBasic {
 }
 
 export interface Network {
+  name: string,
   referenceName: string,
   link: string,
+  showContent?: boolean
 }
 
 export interface Education {
@@ -43,6 +45,7 @@ export interface Education {
   endDate: string,
   duration: number,
   summary: string,
+  showContent?: boolean
 }
 
 export interface WorkExperience {
@@ -52,8 +55,9 @@ export interface WorkExperience {
   occupiedPosition: string,
   startDate: string,
   endDate: string,
-  duration: number,
-  summary: string,
+  duration: string,
+  summary: string[],
+  showContent?: boolean
 }
 
 export interface TechnicalDetail {

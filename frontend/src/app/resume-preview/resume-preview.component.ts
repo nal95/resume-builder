@@ -1,8 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {Observable} from "rxjs";
 import {User} from "../resume-data/user.data";
-import {AsyncPipe, JsonPipe, NgIf, NgOptimizedImage} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {DomSanitizer} from "@angular/platform-browser";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-resume-preview',
@@ -11,7 +12,10 @@ import {DomSanitizer} from "@angular/platform-browser";
     AsyncPipe,
     NgIf,
     JsonPipe,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgForOf,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './resume-preview.component.html',
   styleUrl: './resume-preview.component.css'
