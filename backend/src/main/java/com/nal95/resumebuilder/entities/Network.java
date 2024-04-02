@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Network {
+    private String name;
     private String referenceName;
     private String link;
 }

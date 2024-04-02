@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -19,6 +20,6 @@ public class WorkExperience {
     private String occupiedPosition;
     private LocalDate startDate;
     private LocalDate endDate;
-    private int duration;
-    private String summary;
+    private String duration;
+    private List<String> summary;
 }

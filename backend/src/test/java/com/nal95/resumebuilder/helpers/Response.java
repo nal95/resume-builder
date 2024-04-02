@@ -5,6 +5,7 @@ import com.nal95.resumebuilder.entities.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -48,9 +49,9 @@ public class Response {
 
     public UserDetails getUserDetails() {
         UserBasic b = new UserBasic("New York","Experienced software engineer","Senior Software Engineer","Software Development","+1234567890",5);
-        Network n = new Network("Linkedin", "https://linkedin.com/in/johndoe");
+        Network n = new Network("john doe","Linkedin", "https://linkedin.com/in/johndoe");
         Education e = new Education("University of XYZ", "Computer Science", "Bachelor's", LocalDate.of(2020, 1, 1), LocalDate.of(2024, 1, 1), 4, "Graduated with honors");
-        WorkExperience w = new WorkExperience("ABC Inc.", "New York", "https://abcinc.com", "Software Engineer", LocalDate.of(2024, 2, 1), LocalDate.of(2025, 2, 1), 1, "Developed cutting-edge software");
+        WorkExperience w = new WorkExperience("ABC Inc.", "New York", "https://abcinc.com", "Software Engineer", LocalDate.of(2024, 2, 1), LocalDate.of(2025, 2, 1), "1", List.of("Developed cutting-edge software"));
         TechnicalExperience t = new TechnicalExperience("PROGRAMMING", Set.of(TechnicalDetail.builder().name("java").level(5).build(), TechnicalDetail.builder().name("JavaScript").level(4).build()));
         return UserDetails.builder()
                 .basic(b)

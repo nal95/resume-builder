@@ -27,10 +27,12 @@ VALUES ('John',
           },
           "networks": [
             {
+              "name": "johndoe",
               "referenceName": "linkedin",
               "link": "https://linkedin.com/in/johndoe"
             },
             {
+              "name": "johndoe",
               "referenceName": "GIT",
               "link": "https://github.com/johndoe"
             }
@@ -54,8 +56,10 @@ VALUES ('John',
               "occupiedPosition": "Software Engineer",
               "startDate": "2024-02-01",
               "endDate": "2025-02-01",
-              "duration": 1,
-              "summary": "Developed cutting-edge software"
+              "duration": "1 year",
+              "summary": [
+                "Developed cutting-edge software"
+              ]
             }
           ],
           "technicalExperiences": [
