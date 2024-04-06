@@ -1,0 +1,53 @@
+<ng-container *ngIf="isSimpleTyp() , else ComposedValues">
+  <div *ngIf="(getSimpleValues$() | async) as simpleValues">
+    <div class="field is-grouped is-grouped-multiline m-2 p-2">
+      <div *ngFor="let simpleValue of simpleValues" class="control">
+        <div class="tags has-addons">
+          <span class="tag is-black is-light  is-medium" type="text">{{ simpleValue }}</span>
+          <span (click)="deleteSimpleValue(simpleValues, simpleValue)"
+                class="tag is-delete is-medium is-danger is-light"></span>
+        </div>
+      </div>
+    </div>
+    <div class="field has-addons has-addons-centered m-2 p-2">
+      <div class="control">
+        <input [(ngModel)]="newSimpleValue" class="input" placeholder="{{originTyp}}" type="text">
+      </div>
+      <div class="control ">
+        <button (click)="addSimpleValue(simpleValues)" class="button is-primary" type="submit">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #ComposedValues>
+  <div *ngIf="(getComposedValues$() | async) as composedValues">
+    <div class="field is-grouped is-grouped-multiline m-2 p-2">
+      <div *ngFor="let composedValue of composedValues" class="control">
+        <div class="tags has-addons">
+          <span class="tag is-info is-light has-text-black-bis is-medium">{{ composedValue.name }}</span>
+          <span class="tag  is-medium">{{ composedValue.compound }}</span>
+          <a (click)="deleteComposedValue(composedValue)" class="tag is-delete is-medium is-danger is-light"></a>
+        </div>
+      </div>
+    </div>
+    <div class="field has-addons has-addons-centered m-2 p-2">
+      <div class="control">
+        <input [(ngModel)]="newComposedValue.name" class="input" placeholder="{{originTyp}}" type="text">
+      </div>
+      <div *ngIf="isCertification" class="control">
+        <input [(ngModel)]="newComposedValue.compound" class="input" type="month">
+      </div>
+      <div *ngIf="!isCertification" class="control">
+        <input [(ngModel)]="newComposedValue.compound" class="input" type="text">
+      </div>
+      <div class="control ">
+        <button (click)="addComposedValue()" class="button is-primary" type="submit">
+          Add {{ originTyp }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
