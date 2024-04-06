@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ResumePreviewComponent } from './resume-preview.component';
+import {ResumePreviewComponent} from './resume-preview.component';
 
 describe('ResumePreviewComponent', () => {
   let component: ResumePreviewComponent;
@@ -11,7 +11,7 @@ describe('ResumePreviewComponent', () => {
       imports: [ResumePreviewComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ResumePreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

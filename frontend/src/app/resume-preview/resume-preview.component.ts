@@ -1,9 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {Observable} from "rxjs";
-import {User} from "../resume-data/user.data";
+import {Component} from '@angular/core';
 import {AsyncPipe, JsonPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {UserDataStoreService} from "../services/user-data-store/user-data-store.service";
 
 @Component({
   selector: 'app-resume-preview',
@@ -22,14 +21,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 })
 export class ResumePreviewComponent {
 
-  @Input()
-  initUserData!: Observable<User>;
-
-  constructor(private _sanitizer: DomSanitizer) {
+  constructor(private _sanitizer: DomSanitizer,
+              public dataStorageService: UserDataStoreService) {
   }
 
+  //TODO: work on a way to render image
   getImageUrl(image: string) {
-    const newImage =  'data:image/svg+xml;base64,' + image;
+    const newImage = 'data:image/svg+xml;base64,' + image;
     return this._sanitizer.bypassSecurityTrustResourceUrl(newImage);
   }
 }
