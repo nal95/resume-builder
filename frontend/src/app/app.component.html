@@ -77,11 +77,20 @@
           </span>
             <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
           </a>
-          <a #trainings class="panel-block is-justify-content-space-between"  id="Trainings ans Certificate" (click)="collectDetailsOf(trainings)">
+          <a #certifications class="panel-block is-justify-content-space-between"  id="Certifications" (click)="collectDetailsOf(certifications)">
           <span class="icon-text">
             <span class="icon"><i class="ri-medal-line"></i></span>
             <span>Trainings ans Certificate</span>
           </span>
+            <span>Certifications</span>
+          </span>
+            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
+          </a>
+          <a #trainings class="panel-block is-justify-content-space-between"  id="Trainings" (click)="collectDetailsOf(trainings)">
+            <span class="icon-text">
+              <span class="icon"><i class="ri-recycle-line"></i></span>
+              <span>Trainings</span>
+            </span>
             <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
           </a>
           <a #language class="panel-block is-justify-content-space-between"  id="Language" (click)="collectDetailsOf(language)">
@@ -113,6 +122,13 @@
         <app-hobbies *ngIf="!showSideBar && actualSection == 'Hobbies and Interest'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-hobbies>
         <app-trainings *ngIf="!showSideBar && actualSection == 'Trainings ans Certificate'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-trainings>
         <app-languages *ngIf="!showSideBar && actualSection == 'Language'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-languages>
+        <app-skills *ngIf="!showSideBar && actualSection == 'Skills'"></app-skills>
+        <app-tools *ngIf="!showSideBar && actualSection == 'Tools'"></app-tools>
+        <app-methodologies *ngIf="!showSideBar && actualSection == 'Methodologies'"></app-methodologies>
+        <app-hobbies *ngIf="!showSideBar && actualSection == 'Hobbies and Interest'"></app-hobbies>
+        <app-certifications *ngIf="!showSideBar && actualSection == 'Certifications'"></app-certifications>
+        <app-trainings *ngIf="!showSideBar && actualSection == 'Trainings'"></app-trainings>
+        <app-languages *ngIf="!showSideBar && actualSection == 'Language'"></app-languages>
       </aside>
     </div>
     <div class="column" [ngClass]="{'is-three-quarters' : !isSmall, 'is-three-fifths': isSmall}">

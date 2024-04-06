@@ -1,37 +1,17 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Observable, Subject, takeUntil} from "rxjs";
-import {User} from "../../resume-data/user.data";
+import {Component} from '@angular/core';
+import {UserDataType} from "../../resume-data/user.data";
+import {EasyListComponent} from "../../utils/easy-list/easy-list.component";
 
 @Component({
   selector: 'app-tools',
   standalone: true,
-  imports: [],
-  templateUrl: './tools.component.html',
-  styleUrl: './tools.component.css'
+  imports: [
+    EasyListComponent
+  ],
+  template: `
+    <app-easy-list [valuesType]="valuesType"></app-easy-list>
+  `
 })
-export class ToolsComponent  implements OnInit, OnDestroy {
-  @Input()
-  initUserData!: Observable<User>;
-
-  @Output()
-  userDataChanged = new EventEmitter<User>();
-
-  userData!: User;
-  public unsubscribe$: Subject<void> = new Subject<void>();
-
-  ngOnInit(): void {
-    if (this.initUserData) {
-      this.initUserData.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(user => {
-        this.userData = user;
-      });
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
+export class ToolsComponent {
+  valuesType: UserDataType = UserDataType.TOOLS;
 }
