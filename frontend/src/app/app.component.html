@@ -4,8 +4,8 @@
   </nav>
   <div class="columns is-2">
     <div class="column" [ngClass]="{'is-one-quarter' : !isSmall, 'is-two-fifths': isSmall}" id="sidebar">
-      <aside class="panel">
-        <p class="panel-heading" *ngIf="initUserData | async as data">User Details {{data.id}}</p>
+      <aside class="panel ">
+        <p class="panel-heading">User Details {{ userDataIsLoaded$ | async }}</p>
         <ng-container *ngIf="showSideBar">
           <a #user class="panel-block is-justify-content-space-between" id="User" (click)="collectDetailsOf(user)">
           <span class="icon-text">
@@ -80,8 +80,6 @@
           <a #certifications class="panel-block is-justify-content-space-between"  id="Certifications" (click)="collectDetailsOf(certifications)">
           <span class="icon-text">
             <span class="icon"><i class="ri-medal-line"></i></span>
-            <span>Trainings ans Certificate</span>
-          </span>
             <span>Certifications</span>
           </span>
             <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
@@ -110,18 +108,12 @@
             <span></span>
           </a>
         </ng-container>
-        <app-user *ngIf="!showSideBar && actualSection == 'User'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-user>
-        <app-user-basics *ngIf="!showSideBar && actualSection == 'User Basics'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-user-basics>
-        <app-networks *ngIf="!showSideBar && actualSection == 'Networks'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-networks>
-        <app-educations *ngIf="!showSideBar && actualSection == 'Educations'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-educations>
-        <app-work-experiences *ngIf="!showSideBar && actualSection == 'Work Experiences'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-work-experiences>
-        <app-tech-experiences *ngIf="!showSideBar && actualSection == 'Technical Experiences'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-tech-experiences>
-        <app-skills *ngIf="!showSideBar && actualSection == 'Skills'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-skills>
-        <app-tools *ngIf="!showSideBar && actualSection == 'Tools'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-tools>
-        <app-methodologies *ngIf="!showSideBar && actualSection == 'Methodologies'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-methodologies>
-        <app-hobbies *ngIf="!showSideBar && actualSection == 'Hobbies and Interest'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-hobbies>
-        <app-trainings *ngIf="!showSideBar && actualSection == 'Trainings ans Certificate'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-trainings>
-        <app-languages *ngIf="!showSideBar && actualSection == 'Language'" [initUserData]="initUserData" (userDataChanged)="onUserDataChanged($event)"></app-languages>
+        <app-user *ngIf="!showSideBar && actualSection == 'User'"></app-user>
+        <app-user-basics *ngIf="!showSideBar && actualSection == 'User Basics'"></app-user-basics>
+        <app-networks *ngIf="!showSideBar && actualSection == 'Networks'"></app-networks>
+        <app-educations *ngIf="!showSideBar && actualSection == 'Educations'"></app-educations>
+        <app-work-experiences *ngIf="!showSideBar && actualSection == 'Work Experiences'"></app-work-experiences>
+        <app-tech-experiences *ngIf="!showSideBar && actualSection == 'Technical Experiences'"></app-tech-experiences>
         <app-skills *ngIf="!showSideBar && actualSection == 'Skills'"></app-skills>
         <app-tools *ngIf="!showSideBar && actualSection == 'Tools'"></app-tools>
         <app-methodologies *ngIf="!showSideBar && actualSection == 'Methodologies'"></app-methodologies>
@@ -132,7 +124,7 @@
       </aside>
     </div>
     <div class="column" [ngClass]="{'is-three-quarters' : !isSmall, 'is-three-fifths': isSmall}">
-      <app-resume-preview [initUserData]="initUserData"></app-resume-preview>
+      <app-resume-preview></app-resume-preview>
     </div>
   </div>
 </main>

@@ -1,37 +1,86 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Observable, Subject, takeUntil} from "rxjs";
-import {User} from "../../resume-data/user.data";
+import {Component} from '@angular/core';
+import {map} from "rxjs";
+import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
+import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {TechnicalDetail, TechnicalExperience} from "../../resume-data/user.data";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-tech-experiences',
   standalone: true,
-  imports: [],
+  imports: [
+    AsyncPipe,
+    NgClass,
+    NgIf,
+    NgForOf,
+    ReactiveFormsModule,
+    FormsModule
+  ],
   templateUrl: './tech-experiences.component.html',
   styleUrl: './tech-experiences.component.css'
 })
-export class TechExperiencesComponent  implements OnInit, OnDestroy {
-  @Input()
-  initUserData!: Observable<User>;
+export class TechExperiencesComponent {
 
-  @Output()
-  userDataChanged = new EventEmitter<User>();
+  userTechExperiences$ = this.dataStorageService.userData$.pipe(
+    map(user => user.userDetails.technicalExperiences)
+  );
 
-  userData!: User;
-  public unsubscribe$: Subject<void> = new Subject<void>();
+  constructor(public dataStorageService: UserDataStoreService) {
+  }
 
-  ngOnInit(): void {
-    if (this.initUserData) {
-      this.initUserData.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(user => {
-        this.userData = user;
-      });
+  toggleTechExperience(techExperience: TechnicalExperience) {
+    techExperience.showContent = !techExperience.showContent;
+  }
+
+  addTechExperience() {
+    let userData = this.dataStorageService.userData;
+    const techExperience: TechnicalExperience = {
+      topic: '',
+      showContent: true,
+      technicalDetails: [{
+        name: '',
+        level: 1
+      }]
+    };
+
+    userData.userDetails.technicalExperiences.push(techExperience);
+    this.dataStorageService.setUserData(userData);
+  }
+
+  addTechDetails(techExperience: TechnicalExperience) {
+    let userData = this.dataStorageService.userData
+    const index = userData.userDetails.technicalExperiences.indexOf(techExperience);
+    const techDetail: TechnicalDetail = {
+      name: '',
+      level: 1
+    };
+
+    if (index !== -1) {
+      userData.userDetails.technicalExperiences[index].technicalDetails.push(techDetail);
+      this.dataStorageService.setUserData(userData);
     }
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  deleteTechExperiences(techExperience: TechnicalExperience) {
+    let userData = this.dataStorageService.userData
+    const index = userData.userDetails.technicalExperiences.indexOf(techExperience);
+
+    if (index !== -1) {
+      userData.userDetails.technicalExperiences.splice(index, 1);
+      this.dataStorageService.setUserData(userData);
+    }
   }
 
+  removeTechDetails(techExperience: TechnicalExperience, technicalDetail: TechnicalDetail) {
+    let userData = this.dataStorageService.userData
+    const index = userData.userDetails.technicalExperiences.indexOf(techExperience);
+
+    techExperience.technicalDetails = techExperience.technicalDetails
+      .filter(techDetail => techDetail !== technicalDetail);
+
+    if (index !== -1){
+      userData.userDetails.technicalExperiences[index] = techExperience;
+      this.dataStorageService.setUserData(userData);
+    }
+  }
 }

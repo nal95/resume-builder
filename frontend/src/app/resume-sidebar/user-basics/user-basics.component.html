@@ -1,38 +1,43 @@
-<div *ngIf="(initUserData | async)?.userDetails?.basic as basic">
-  <div class="field is-small" >
-    <div class="field-body m-2">
+<div *ngIf="(userBasicData$ | async) as basic_data" class="m-2 p-0">
+  <div class="field is-small">
+    <div class="field-bod">
       <input class="input control" type="text" placeholder="Title" name="title"
-             [ngModel]="basic.title" (ngModelChange)="updateTitle($event)">
+             [(ngModel)]="basic_data.title">
     </div>
   </div>
   <div class="field is-small">
-    <div class="field-body m-2">
+    <div class="field-bod">
       <input class="input control" type="text" placeholder="Profession" name="profession"
-             [ngModel]="basic.profession" (ngModelChange)="updateProfession($event)">
+             [(ngModel)]="basic_data.profession">
     </div>
   </div>
   <div class="field is-small">
-    <div class="field-body m-2">
+    <div class="field-bod">
       <input class="input control" type="number" placeholder="Relevant experience years" name="experiences_years"
-             [ngModel]="basic.relevantExperienceYears" (ngModelChange)="updateExperiencesYears($event)">
+             [(ngModel)]="basic_data.relevantExperienceYears">
     </div>
   </div>
   <div class="field is-small">
-    <div class="field-body m-2">
+    <div class="field-bod">
       <input class="input control" type="tel" placeholder="Mobile Phone Number" name="phone"
-             [ngModel]="basic.mobilePhoneNumber" (ngModelChange)="updatePhone($event)">
+             [(ngModel)]="basic_data.mobilePhoneNumber">
     </div>
   </div>
   <div class="field is-small">
-    <div class="field-body m-2">
+    <div class="field-bod">
       <input class="input control" type="text" placeholder="Location" name="location"
-             [ngModel]="basic.location" (ngModelChange)="updateLocation($event)">
+             [(ngModel)]="basic_data.location">
     </div>
   </div>
-  <div class="field is-small">
-    <div class="field-body m-2 p-2">
-    <textarea class="textarea control is-hovered" placeholder="About me" name="summary"
-              [ngModel]="basic.summary" (ngModelChange)="updateSummary($event)"></textarea>
+  <div class="field is-small p-2">
+    <div class="field-body is-small is-grouped">
+      <div class="field">
+        <label class="label">Summary About you:</label>
+        <div class="control">
+          <app-quill (textChanged)="onSummaryChanged($event)"
+                     [text]="basic_data.summary"></app-quill>
+        </div>
+      </div>
     </div>
   </div>
 </div>

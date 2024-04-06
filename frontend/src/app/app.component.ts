@@ -1,6 +1,6 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {AsyncPipe, NgClass, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgClass, NgIf} from "@angular/common";
 import {UserComponent} from "./resume-sidebar/user/user.component";
 import {UserBasicsComponent} from "./resume-sidebar/user-basics/user-basics.component";
 import {NetworksComponent} from "./resume-sidebar/networks/networks.component";
@@ -13,10 +13,13 @@ import {MethodologiesComponent} from "./resume-sidebar/methodologies/methodologi
 import {HobbiesComponent} from "./resume-sidebar/hobbies/hobbies.component";
 import {TrainingsComponent} from "./resume-sidebar/trainings/trainings.component";
 import {LanguagesComponent} from "./resume-sidebar/languages/languages.component";
-import {User} from "./resume-data/user.data";
-import {Observable} from "rxjs";
+import {BehaviorSubject, catchError, of, retry, Subject, takeUntil} from "rxjs";
 import {ResumePreviewComponent} from "./resume-preview/resume-preview.component";
-import {ResumeDataService} from "./services/resume-data/resume-data.service";
+import {UserDataService} from "./services/user-data/user-data.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {UserDataStoreService} from "./services/user-data-store/user-data-store.service";
+import {User} from "./resume-data/user.data";
+import {CertificationsComponent} from "./resume-sidebar/certifications/certifications.component";
 
 @Component({
   selector: 'app-root',
@@ -25,19 +28,21 @@ import {ResumeDataService} from "./services/resume-data/resume-data.service";
     NetworksComponent, EducationsComponent, WorkExperiencesComponent,
     TechExperiencesComponent, SkillsComponent, ToolsComponent,
     MethodologiesComponent, HobbiesComponent, TrainingsComponent,
-    LanguagesComponent, AsyncPipe, ResumePreviewComponent, NgClass],
+    LanguagesComponent, AsyncPipe, ResumePreviewComponent, NgClass, JsonPipe, CertificationsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  title = 'resume-builder';
+export class AppComponent implements OnInit, OnDestroy {
   showSideBar: boolean = true
   actualSection: string = ""
-  initUserData: Observable<User> = this.resumeDataService.getUserDetails('1');
   isSmall: boolean = false;
 
-  constructor(private resumeDataService: ResumeDataService) {
+  userDataIsLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  public unsubscribe$: Subject<void> = new Subject<void>();
+
+  constructor(private resumeDataService: UserDataService,
+              public dataStorageService: UserDataStoreService) {
     this.checkIfMobile();
   }
 
@@ -47,11 +52,37 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUserData();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  loadUserData() {
+    this.resumeDataService.getUserData('1')
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        retry(3),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error fetching user data:', error);
+          return of('An error occurred while fetching user data.');
+        })
+      )
+      .subscribe((data) => {
+        if (typeof data != 'string') {
+          this.dataStorageService.setUserData(this.someConversionAndInitialization(data));
+          this.userDataIsLoaded$.next(true);
+        }
+      });
   }
 
   collectDetailsOf(sectionElement: HTMLElement) {
-    this.showSideBar = !this.showSideBar;
-    this.actualSection = sectionElement.id
+    if (this.userDataIsLoaded$.getValue()) {
+      this.showSideBar = !this.showSideBar;
+      this.actualSection = sectionElement.id
+    }
   }
 
   closeSection() {
@@ -64,11 +95,30 @@ export class AppComponent implements OnInit {
     this.isSmall = window.innerWidth <= 1280;
   }
 
-  onUserDataChanged(userData: User) {
-    this.initUserData = new Observable<User>(observer => {
-      observer.next(userData);
-      observer.complete();
+  someConversionAndInitialization(data: User) {
+    data.userDetails.networks.forEach(network => network.showContent = false);
+    data.userDetails.technicalExperiences.forEach(techExperience =>
+      techExperience.showContent = false);
+
+    data.userDetails.educations.forEach(education => {
+      education.showContent = false;
+      education.startDate = this.formattedDateString(education.startDate);
+      education.endDate = this.formattedDateString(education.endDate);
     });
+
+    data.userDetails.workExperiences.forEach(workExperience => {
+      workExperience.showContent = false
+      workExperience.startDate = this.formattedDateString(workExperience.startDate);
+      workExperience.endDate = this.formattedDateString(workExperience.endDate);
+    });
+
+    data.userDetails.certifications.forEach(certification =>
+      certification.validity = this.formattedDateString(certification.validity));
+
+    return data;
   }
 
+  formattedDateString(dateString: string) {
+    return dateString.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1-$2');
+  }
 }

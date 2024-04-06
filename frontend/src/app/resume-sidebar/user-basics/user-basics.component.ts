@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Observable, Subject, takeUntil} from "rxjs";
-import {User} from "../../resume-data/user.data";
+import {Component} from '@angular/core';
+import {map} from "rxjs";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
+import {QuillComponent} from "../../utils/quill/quill.component";
 
 @Component({
   selector: 'app-user-basics',
@@ -11,75 +12,25 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AsyncPipe,
     ReactiveFormsModule,
     FormsModule,
-    NgIf
+    NgIf,
+    QuillComponent
   ],
   templateUrl: './user-basics.component.html',
   styleUrl: './user-basics.component.css'
 })
-export class UserBasicsComponent implements OnInit, OnDestroy {
-  @Input()
-  initUserData!: Observable<User>;
+export class UserBasicsComponent {
 
-  @Output()
-  userDataChanged = new EventEmitter<User>();
+  userBasicData$ = this.dataStorageService.userData$.pipe(
+    map(user => user.userDetails.basic)
+  );
 
-  userData!: User;
-  public unsubscribe$: Subject<void> = new Subject<void>();
-
-  ngOnInit(): void {
-    if (this.initUserData) {
-      this.initUserData.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(user => {
-        this.userData = user;
-      });
-    }
+  constructor(public dataStorageService: UserDataStoreService) {
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
+  onSummaryChanged(summary: string) {
+    let userData = this.dataStorageService.userData;
+    userData.userDetails.basic.summary = summary;
 
-  updateSummary(value: string) {
-    if (this.userData){
-      this.userData.userDetails.basic.summary = value;
-      this.userDataChanged.emit(this.userData);
-    }
-  }
-
-  updateLocation(value: string) {
-    if (this.userData){
-      this.userData.userDetails.basic.location = value;
-      this.userDataChanged.emit(this.userData);
-    }
-  }
-
-  updatePhone(value: string) {
-    if (this.userData){
-      this.userData.userDetails.basic.mobilePhoneNumber = value;
-      this.userDataChanged.emit(this.userData);
-    }
-  }
-
-  updateExperiencesYears(value: number) {
-    if (this.userData){
-      this.userData.userDetails.basic.relevantExperienceYears = value;
-      this.userDataChanged.emit(this.userData);
-    }
-  }
-
-  updateTitle(value: string) {
-    if (this.userData){
-      this.userData.userDetails.basic.title = value;
-      this.userDataChanged.emit(this.userData);
-    }
-  }
-
-  updateProfession(value: string) {
-    if (this.userData){
-      this.userData.userDetails.basic.profession = value;
-      this.userDataChanged.emit(this.userData);
-    }
+    this.dataStorageService.setUserData(userData);
   }
 }

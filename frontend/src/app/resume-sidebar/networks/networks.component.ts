@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Observable, Subject, takeUntil} from "rxjs";
-import {Network, User} from "../../resume-data/user.data";
+import {Component} from '@angular/core';
+import {map} from "rxjs";
+import {Network} from "../../resume-data/user.data";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
 
 @Component({
   selector: 'app-networks',
@@ -18,58 +19,34 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   templateUrl: './networks.component.html',
   styleUrl: './networks.component.css'
 })
-export class NetworksComponent  implements OnInit, OnDestroy {
-  @Input()
-  initUserData!: Observable<User>;
+export class NetworksComponent {
 
-  @Output()
-  userDataChanged = new EventEmitter<User>();
+  userNetworks$ = this.dataStorageService.userData$.pipe(
+    map(user => user.userDetails.networks)
+  );
 
-  userData!: User;
-
-  newNetwork: Network = { name: '', referenceName: '', link: '' , showContent: true};
-
-  public unsubscribe$: Subject<void> = new Subject<void>();
-
-
-  ngOnInit(): void {
-    if (this.initUserData) {
-      this.initUserData.pipe(
-        takeUntil(this.unsubscribe$)
-      ).subscribe(user => {
-        this.userData = user;
-        this.userData.userDetails.networks.forEach( network => network.showContent = false);
-        this.userDataChanged.emit(this.userData);
-      });
-    }
+  constructor(public dataStorageService: UserDataStoreService) {
   }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
 
   addNetwork() {
-    if (this.userData) {
-      this.userData.userDetails.networks.push(this.newNetwork);
-      this.userDataChanged.emit(this.userData);
-    }
-  }
+    const newNetwork: Network = {name: '', referenceName: '', link: '', showContent: true};
+    let userData = this.dataStorageService.userData;
 
+    userData.userDetails.networks.push(newNetwork);
+    this.dataStorageService.setUserData(userData);
+  }
 
   toggleContent(network: Network) {
     network.showContent = !network.showContent;
   }
 
-
   deleteNetwork(network: Network) {
-    if (this.userData) {
-      const index = this.userData.userDetails.networks.indexOf(network);
-      if (index !== -1) {
-        this.userData.userDetails.networks.splice(index, 1);
-        this.userDataChanged.emit(this.userData);
-      }
+    let userData = this.dataStorageService.userData
+    const index = userData.userDetails.networks.indexOf(network);
+
+    if (index !== -1) {
+      userData.userDetails.networks.splice(index, 1);
+      this.dataStorageService.setUserData(userData);
     }
   }
 }

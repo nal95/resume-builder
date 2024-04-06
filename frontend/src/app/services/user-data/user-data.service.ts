@@ -7,11 +7,11 @@ import {GET_USER} from "../../backend/api-endpoints";
 @Injectable({
   providedIn: 'root'
 })
-export class ResumeDataService {
+export class UserDataService {
 
   constructor(private http: HttpClient) { }
 
-  getUserDetails(userId: string): Observable<User> {
+  getUserData(userId: string): Observable<User> {
     return this.http.get<User>(GET_USER + userId);
   }
 }

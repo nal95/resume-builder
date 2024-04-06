@@ -1,5 +1,5 @@
-<div *ngIf="(initUserData | async)?.userDetails?.workExperiences as workExperiences">
-  <div *ngFor="let workExperience of workExperiences">
+<div *ngIf="(userWorkExperiences$ | async) as workExperiences">
+  <ng-container *ngFor="let workExperience of workExperiences">
     <div class="card m-2">
       <header class="card-header">
         <p class="card-header-title">{{ workExperience.company }}</p>
@@ -20,69 +20,71 @@
           <div class="field-body m-1 p-1">
             <div class="field">
               <label class="label" *ngIf="workExperience.company.length <= 0">Company</label>
-              <input class="input control is-small" type="text" placeholder="e.g Company XYZ"
+              <input class="input control" type="text" placeholder="e.g Company XYZ"
                      [(ngModel)]="workExperience.company" name="company">
             </div>
           </div>
           <div class="field-body m-1 p-1">
             <div class="field">
               <label class="label" *ngIf="workExperience.occupiedPosition.length <= 0">Company</label>
-              <input class="input control is-small" type="text" placeholder="e.g Software Developer"
+              <input class="input control" type="text" placeholder="e.g Software Developer"
                      [(ngModel)]="workExperience.occupiedPosition" name="position">
             </div>
             <div class="field">
               <label class="label" *ngIf="workExperience.duration.length <= 0">Duration</label>
-              <input class="input control is-small" type="text" [size]="workExperience.duration.length +1"
+              <input class="input control" type="text" [size]="workExperience.duration.length +1"
                      placeholder="e.g 5 years" [(ngModel)]="workExperience.duration" name="duration">
             </div>
           </div>
           <div class="field-body m-1 p-1">
             <div class="field">
               <label class="label" *ngIf="workExperience.companyCity.length <= 0">City</label>
-              <input class="input control is-small" type="text" placeholder="e.g Berlin"
+              <input class="input control" type="text" placeholder="e.g Berlin"
                      [(ngModel)]="workExperience.companyCity" name="companyCity">
             </div>
             <div class="field">
               <label class="label" *ngIf="workExperience.companyLink.length <= 0">Link</label>
-              <input class="input control is-small" type="text" placeholder="Company URL"
+              <input class="input control" type="text" placeholder="Company URL"
                      [(ngModel)]="workExperience.companyLink" name="companyLink">
             </div>
           </div>
-          <div class="field-body m-1 p-1 is-small is-grouped">
+          <div class="field-body m-1 p-1 is-grouped">
             <div class="field">
               <label class="label" *ngIf="workExperience.startDate.length <= 0">Start Date</label>
-              <input class="input control is-small" type="month" [(ngModel)]="workExperience.startDate" name="startDate">
+              <input [(ngModel)]="workExperience.startDate" class="input control" name="startDate"
+                     type="month">
             </div>
             <div class="field">
               <label class="label" *ngIf="workExperience.endDate.length <= 0">End Date</label>
-              <input class="input control is-small is-small" type="month"
+              <input class="input control" type="month"
                      [(ngModel)]="workExperience.endDate" name="endDate">
             </div>
           </div>
-          <div class="field-body m-1 p-1">
+          <div class="field-body m-1 p-1 is-grouped">
             <div class="field">
-              <label class="label has-icons-right">
-                 <span class="icon is-clickable">
-                    <i class="ri-add-box-line" (click)="addWorkExperienceSummary(workExperience)" aria-hidden="true"></i>
-                 </span>
-                Few points on this work experience
-              </label>
-<!--              TODO: this binding has problem get look on how to fix it  -->
-              <div class="control p-1 has-icons-right" *ngFor="let summary of workExperience.summary; let i = index;">
-                <input class="input is-small is-focused" rows="2" placeholder="work experience description"
-                          (input)="updateWS(workExperience.summary, i, $event)" [(ngModel)]="workExperience.summary[i]"   name="summary">
-                <span class="icon is-right is-clickable">
-                    <i class="ri-delete-bin-line" (click)="deleteWorkExperienceSummary(workExperience, i)" aria-hidden="true"></i>
-                 </span>
+              <label class="label">Few points on this work experience:</label>
+              <div class="control">
+                <app-quill (textChanged)="onSummaryChanged(workExperience,$event)"
+                           [text]="workExperience.summary"></app-quill>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="field m-1 p-2">
-<button class="button control" type="submit" (click)="addWorkExperience()">Add Work Experience</button>
+  </ng-container>
 </div>
 
+<div class="field m-1 p-2">
+  <button (click)="addWorkExperience()" class="button control is-primary" type="submit">Add Work Experience</button>
+</div>
+
+<!--<div class="field w-field">-->
+<!--  <label class="label w-label">Username</label>-->
+<!--  <div class="control has-icons-left">-->
+<!--    <input class="input w-input" type="text" placeholder="Username">-->
+<!--    <span class="icon is-small is-left">-->
+<!--                <i class="fas fa-user"> test </i>-->
+<!--              </span>-->
+<!--  </div>-->
+<!--</div>-->

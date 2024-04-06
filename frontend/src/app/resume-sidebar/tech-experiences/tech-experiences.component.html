@@ -1,1 +1,52 @@
-<p>tech-experiences works!</p>
+<div *ngIf="(userTechExperiences$ | async) as techExperiences">
+  <ng-container *ngFor="let techExperience of techExperiences">
+    <div class="card m-2">
+      <header class="card-header">
+        <p class="card-header-title">{{ techExperience.topic }}</p>
+        <button (click)="deleteTechExperiences(techExperience)" aria-label="more options" class="card-header-icon">
+          <span class="icon">
+            <i aria-hidden="true" class="ri-close-line"></i>
+          </span>
+        </button>
+        <button (click)="toggleTechExperience(techExperience)" aria-label="more options" class="card-header-icon">
+          <span class="icon">
+            <i *ngIf="techExperience.showContent===false" aria-hidden="true" class="ri-arrow-down-s-line"></i>
+            <i *ngIf="techExperience.showContent===true" aria-hidden="true" class="ri-arrow-up-s-line"></i>
+          </span>
+        </button>
+      </header>
+      <div [ngClass]="{ 'is-hidden': techExperience.showContent===false }" class="card-content m-0">
+        <div class="field">
+          <div class="field-body p-1">
+            <div class="field">
+              <input [(ngModel)]="techExperience.topic" class="input control is-small" placeholder="Tech Topic"
+                     type="text">
+            </div>
+            <div class="field" *ngIf="techExperience.topic !== ''">
+              <button (click)="addTechDetails(techExperience)" class="button is-small is-primary is-light">Add Tech</button>
+            </div>
+          </div>
+          <div *ngFor="let technicalDetail of techExperience.technicalDetails" class="field-body p-1">
+            <div class="field">
+              <input [(ngModel)]="technicalDetail.name" class="input control is-small" placeholder="Tech Name"
+                     type="text">
+            </div>
+            <div class="field">
+              <input [(ngModel)]="technicalDetail.level" [max]="10" [min]="1" class="input control is-small"
+                     placeholder="Level"
+                     type="number">
+            </div>
+            <div class="field" *ngIf="technicalDetail.name !== ''">
+              <button (click)="removeTechDetails(techExperience, technicalDetail)" class="button is-small is-danger is-light">Remove Tech
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="field m-1 p-2">
+  <button (click)="addTechExperience()" class="button control is-primary" type="submit">Add Technical Experience</button>
+</div>
+

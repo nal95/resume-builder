@@ -1,14 +1,14 @@
-<div *ngIf="(initUserData | async)?.userDetails?.educations as educations">
+<div *ngIf="(userEducations$ | async) as educations">
   <ng-container *ngFor="let education of educations">
     <div class="card m-2">
       <header class="card-header">
         <p class="card-header-title">{{ education.school }}</p>
-        <button class="card-header-icon" aria-label="more options" (click)="deleteEducation(education)">
+        <button class="card-header-icon" aria-label="delete" (click)="deleteEducation(education)">
           <span class="icon">
             <i class="ri-close-line" aria-hidden="true"></i>
           </span>
         </button>
-        <button class="card-header-icon" aria-label="more options" (click)="toggleEducation(education)">
+        <button class="card-header-icon" aria-label="show" (click)="toggleEducation(education)">
           <span class="icon">
             <i class="ri-arrow-down-s-line" aria-hidden="true" *ngIf="education.showContent===false"></i>
             <i class="ri-arrow-up-s-line" aria-hidden="true" *ngIf="education.showContent===true"></i>
@@ -20,17 +20,21 @@
           <div class="field-body m-1 p-1">
             <div class="field">
               <label class="label" *ngIf="education.school.length <= 0">University/Institution</label>
-              <input class="input control is-small" type="text" placeholder="e.g University of XYZ" [(ngModel)]="education.school" name="school">
+              <input class="input control is-small" type="text" placeholder="e.g University of XYZ"
+                     [(ngModel)]="education.school"
+                     name="school">
             </div>
           </div>
           <div class="field-body m-1 p-1">
             <div class="field">
               <label class="label" *ngIf="education.degree.length <= 0">Degree</label>
-              <input class="input control is-small" type="text" placeholder="Degree" [(ngModel)]="education.degree" name="degree">
+              <input class="input control is-small" type="text" placeholder="Degree" [(ngModel)]="education.degree"
+                     name="degree">
             </div>
             <div class="field">
               <label class="label" *ngIf="education.field.length <= 0">Faculty</label>
-              <input class="input control is-small" type="text" placeholder="Faculty" [(ngModel)]="education.field" name="faculty">
+              <input class="input control is-small" type="text" placeholder="Faculty" [(ngModel)]="education.field"
+                     name="faculty">
             </div>
           </div>
           <div class="field-body m-1 p-1 is-small is-grouped">
@@ -46,7 +50,10 @@
           <div class="field-body m-1 p-1" *ngIf="education.summary.length > 0">
             <div class="field">
               <label class="label">Summary/Appreciation</label>
-              <textarea class="input control" type="text" placeholder="Summary or Faculty description or Appreciation" [(ngModel)]="education.summary" name="summary"></textarea>
+              <textarea class="input control" type="text" placeholder="Summary or Faculty description or Appreciation"
+                        [(ngModel)]="education.summary"
+                        name="summary">
+              </textarea>
             </div>
           </div>
         </div>
@@ -55,6 +62,6 @@
   </ng-container>
 </div>
 <div class="field m-1 p-2">
-<button class="button control" type="submit" (click)="addEducation()">Add Education</button>
+<button class="button control is-primary" type="submit" (click)="addEducation()">Add Education</button>
 </div>
 
