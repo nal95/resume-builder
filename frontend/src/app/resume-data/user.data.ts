@@ -10,15 +10,17 @@ export interface User {
 export interface UserDetails {
   basic: UserBasic,
   image:string,
+  languages: Language[],
   networks: Network[],
   educations: Education[],
   workExperiences: WorkExperience[],
   technicalExperiences: TechnicalExperience[],
+  certifications: Certification[],
+  trainings: Training[],
+  hobbiesAndInterest: string[],
   tools: string[],
   methodologies: string[],
   skills: string[],
-  hobbiesAndInterest: string[],
-  trainingsAndCertifications: string[],
 }
 
 export interface UserBasic {
@@ -56,7 +58,7 @@ export interface WorkExperience {
   startDate: string,
   endDate: string,
   duration: string,
-  summary: string[],
+  summary: string,
   showContent?: boolean
 }
 
@@ -65,9 +67,45 @@ export interface TechnicalDetail {
   level: number,
 }
 
+export interface Language {
+  name: string,
+  level: string,
+}
+
+export interface Certification {
+  name: string,
+  validity: string,
+}
+
+export interface Training {
+  title: string,
+  platform: string,
+}
+
 export interface TechnicalExperience {
   topic: string,
+  showContent?: boolean
   technicalDetails: TechnicalDetail[],
 }
 
+export enum UserDataType {
+  //simple type
+  TOOLS,
+  METHODOLOGIES,
+  SKILLS,
+  HOBBIES_AND_INTEREST,
 
+  //composed type
+  CERTIFICATIONS,
+  TRAININGS,
+  LANGUAGES,
+}
+
+export enum LanguageLevel {
+  'A1' = 'Beginner',
+  'A2' = 'Elementary',
+  'B1' = 'Intermediate',
+  'B2' = 'Upper Intermediate',
+  'C1' = 'Advanced',
+  'C2' = 'Proficiency'
+}
