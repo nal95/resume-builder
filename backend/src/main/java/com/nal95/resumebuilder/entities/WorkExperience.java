@@ -21,5 +21,5 @@ public class WorkExperience {
     private LocalDate startDate;
     private LocalDate endDate;
     private String duration;
-    private List<String> summary;
+    private String summary;
 }

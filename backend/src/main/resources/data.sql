@@ -17,14 +17,24 @@ VALUES ('John',
         'Doe',
         'john.doe@example.com',
         '{
-          "basic":{
+          "basic": {
             "location": "New York",
-            "summary": "Experienced software engineer",
+            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\\nPhasellus nec iaculis mauris. <a>@bulmaio</a>.\\n<a href=\\\"#\\\">#css</a> <a href=\\\"#\\\">#responsive</a>\\n<br>\\n<time datetime=\\\"2016-1-1\\\">11:09 PM - 1 Jan 2016</time>",
             "title": "Senior Software Engineer",
             "profession": "Software Development",
             "mobilePhoneNumber": "+1234567890",
             "relevantExperienceYears": 5
           },
+          "languages": [
+            {
+              "name": "German",
+              "level": "Beginner"
+            },
+            {
+              "name": "French",
+              "level": "Proficiency"
+            }
+          ],
           "networks": [
             {
               "name": "johndoe",
@@ -41,7 +51,7 @@ VALUES ('John',
             {
               "school": "University of XYZ",
               "field": "Computer Science",
-              "degree": "Bachelor''s",
+              "degree": "Bachelor''''s",
               "startDate": "2020-01-01",
               "endDate": "2024-01-01",
               "duration": 4,
@@ -57,9 +67,7 @@ VALUES ('John',
               "startDate": "2024-02-01",
               "endDate": "2025-02-01",
               "duration": "1 year",
-              "summary": [
-                "Developed cutting-edge software"
-              ]
+              "summary": "<ul><li>Developed cutting-edge software</li></ul>"
             }
           ],
           "technicalExperiences": [
@@ -68,26 +76,156 @@ VALUES ('John',
               "technicalDetails": [
                 {
                   "name": "Java",
-                  "level": 5
+                  "level": 3
                 },
                 {
                   "name": "JavaScript",
-                  "level": 4
+                  "level": 3
+                },
+                {
+                  "name": "TypeScript",
+                  "level": 3
+                },
+                {
+                  "name": "C/C++",
+                  "level": 2
+                },
+                {
+                  "name": "Python",
+                  "level": 2
                 }
               ]
             },
             {
-              "topic": "Framework",
+              "topic": "Backend Development",
               "technicalDetails": [
                 {
                   "name": "Spring Boot",
                   "level": 5
                 },
                 {
+                  "name": "NodeJs",
+                  "level": 4
+                }
+              ]
+            },
+            {
+              "topic": "Frontend Development",
+              "technicalDetails": [
+                {
+                  "name": "React",
+                  "level": 1
+                },
+                {
                   "name": "Angular",
                   "level": 4
                 }
               ]
+            },
+            {
+              "topic": "Database",
+              "technicalDetails": [
+                {
+                  "name": "MySQL",
+                  "level": 3
+                },
+                {
+                  "name": "MongoDB",
+                  "level": 2
+                },
+                {
+                  "name": "BigQuery",
+                  "level": 2
+                }
+              ]
+            },
+            {
+              "topic": "Cloud",
+              "technicalDetails": [
+                {
+                  "name": "AWS",
+                  "level": 3
+                },
+                {
+                  "name": "Google Cloud Platform",
+                  "level": 2
+                },
+                {
+                  "name": "Azure",
+                  "level": 2
+                }
+              ]
+            },
+            {
+              "topic": "DevOps",
+              "technicalDetails": [
+                {
+                  "name": "Docker",
+                  "level": 3
+                },
+                {
+                  "name": "Kubernetes",
+                  "level": 2
+                },
+                {
+                  "name": "Terraform",
+                  "level": 3
+                },
+                {
+                  "name": "GitHub Actions",
+                  "level": 3
+                },
+                {
+                  "name": "Jenkins",
+                  "level": 3
+                },
+                {
+                  "name": "Helm",
+                  "level": 2
+                }
+              ]
+            },
+            {
+              "topic": "Testing",
+              "technicalDetails": [
+                {
+                  "name": "JUnit",
+                  "level": 3
+                },
+                {
+                  "name": "Jest",
+                  "level": 2
+                }
+              ]
+            },
+            {
+              "topic": "Message Brokers",
+              "technicalDetails": [
+                {
+                  "name": "RabbitMQ",
+                  "level": 3
+                },
+                {
+                  "name": "Kafka",
+                  "level": 2
+                },
+                {
+                  "name": "Nats.io",
+                  "level": 2
+                }
+              ]
+            }
+          ],
+          "certifications": [
+            {
+              "name": "Google Cloud Associate Cloud Engineer",
+              "validity": "2026-01-01"
+            }
+          ],
+          "trainings": [
+            {
+              "title": "Java Design Pattern",
+              "platform": "Udemy"
             }
           ],
           "tools": [
@@ -111,9 +249,6 @@ VALUES ('John',
             "Playing the Piano",
             "DIY (Do It Yourself)",
             "Travel"
-          ],
-          "trainingsAndCertifications": [
-            "Google Cloud",
-            "Clean Code"
           ]
         }' FORMAT JSON);
+
