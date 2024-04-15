@@ -15,5 +15,6 @@ public class UserBasic {
     private String title;
     private String profession;
     private String mobilePhoneNumber;
+    private String website;
     private int relevantExperienceYears;
 }

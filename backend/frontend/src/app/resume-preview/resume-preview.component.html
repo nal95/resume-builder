@@ -1,0 +1,9 @@
+<ng-container [ngSwitch]="selectedTemplate.name">
+  <app-simple *ngSwitchDefault></app-simple>
+  <app-semi-pro *ngSwitchCase="'Semi Pro'"></app-semi-pro>
+</ng-container>
+
+<!--<div class=" box" style="position: fixed">-->
+<!--  zoom-->
+<!--</div>-->
+<!--<app-semi-pro></app-semi-pro>-->

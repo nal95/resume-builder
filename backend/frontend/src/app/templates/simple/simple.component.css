@@ -1,0 +1,125 @@
+@page{
+  size: letter portrait;
+  margin: 0;
+}
+
+body{
+  width: 8.5in;
+  height: 11in;
+  margin: 0 auto;
+}
+
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  border-radius: 40%;
+  border: 3px solid #94824b;
+}
+
+#main{
+  float: left;
+  width: 6.4in;
+  padding: 0.25in 0.25in 0 0.25in;
+  font-size: 7pt;
+}
+
+.horizontal-line {
+  border-top: 1px solid #ccc;
+}
+
+.inline-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.inline-list li {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+#main .inline-list li:first-child::after {
+  content: "\007C"; /* Unicode representation of arrow-right-s-line */
+  margin-left: 3px; /* Adjust spacing as needed */
+  margin-right: 4px; /* Adjust spacing as needed */
+}
+
+#main .inline-list li:first-child::after {
+  content: "\2192"; /* Separator for the first item */
+  margin-left: 10px; /* Adjust spacing as needed */
+  margin-right: 10px; /* Adjust spacing as needed */
+}
+
+#main .inline-list li:nth-child(n+3)::before {
+  content: "\007C"; /* Unicode representation of arrow-right-s-line */
+  margin-left: 3px; /* Adjust spacing as needed */
+  margin-right: 4px; /* Adjust spacing as needed */
+}
+
+.item-title {
+  text-align: left;
+}
+
+.item-title span {
+  float: right;
+}
+
+#main h6:not(:last-child),
+#sidebar h6:not(:last-child) {
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  color:  #946c00;
+}
+
+#sidebar{
+  float: right;
+  position: relative;
+  width: calc(8.5in - 6.4in);
+  height: 100%;
+  padding: 0.25in 0.10in 0 0.10in;
+  font-size: 8.5pt;
+  /*background: #eff5fb ;*/
+}
+
+.table td {
+  border: none;
+}
+
+.table {
+  background-color: unset;
+}
+
+.skills-list,
+.methods-list,
+.tools-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.item {
+  margin-right: 5px;
+  font-size: 0.70rem;
+  text-decoration: underline;
+  /*background-color: white;*/
+  margin-bottom: 5px;
+
+}
+
+#highlights{
+  position: absolute;
+  bottom: 0;
+  right: 0.1in;
+  left: 0.1in;
+  font-size: 0.7rem;
+  font-style: italic;
+  line-height: 1.1;
+  text-align: right;
+  color: #777;
+}

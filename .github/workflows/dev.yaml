@@ -27,7 +27,7 @@ jobs:
             backend:
               - 'backend/**'
             frontend:
-              - 'frontend/**'    
+              - 'backend/frontend/**'    
 
   # JOB to build and test backend code
   backend:
@@ -66,15 +66,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd frontend
+          cd backend/frontend
           npm ci
 
       - name: Build
         run: |
-          cd frontend
+          cd backend/frontend
           npm run build
 
       - name: Test
         run: |
-          cd frontend
+          cd backend/frontend
           npx jest  app

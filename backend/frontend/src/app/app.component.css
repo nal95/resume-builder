@@ -1,0 +1,42 @@
+.sidebar {
+  height: 22.5cm;
+  max-height: 29.7cm;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.preview {
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 1.3;
+  hyphens: auto;
+  overflow-y: auto;
+  width: 21cm; /* Largeur de la page A4 */
+  height: 22.5cm; /* Hauteur de la page A4 */
+  max-height: 29.7cm;
+}
+
+/* Hide scrollbar for Firefox */
+.sidebar::-webkit-scrollbar,
+.preview::-webkit-scrollbar {
+  display: none;
+}
+
+.template-image {
+  width: 30%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.card-footer-item {
+  border-right: none;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .template-image {
+    width: 70%;
+  }
+}

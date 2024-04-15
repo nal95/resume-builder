@@ -19,10 +19,11 @@ VALUES ('John',
         '{
           "basic": {
             "location": "New York",
-            "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\\nPhasellus nec iaculis mauris. <a>@bulmaio</a>.\\n<a href=\\\"#\\\">#css</a> <a href=\\\"#\\\">#responsive</a>\\n<br>\\n<time datetime=\\\"2016-1-1\\\">11:09 PM - 1 Jan 2016</time>",
+            "summary": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.</p>",
             "title": "Senior Software Engineer",
             "profession": "Software Development",
             "mobilePhoneNumber": "+1234567890",
+            "website": "www.johndoe.com",
             "relevantExperienceYears": 5
           },
           "languages": [
@@ -56,6 +57,15 @@ VALUES ('John',
               "endDate": "2024-01-01",
               "duration": 4,
               "summary": "Graduated with honors"
+            },
+            {
+              "school": "University of XYZ",
+              "field": "Computer Science",
+              "degree": "Bachelor''''s",
+              "startDate": "2020-01-01",
+              "endDate": "2024-01-01",
+              "duration": 4,
+              "summary": "Graduated with honors"
             }
           ],
           "workExperiences": [
@@ -67,7 +77,27 @@ VALUES ('John',
               "startDate": "2024-02-01",
               "endDate": "2025-02-01",
               "duration": "1 year",
-              "summary": "<ul><li>Developed cutting-edge software</li></ul>"
+              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>"
+            },
+            {
+              "company": "ABC Inc.",
+              "companyCity": "New York",
+              "companyLink": "https://abcinc.com",
+              "occupiedPosition": "Software Engineer",
+              "startDate": "2024-02-01",
+              "endDate": "2025-02-01",
+              "duration": "1 year",
+              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>"
+            },
+            {
+              "company": "ABC Inc.",
+              "companyCity": "New York",
+              "companyLink": "https://abcinc.com",
+              "occupiedPosition": "Software Engineer",
+              "startDate": "2024-02-01",
+              "endDate": "2025-02-01",
+              "duration": "1 year",
+              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>"
             }
           ],
           "technicalExperiences": [
@@ -248,7 +278,8 @@ VALUES ('John',
             "Reading",
             "Playing the Piano",
             "DIY (Do It Yourself)",
-            "Travel"
+            "Travel",
+            "Another One"
           ]
         }' FORMAT JSON);
 

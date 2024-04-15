@@ -1,0 +1,15 @@
+/*.w-field {*/
+/*  position: relative;*/
+/*}*/
+
+/*.w-label {*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 10px; !* Adjust as needed *!*/
+/*  transform: translateY(-50%);*/
+/*  pointer-events: none; !* Ensures the label doesn't interfere with input focus *!*/
+/*}*/
+
+.w-input {
+  padding-left: 70px; /* Adjust to accommodate the label and icon */
+}

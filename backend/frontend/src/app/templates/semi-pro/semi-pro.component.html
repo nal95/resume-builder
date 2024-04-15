@@ -1,0 +1,194 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-timeline@3.0.5/dist/css/bulma-timeline.min.css"/>
+  <title>simple theme</title>
+
+</head>
+<body lang="en" *ngIf="(data$ | async) as data">
+<header id="title">
+  <div class="column is-full is-vcentered is-centered pt-3 pb-1">
+    <div class="profile">
+      <figure class="image is-64x64">
+        <img class="profile-image is-bordered" ngSrc="https://bulma.io/assets/images/placeholders/64x64.png"
+             alt="Placeholder image" fill/>
+      </figure>
+    </div>
+    <div class="title profile is-6">{{ data.firstName }} {{ data.lastName }}</div>
+    <div class="subtitle profile is-7" >
+      <ul class="inline-list" *ngIf="data.userDetails?.basic">
+        <li class="subtitle is-7" >
+          <p *ngIf="data.userDetails.basic?.mobilePhoneNumber">
+            <span class="icon is-small m-0">
+              <i class="ri-phone-fill" aria-hidden="true"></i>
+            </span>
+            <span class="mr-1">{{ data.userDetails.basic.mobilePhoneNumber }}</span>
+          </p>
+          <p *ngIf="data.email">
+            <span class="icon is-small m-0">
+              <i class="ri-mail-fill" aria-hidden="true"></i>
+            </span>
+            <span class="mr-1">{{ data.email}}</span>
+          </p>
+          <p *ngIf="data.userDetails.basic?.website">
+            <span class="icon is-small m-0">
+                <i class="ri-global-fill" aria-hidden="true"></i>
+            </span>
+            <span class="mr-1">{{ data.userDetails.basic.website }}</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<section class="box" id="main">
+  <section class="tech-exp">
+    <h6 class="title  has-text-weight-bold is-uppercase is-7 pb-1">
+      Technical Experiences <span class="is-underlined">(Rated out of 5)</span></h6>
+    <div class="tech-exp-list">
+      <ul class="inline-list is-size-7" *ngFor="let techExperience of data.userDetails?.technicalExperiences">
+        <li>
+          <span class="is-uppercase"><strong>{{ techExperience.topic }}</strong></span>
+        </li>
+        <li *ngFor="let detail of techExperience.technicalDetails">
+          <span class="has-text-weight-medium is-underlined">{{ detail.name }} <sup>[{{ detail.level }}]</sup></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="work-exp">
+    <h6 class="title  has-text-weight-bold is-uppercase is-7 pt-3 pb-1 mb-3">
+      Work Experience </h6>
+    <div class="content is-size-7">
+      <div class="timeline" *ngFor="let workExperience of data.userDetails?.workExperiences">
+        <div class="timeline-item is-black is-block">
+          <span class="timeline-marker has-background-warning-dark"></span>
+          <p class="heading item-title ml-4 mb-0"> {{ workExperience.company }}
+            <span>{{ workExperience.startDate }} - {{ workExperience.endDate }} </span></p>
+          <p class=" heading item-title ml-4"> {{ workExperience.occupiedPosition }}  </p>
+          <div class="timeline-content pt-0 mt-0"  [innerHTML]="workExperience.summary"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="Certifications mt-4">
+    <h6 class="title  has-text-weight-bold is-uppercase is-7">
+      Certifications </h6>
+    <div class="content is-small">
+      <ul>
+        <li *ngFor="let cert of data.userDetails?.certifications">
+          <p class="item-title"> {{cert.name}}
+            <span class="heading">Valid Until {{cert.validity}}</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="trainings mt-4">
+    <h6 class="title  has-text-weight-bold is-uppercase is-7">
+      Trainings </h6>
+    <div class="content is-small">
+      <ul>
+        <li class="item-title" *ngFor="let training of data.userDetails?.trainings">
+          {{ training.title}}<sup>({{ training.platform}})</sup>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</section>
+
+<aside class="box has-background-info-light" id="sidebar">
+  <div class="sidebar-content">
+    <section class="about-me" *ngIf="data.userDetails?.basic && data.userDetails.basic?.summary">
+      <h6 class="title has-text-weight-bold  is-uppercase pb-1">
+        About Me </h6>
+      <div class="content" [innerHTML]="data.userDetails.basic.summary"></div>
+    </section>
+
+    <section class="educations pb-1 pt-1 m-1">
+      <h6 class="title has-text-weight-bold  is-uppercase">
+        Educations </h6>
+      <div class="content m-1 is-small is-flex is-flex-direction-column"
+           *ngFor="let education of data.userDetails?.educations"
+      >
+        <span class="has-text-weight-bold">{{ education.school}}</span>
+        <span class="has-text-weight-semibold">{{ education.degree}}, {{ education.field}}</span>
+        <span>{{ education.startDate}} - {{ education.endDate}} | {{ education.duration}} Years</span>
+      </div>
+    </section>
+
+    <section class="skills pb-1 pt-0 m-1">
+      <h6 class="title has-text-weight-bold is-size-7 is-uppercase">
+        Skills </h6>
+      <div class="skills-list m-1">
+        <span class="item"  *ngFor="let skill of data.userDetails?.skills">{{ skill }}</span>
+      </div>
+    </section>
+
+    <section class="methods pb-1 pt-0 m-1">
+      <h6 class="title has-text-weight-bold  is-uppercase">
+        Methods </h6>
+      <div class="methods-list m-1">
+        <span class="item" *ngFor="let methode of data.userDetails?.methodologies">{{ methode }}</span>
+      </div>
+    </section>
+
+    <section class="tools pb-1 pt-0 m-1">
+      <h6 class="title has-text-weight-bold is-uppercase">
+        Tools </h6>
+      <div class="tools-list m-1">
+        <span class="item" *ngFor="let tool of data.userDetails?.tools">{{ tool }}</span>
+      </div>
+    </section>
+
+    <section id="languages" class="m-1">
+      <h6 class="title has-text-weight-bold  is-uppercase">
+        Languages </h6>
+      <table class="table is-narrow is-fullwidth" >
+        <tr *ngFor="let language of data.userDetails?.languages">
+          <td>{{ language.name }}</td>
+          <td class="is-pulled-right">{{ language.level }}</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="hobbies" class="m-1">
+      <h6 class="title has-text-weight-bold  is-uppercase pb-1">
+        Interest </h6>
+      <div class="content is-small is-grouped is-grouped-multiline">
+        <span class="icon-text"
+              *ngFor="let interest of data.userDetails?.hobbiesAndInterest">
+          <span class="icon" *ngIf="checkRead(interest)">
+            <i class="ri-book-open-line"></i>
+          </span>
+          <span class="icon" *ngIf="checkPiano(interest)">
+            <i class="ri-music-fill"></i>
+          </span>
+          <span class="icon" *ngIf="checkSports(interest)">
+            <i class="ri-football-fill"></i>
+          </span>
+          <span class="icon" *ngIf="checkTraveling(interest)">
+             <i class="ri-suitcase-2-line"></i>
+          </span>
+          <span class="icon" *ngIf="checkLab(interest)">
+            <i class="ri-home-wifi-line"></i>
+          </span>
+          <span class="icon" *ngIf="!check(interest)">
+            <i class="ri-arrow-right-fill"></i>
+          </span>
+          <span>{{ interest }}</span>
+        </span>
+      </div>
+    </section>
+  </div>
+
+  <div class="highlights" id="highlights">
+    <p> #Interculturelle Competent #Zielorientiert #Zuverlässig #Teamfähig #Kommunikationsbereitschaft
+      #Engagement #Lernbereitschaft #schnelles Verständnis
+    </p>
+  </div>
+</aside>
+</body>
