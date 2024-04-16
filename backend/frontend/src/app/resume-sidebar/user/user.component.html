@@ -1,17 +1,17 @@
 <div *ngIf="(userData.userData$ | async) as data">
-    <div class="field is-small">
-      <div class="field-body m-2 p-1">
+    <div class="field">
+      <div class="field-body ">
         <div class="field">
-            <input class="input control" type="text" placeholder="First Name" name="firstName"
+            <input class="input control is-small" type="text" placeholder="First Name" name="firstName"
                    [(ngModel)]="data.firstName">
         </div>
         <div class="field">
-            <input class="input control" type="text" placeholder="Last Name" name="lastName"
+            <input class="input control is-small" type="text" placeholder="Last Name" name="lastName"
                    [(ngModel)]="data.lastName">
         </div>
       </div>
-      <div class="field-body m-2 pb-2">
-        <input class="input control" type="email" placeholder="Email" name="email"
+      <div class="field-body pt-1">
+        <input class="input control is-small" type="email" placeholder="Email" name="email"
                [(ngModel)]="data.email">
       </div>
     </div>
