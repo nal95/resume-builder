@@ -72,7 +72,7 @@
           </div>
           <button class="modal-close is-large" (click)="closeModal()" aria-label="close"></button>
         </div>
-        <div class="column is-one-fifth">
+        <div class="column is-one-fifth" [ngClass]="{'is-3': isSmall}" id="sidebar">
           <aside class="menu">
             <p class="menu-label">Settings</p>
             <ng-container *ngIf="showSideBar">
