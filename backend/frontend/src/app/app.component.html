@@ -1,6 +1,5 @@
 <main class="box pt-0 p-1">
   <app-navbar [isModalOpen$] = (isModalOpen$) ></app-navbar>
-
   <div class="columns is-2 debut pt-3" >
     <div class="modal" [ngClass]="{'is-active' : (isModalOpen$ | async)}">
       <div class="modal-background"></div>
@@ -21,9 +20,8 @@
                   </span>
                 </div>
                 <div class="card-footer-item">
-                  <span class="icon is-small is-clickable" (click)="selectTemplate()">
-                    <i class="ri-checkbox-circle-fill"></i>
-<!--                    <span class="is-text is-small"></span>-->
+                  <span class="is-text is-small">
+                   {{selectedTemplate.name}}
                   </span>
                 </div>
                 <div class="card-footer-item">
@@ -39,10 +37,6 @@
       </div>
       <button class="modal-close is-large" (click)="closeModal()" aria-label="close"></button>
     </div>
-
-
-
-
     <div class="column panel sidebar is-one-fifth" *ngIf="!(isModalOpen$ | async)"
          [ngClass]="{'is-3': isSmall}" id="sidebar">
       <p class="panel-heading is-small">User Details {{ userDataIsLoaded$ | async }}</p>

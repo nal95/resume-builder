@@ -89,8 +89,6 @@ export class AppComponent implements OnInit, OnDestroy {
   currentIndex: number = 0;
 
   selectTemplate(): void {
-    // TODO:
-    console.log(this.selectedTemplate);
     this.cdr.detectChanges();
     this.closeModal();
   }
