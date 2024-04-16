@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AsyncPipe, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
+import {InputWithIconTextComponent} from "../../utils/input-with-icon-text/input-with-icon-text.component";
 
 @Component({
   selector: 'app-user',
@@ -9,7 +10,8 @@ import {UserDataStoreService} from "../../services/user-data-store/user-data-sto
   imports: [
     AsyncPipe,
     FormsModule,
-    NgIf
+    NgIf,
+    InputWithIconTextComponent
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'

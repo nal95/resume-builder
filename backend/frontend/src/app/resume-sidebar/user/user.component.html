@@ -1,18 +1,29 @@
 <div *ngIf="(userData.userData$ | async) as data">
-    <div class="field pt-1">
-      <div class="field-body ">
-        <div class="field">
-            <input class="input control is-small" type="text" placeholder="First Name" name="firstName"
-                   [(ngModel)]="data.firstName">
-        </div>
-        <div class="field">
-            <input class="input control is-small" type="text" placeholder="Last Name" name="lastName"
-                   [(ngModel)]="data.lastName">
-        </div>
-      </div>
-      <div class="field-body pt-1">
-        <input class="input control is-small" type="email" placeholder="Email" name="email"
-               [(ngModel)]="data.email">
-      </div>
-    </div>
+
+  <app-input-with-icon-text [label]="'FirstName'"
+                            [placeholder]="'FirstName'"
+                            name="firstName"
+                            ngDefaultControl
+                            type="text"
+                            [inputValue]="data.firstName"
+                            [(ngModel)]="data.firstName">
+  </app-input-with-icon-text>
+
+  <app-input-with-icon-text [label]="'Last Name'"
+                            [placeholder]="'Last Name'"
+                            name="lastName"
+                            ngDefaultControl
+                            type="text"
+                            [inputValue]="data.lastName"
+                            [(ngModel)]="data.lastName">
+  </app-input-with-icon-text>
+
+  <app-input-with-icon-text [label]="'Email'"
+                            [placeholder]="'Email'"
+                            name="email"
+                            ngDefaultControl
+                            type="email"
+                            [inputValue]="data.email"
+                            [(ngModel)]="data.email">
+  </app-input-with-icon-text>
 </div>

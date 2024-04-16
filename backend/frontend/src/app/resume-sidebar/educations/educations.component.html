@@ -15,53 +15,134 @@
           </span>
         </button>
       </header>
-      <div class="card-content m-0 p-2" [ngClass]="{ 'is-hidden': education.showContent===false }">
-        <div class="field">
-          <div class="field-body m-1 p-1">
-            <div class="field">
-              <label class="label" *ngIf="education.school.length <= 0">University/Institution</label>
-              <input class="input control is-small" type="text" placeholder="e.g University of XYZ"
-                     [(ngModel)]="education.school"
-                     name="school">
+      <div class="card-content has-text-centered" [ngClass]="{ 'is-hidden': education.showContent===false }">
+        <app-input-with-icon-text [label]="'University'"
+                                  [placeholder]="'e.g University of XYZ'"
+                                  name="university"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="education.school"
+                                  [(ngModel)]="education.school">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Degree'"
+                                  [placeholder]="'Bachelor'"
+                                  name="degree"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="education.degree"
+                                  [(ngModel)]="education.degree">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Faculty'"
+                                  [placeholder]="'IT'"
+                                  name="faculty"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="education.field"
+                                  [(ngModel)]="education.field">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Start Date'"
+                                  name="start date"
+                                  ngDefaultControl
+                                  type="month"
+                                  [inputValue]="education.startDate"
+                                  [(ngModel)]="education.startDate">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'End Date'"
+                                  name="end date"
+                                  ngDefaultControl
+                                  type="month"
+                                  [inputValue]="education.endDate"
+                                  [(ngModel)]="education.endDate">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text *ngIf="education.grade"
+                                  [label]="'Grade'"
+                                  name="grade"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="education.grade"
+                                  [(ngModel)]="education.grade">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text *ngIf="education.description"
+                                  [label]="'Description'"
+                                  name="description"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="education.description"
+                                  [(ngModel)]="education.description">
+        </app-input-with-icon-text>
+
+        <button class="button is-small is-ghost" *ngIf="!(showDescriptionAndGradeSection$ | async)"
+                (click)="showDescriptionAndGradeSection()">
+          Add a description or your grade?
+        </button>
+
+        <ng-container *ngIf="(showDescriptionAndGradeSection$ | async)">
+          <div class="field">
+            <div class="control">
+              <div class="select is-fullwidth is-small is-rounded">
+                <select [(ngModel)]="selectedOption">
+                  <option *ngFor="let option of options">{{ option }}</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="field-body m-1 p-1">
-            <div class="field">
-              <label class="label" *ngIf="education.degree.length <= 0">Degree</label>
-              <input class="input control is-small" type="text" placeholder="Degree" [(ngModel)]="education.degree"
-                     name="degree">
-            </div>
-            <div class="field">
-              <label class="label" *ngIf="education.field.length <= 0">Faculty</label>
-              <input class="input control is-small" type="text" placeholder="Faculty" [(ngModel)]="education.field"
-                     name="faculty">
-            </div>
-          </div>
-          <div class="field-body m-1 p-1 is-small is-grouped">
-            <div class="field">
-              <label class="label" *ngIf="education.startDate.length <= 0">Start Date</label>
-              <input class="input control is-small" type="month" [(ngModel)]="education.startDate" name="startDate">
-            </div>
-            <div class="field">
-              <label class="label" *ngIf="education.endDate.length <= 0">End Date</label>
-              <input class="input control is-small is-small" type="month" [(ngModel)]="education.endDate" name="endDate">
+
+          <div class="field" *ngIf=" selectedOption == options[0]">
+            <div class="field-body is-grouped">
+              <div class="field is-rounded">
+                <label class="label is-small">Add The Description your Faculty</label>
+                <div class="control">
+                  <app-quill (textChanged)="onDescriptionChanged($event)"
+                             [text]="inputValue"></app-quill>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="field-body m-1 p-1" *ngIf="education.summary.length > 0">
-            <div class="field">
-              <label class="label">Summary/Appreciation</label>
-              <textarea class="input control" type="text" placeholder="Summary or Faculty description or Appreciation"
-                        [(ngModel)]="education.summary"
-                        name="summary">
-              </textarea>
-            </div>
+
+          <app-input-with-icon-text *ngIf="selectedOption == options[1]"
+                                    [label]="options[1]"
+                                    [placeholder]="options[1]"
+                                    [name]="options[1]"
+                                    ngDefaultControl
+                                    type="text"
+                                    [inputValue]="inputValue"
+                                    [(ngModel)]="inputValue">
+          </app-input-with-icon-text>
+
+          <div class="field is-rounded is-grouped is-grouped-centered">
+            <p class="control">
+              <button class="button is-small is-primary is-light is-rounded is-focused is-disabled"
+                      type="submit"
+                      [disabled]="inputValue.length <= 0"
+                      (click)="addEducationDescriptionOrGrade(selectedOption, inputValue, education)">
+                <span class="icon is-small">
+                  <i class="ri-add-box-fill"></i>
+                </span>
+                <span>Add</span>
+              </button>
+            </p>
+            <p class="control">
+              <button class="button is-small is-warning is-light is-rounded is-focused"
+                      type="reset"
+                      (click)="resetEducationDescriptionAndGrade()">
+                <span class="icon is-small">
+                  <i class="ri-close-circle-fill"></i>
+                </span>
+                <span>Cancel</span>
+              </button>
+            </p>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </ng-container>
 </div>
-<div class="field m-1 p-2">
-<button class="button control is-primary" type="submit" (click)="addEducation()">Add Education</button>
+<div class="field m-1 p-2 is-flex is-justify-content-center">
+  <button class="button is-small is-primary is-light is-rounded is-focused" type="submit" (click)="addEducation()">
+    <span class="icon is-small">
+      <i class="ri-add-box-fill"></i>
+    </span>
+    <span>Add</span>
+  </button>
 </div>
 

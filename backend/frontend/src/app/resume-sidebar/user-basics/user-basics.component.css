@@ -1,0 +1,10 @@
+.input {
+  border-radius: 9999px;
+  padding-left: calc(1.125em - 1px);
+  padding-right: calc(1.125em - 1px);
+  font-size: 0.75rem;
+}
+
+.field-body {
+  padding-bottom: 0.5rem
+}

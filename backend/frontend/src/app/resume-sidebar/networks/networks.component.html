@@ -16,33 +16,41 @@
         </button>
       </header>
       <div class="card-content has-text-centered" [ngClass]="{ 'is-hidden': network.showContent===false }">
-        <div class="field">
-          <div class="field-body">
-            <div class="field">
-              <input [(ngModel)]="network.name"
-                     [size]="network.name.length <= 0 ? 1 : network.name.length" class="input control"
-                     placeholder="Username"
-                     type="text">
-            </div>
-            <div class="field">
-              <input [(ngModel)]="network.referenceName"
-                     [size]="network.referenceName.length <= 0 ? 1 : network.referenceName.length"
-                     class="input control"
-                     placeholder="Network"
-                     type="text">
-            </div>
-            <div class="field">
-              <input [(ngModel)]="network.link"
-                     [size]="network.link.length <= 0 ? 1 : network.referenceName.length" class="input control"
-                     placeholder="Link"
-                     type="url">
-            </div>
-          </div>
+        <div>
+          <app-input-with-icon-text [label]="'User Name'"
+                                    [placeholder]="'User Name'"
+                                    name="user name"
+                                    ngDefaultControl
+                                    type="text"
+                                    [inputValue]="network.name"
+                                    [(ngModel)]="network.name">
+          </app-input-with-icon-text>
+          <app-input-with-icon-text [label]="'Network'"
+                                    [placeholder]="'Network'"
+                                    name="network"
+                                    ngDefaultControl
+                                    type="url"
+                                    [inputValue]="network.referenceName"
+                                    [(ngModel)]="network.referenceName">
+          </app-input-with-icon-text>
+          <app-input-with-icon-text [label]="'Link'"
+                                    [placeholder]="'Link'"
+                                    name="link"
+                                    ngDefaultControl
+                                    type="url"
+                                    [inputValue]="network.link"
+                                    [(ngModel)]="network.link">
+          </app-input-with-icon-text>
         </div>
       </div>
     </div>
   </ng-container>
 </div>
-<div class="field m-1 p-2">
-  <button class="button control is-primary" type="submit" (click)="addNetwork()">Add Network</button>
+<div class="field m-1 p-2 is-flex is-justify-content-center">
+  <button class="button is-small is-primary is-light is-rounded is-focused" type="submit" (click)="addNetwork()">
+    <span class="icon is-small">
+      <i class="ri-add-box-fill"></i>
+    </span>
+    <span>Add</span>
+  </button>
 </div>

@@ -47,7 +47,8 @@ export interface Education {
   startDate: string,
   endDate: string,
   duration: number,
-  summary: string,
+  grade?: string,
+  description?: string,
   showContent?: boolean
 }
 

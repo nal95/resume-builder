@@ -1,38 +1,52 @@
-<div *ngIf="(userBasicData$ | async) as basic_data" class="m-2 p-0">
-  <div class="field is-small">
-    <div class="field-bod">
-      <input class="input control" type="text" placeholder="Title" name="title"
-             [(ngModel)]="basic_data.title">
-    </div>
-  </div>
-  <div class="field is-small">
-    <div class="field-bod">
-      <input class="input control" type="text" placeholder="Profession" name="profession"
-             [(ngModel)]="basic_data.profession">
-    </div>
-  </div>
-  <div class="field is-small">
-    <div class="field-bod">
-      <input class="input control" type="number" placeholder="Relevant experience years" name="experiences_years"
-             [(ngModel)]="basic_data.relevantExperienceYears">
-    </div>
-  </div>
-  <div class="field is-small">
-    <div class="field-bod">
-      <input class="input control" type="tel" placeholder="Mobile Phone Number" name="phone"
-             [(ngModel)]="basic_data.mobilePhoneNumber">
-    </div>
-  </div>
-  <div class="field is-small">
-    <div class="field-bod">
-      <input class="input control" type="text" placeholder="Location" name="location"
-             [(ngModel)]="basic_data.location">
-    </div>
-  </div>
-  <div class="field is-small p-2">
-    <div class="field-body is-small is-grouped">
+<div *ngIf="(userBasicData$ | async) as basic_data" class="m-1">
+
+  <app-input-with-icon-text [label]="'Title'"
+                            [placeholder]="'Title'"
+                            name="title"
+                            ngDefaultControl
+                            type="text"
+                            [inputValue]="basic_data.title"
+                            [(ngModel)]="basic_data.title">
+  </app-input-with-icon-text>
+
+  <app-input-with-icon-text [label]="'Profession'"
+                            [placeholder]="'Profession'"
+                            name="profession"
+                            ngDefaultControl
+                            type="text"
+                            [inputValue]="basic_data.profession"
+                            [(ngModel)]="basic_data.profession">
+  </app-input-with-icon-text>
+
+  <app-input-with-icon-text [label]="'Years'"
+                            [placeholder]="'Years'"
+                            name="relevantExperienceYears"
+                            ngDefaultControl
+                            type="number"
+                            [inputValue]="basic_data.relevantExperienceYears"
+                            [(ngModel)]="basic_data.relevantExperienceYears">
+  </app-input-with-icon-text>
+
+  <app-input-with-icon-text [label]="'Phone'"
+                            [placeholder]="'Phone'"
+                            name="mobilePhoneNumber"
+                            ngDefaultControl
+                            type="tel"
+                            [inputValue]="basic_data.mobilePhoneNumber"
+                            [(ngModel)]="basic_data.mobilePhoneNumber">
+  </app-input-with-icon-text>
+
+  <app-input-with-icon-text [label]="'Location'"
+                            [placeholder]="'Location'"
+                            name="location"
+                            ngDefaultControl
+                            type="text"
+                            [inputValue]="basic_data.location"
+                            [(ngModel)]="basic_data.location">
+  </app-input-with-icon-text>
+  <div class="field-body is-grouped">
       <div class="field">
-        <label class="label">Summary About you:</label>
+        <label class="label">Summary About you</label>
         <div class="control">
           <app-quill (textChanged)="onSummaryChanged($event)"
                      [text]="basic_data.summary"></app-quill>
@@ -40,4 +54,4 @@
       </div>
     </div>
   </div>
-</div>
+
