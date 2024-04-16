@@ -20,6 +20,13 @@
   justify-content: center;
 }
 
+/*a.actualSection :hover{*/
+/*  color: #485fc7;*/
+/*}*/
+a.actualSection :active {
+  color: #485fc7;
+}
+
 /*.container .xd {*/
 /*  margin: 0 auto;*/
 /*}*/
