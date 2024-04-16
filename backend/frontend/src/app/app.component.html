@@ -1,163 +1,271 @@
-<main class="box pt-0 p-1">
-  <app-navbar [isModalOpen$] = (isModalOpen$) ></app-navbar>
-  <div class="columns is-2 debut pt-3" >
-    <div class="modal" [ngClass]="{'is-active' : (isModalOpen$ | async)}">
-      <div class="modal-background"></div>
-      <div class="modal-content template-image">
-        <div class="columns is-multiline is-centered">
-          <div class="column ">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by5">
-                  <img class="template-image" src="{{selectedTemplate.image}}" [alt]="selectedTemplate.name">
-                </figure>
-              </div>
-              <footer class=" is-flex is-justify-content-between">
-                <div class="card-footer-item">
+<section class="hero is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container is-fluid">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="https://bulma.io/assets/images/bulma-type-white.png" alt="Logo" />
+          </a>
+          <span class="navbar-burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active"> Home </a>
+            <a class="navbar-item"> Examples </a>
+            <a class="navbar-item"> Documentation </a>
+            <span class="navbar-item">
+              <a class="button is-primary is-inverted">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Download</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+      <div class="columns is-2 is-fullheight pt-3">
+        <div class="modal" [ngClass]="{'is-active' : (isModalOpen$ | async)}">
+          <div class="modal-background"></div>
+          <div class="modal-content template-image">
+            <div class="columns is-multiline is-centered">
+              <div class="column ">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-4by5">
+                      <img class="template-image" src="{{selectedTemplate.image}}" [alt]="selectedTemplate.name">
+                    </figure>
+                  </div>
+                  <footer class=" is-flex is-justify-content-between">
+                    <div class="card-footer-item">
                   <span class="icon is-small" [ngClass]="{'is-clickable' : resumeTemplates.length > 1 }"
                         (click)="previousTemplate()">
                     <i class="ri-arrow-left-circle-fill"></i>
                   </span>
-                </div>
-                <div class="card-footer-item">
+                    </div>
+                    <div class="card-footer-item">
                   <span class="is-text is-small">
                    {{selectedTemplate.name}}
                   </span>
-                </div>
-                <div class="card-footer-item">
+                    </div>
+                    <div class="card-footer-item">
                   <span class="icon is-small" [ngClass]="{'is-clickable' : resumeTemplates.length > 1 }"
                         (click)="nextTemplate()">
                     <i class="ri-arrow-right-circle-fill"></i>
                   </span>
+                    </div>
+                  </footer>
                 </div>
-              </footer>
+              </div>
+            </div>
+          </div>
+          <button class="modal-close is-large" (click)="closeModal()" aria-label="close"></button>
+        </div>
+        <div class="column is-one-fifth">
+          <aside class="menu">
+            <p class="menu-label">Settings</p>
+            <ng-container *ngIf="showSideBar">
+              <ul class="menu-list">
+                <li>
+                  <a #user class="is-flex is-justify-content-space-between"
+                     id="User" (click)="collectDetailsOf(user)">
+                  <span class="icon-text">
+                    <span class="icon">
+                      <i class="ri-id-card-line"></i>
+                    </span>
+                    <span>User-ID</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #basics class="is-flex is-justify-content-space-between"
+                     id="User Basics" (click)="collectDetailsOf(basics)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-shield-user-line"></i></span>
+                    <span>User Basics</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #networks  class="is-flex is-justify-content-space-between"
+                     id="Networks" (click)="collectDetailsOf(networks)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-global-line"></i></span>
+                    <span>Networks</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #educations class="is-flex is-justify-content-space-between"
+                     id="Educations" (click)="collectDetailsOf(educations)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-book-marked-line"></i></span>
+                    <span>Educations</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #work class="is-flex is-justify-content-space-between"
+                     id="Work Experiences" (click)="collectDetailsOf(work)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-luggage-deposit-line"></i></span>
+                    <span>Work Experiences</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #technical class="is-flex is-justify-content-space-between"
+                     id="Technical Experiences" (click)="collectDetailsOf(technical)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-node-tree"></i></span>
+                    <span>Technical Experiences</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #skills class="is-flex is-justify-content-space-between"
+                     id="Skills" (click)="collectDetailsOf(skills)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-sparkling-line"></i></span>
+                    <span>Skills</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #tools class="is-flex is-justify-content-space-between"
+                     id="Tools" (click)="collectDetailsOf(tools)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-hammer-line"></i></span>
+                    <span>Tools</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #methodologies class="is-flex is-justify-content-space-between"
+                     id="Methodologies" (click)="collectDetailsOf(methodologies)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-pass-pending-line"></i></span>
+                    <span>Methodologies</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #hobbies class="is-flex is-justify-content-space-between"
+                     id="Hobbies and Interest" (click)="collectDetailsOf(hobbies)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-bubble-chart-fill"></i></span>
+                    <span>Hobbies and Interest</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #certifications class="is-flex is-justify-content-space-between"
+                     id="Certifications" (click)="collectDetailsOf(certifications)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-medal-line"></i></span>
+                    <span>Certifications</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #trainings class="is-flex is-justify-content-space-between"
+                     id="Trainings" (click)="collectDetailsOf(trainings)">
+                    <span class="icon-text">
+                      <span class="icon"><i class="ri-recycle-line"></i></span>
+                      <span>Trainings</span>
+                    </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+                <li>
+                  <a #language class="is-flex is-justify-content-space-between"
+                     id="Language" (click)="collectDetailsOf(language)">
+                  <span class="icon-text">
+                    <span class="icon"><i class="ri-translate-2"></i></span>
+                    <span>Language</span>
+                  </span>
+                    <span class="icon"><i class="ri-arrow-right-line"></i></span>
+                  </a>
+                </li>
+              </ul>
+            </ng-container>
+
+            <ng-container *ngIf="!showSideBar">
+              <a class="is.flex is-justify-content-space-between" (click)="closeSection()">
+                <span class="icon-text">
+                  <span class="icon"><i class="ri-arrow-left-line"></i></span>
+                </span>
+                <span>{{ actualSection }}</span>
+                <span></span>
+              </a>
+            </ng-container>
+
+            <app-user *ngIf="!showSideBar && actualSection == 'User'"></app-user>
+            <app-user-basics *ngIf="!showSideBar && actualSection == 'User Basics'"></app-user-basics>
+            <app-networks *ngIf="!showSideBar && actualSection == 'Networks'"></app-networks>
+            <app-educations *ngIf="!showSideBar && actualSection == 'Educations'"></app-educations>
+            <app-work-experiences *ngIf="!showSideBar && actualSection == 'Work Experiences'"></app-work-experiences>
+            <app-tech-experiences *ngIf="!showSideBar && actualSection == 'Technical Experiences'"></app-tech-experiences>
+            <app-skills *ngIf="!showSideBar && actualSection == 'Skills'"></app-skills>
+            <app-tools *ngIf="!showSideBar && actualSection == 'Tools'"></app-tools>
+            <app-methodologies *ngIf="!showSideBar && actualSection == 'Methodologies'"></app-methodologies>
+            <app-hobbies *ngIf="!showSideBar && actualSection == 'Hobbies and Interest'"></app-hobbies>
+            <app-certifications *ngIf="!showSideBar && actualSection == 'Certifications'"></app-certifications>
+            <app-trainings *ngIf="!showSideBar && actualSection == 'Trainings'"></app-trainings>
+            <app-languages *ngIf="!showSideBar && actualSection == 'Language'"></app-languages>
+
+          </aside>
+        </div>
+        <div class="column">
+<!--          <app-resume-preview [selectedTemplate] = "(selectedTemplate)" ></app-resume-preview>-->
+          <div class="columns is-multiline">
+            <div class="column is-full is-centered">
+              zoom
+            </div>
+            <div class="column">
+              <app-resume-preview [selectedTemplate] = "(selectedTemplate)" ></app-resume-preview>
             </div>
           </div>
         </div>
+
       </div>
-      <button class="modal-close is-large" (click)="closeModal()" aria-label="close"></button>
-    </div>
-    <div class="column panel sidebar is-one-fifth" *ngIf="!(isModalOpen$ | async)"
-         [ngClass]="{'is-3': isSmall}" id="sidebar">
-      <p class="panel-heading is-small">User Details {{ userDataIsLoaded$ | async }}</p>
-        <ng-container *ngIf="showSideBar">
-          <a #user class="panel-block is-justify-content-space-between" id="User" (click)="collectDetailsOf(user)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-user-line"></i></span>
-            <span>User</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #basics class="panel-block is-justify-content-space-between" id="User Basics" (click)="collectDetailsOf(basics)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-shield-user-line"></i></span>
-            <span>User Basics</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #networks  class="panel-block is-justify-content-space-between" id="Networks" (click)="collectDetailsOf(networks)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-global-line"></i></span>
-            <span>Networks</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #educations class="panel-block is-justify-content-space-between"  id="Educations" (click)="collectDetailsOf(educations)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-book-marked-line"></i></span>
-            <span>Educations</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #work class="panel-block is-justify-content-space-between"  id="Work Experiences" (click)="collectDetailsOf(work)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-luggage-deposit-line"></i></span>
-            <span>Work Experiences</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #technical class="panel-block is-justify-content-space-between"  id="Technical Experiences" (click)="collectDetailsOf(technical)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-node-tree"></i></span>
-            <span>Technical Experiences</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #skills class="panel-block is-justify-content-space-between"  id="Skills" (click)="collectDetailsOf(skills)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-sparkling-line"></i></span>
-            <span>Skills</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #tools class="panel-block is-justify-content-space-between"  id="Tools" (click)="collectDetailsOf(tools)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-hammer-line"></i></span>
-            <span>Tools</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #methodologies class="panel-block is-justify-content-space-between"  id="Methodologies" (click)="collectDetailsOf(methodologies)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-pass-pending-line"></i></span>
-            <span>Methodologies</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #hobbies class="panel-block is-justify-content-space-between"  id="Hobbies and Interest" (click)="collectDetailsOf(hobbies)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-bubble-chart-fill"></i></span>
-            <span>Hobbies and Interest</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #certifications class="panel-block is-justify-content-space-between"  id="Certifications" (click)="collectDetailsOf(certifications)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-medal-line"></i></span>
-            <span>Certifications</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #trainings class="panel-block is-justify-content-space-between"  id="Trainings" (click)="collectDetailsOf(trainings)">
-            <span class="icon-text">
-              <span class="icon"><i class="ri-recycle-line"></i></span>
-              <span>Trainings</span>
-            </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-          <a #language class="panel-block is-justify-content-space-between"  id="Language" (click)="collectDetailsOf(language)">
-          <span class="icon-text">
-            <span class="icon"><i class="ri-translate-2"></i></span>
-            <span>Language</span>
-          </span>
-            <span class="panel-icon"><i class="ri-arrow-right-line"></i></span>
-          </a>
-        </ng-container>
-        <ng-container *ngIf="!showSideBar">
-          <a class="panel-block is-justify-content-space-between" (click)="closeSection()">
-            <span class="icon-text">
-              <span class="panel-icon"><i class="ri-arrow-left-line"></i></span>
-            </span>
-            <span>{{ actualSection }}</span>
-            <span></span>
-          </a>
-        </ng-container>
-        <app-user *ngIf="!showSideBar && actualSection == 'User'"></app-user>
-        <app-user-basics *ngIf="!showSideBar && actualSection == 'User Basics'"></app-user-basics>
-        <app-networks *ngIf="!showSideBar && actualSection == 'Networks'"></app-networks>
-        <app-educations *ngIf="!showSideBar && actualSection == 'Educations'"></app-educations>
-        <app-work-experiences *ngIf="!showSideBar && actualSection == 'Work Experiences'"></app-work-experiences>
-        <app-tech-experiences *ngIf="!showSideBar && actualSection == 'Technical Experiences'"></app-tech-experiences>
-        <app-skills *ngIf="!showSideBar && actualSection == 'Skills'"></app-skills>
-        <app-tools *ngIf="!showSideBar && actualSection == 'Tools'"></app-tools>
-        <app-methodologies *ngIf="!showSideBar && actualSection == 'Methodologies'"></app-methodologies>
-        <app-hobbies *ngIf="!showSideBar && actualSection == 'Hobbies and Interest'"></app-hobbies>
-        <app-certifications *ngIf="!showSideBar && actualSection == 'Certifications'"></app-certifications>
-        <app-trainings *ngIf="!showSideBar && actualSection == 'Trainings'"></app-trainings>
-        <app-languages *ngIf="!showSideBar && actualSection == 'Language'"></app-languages>
-    </div>
-    <div class="column preview">
-      <app-resume-preview [selectedTemplate] = "(selectedTemplate)" ></app-resume-preview>
-    </div>
   </div>
-</main>
+
+  <!-- Hero footer: will stick at the bottom -->
+<!--  <div class="hero-foo is-flex is-justify-content-center">-->
+<!--    <nav class="tabs">-->
+<!--      <div class="container">-->
+<!--        <ul>-->
+<!--          <li><a>Overview</a></li>-->
+<!--          <li><a>Modifiers</a></li>-->
+<!--          <li><a>Grid</a></li>-->
+<!--          <li><a>Elements</a></li>-->
+<!--          <li><a>Components</a></li>-->
+<!--          <li><a>Layout</a></li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </nav>-->
+<!--  </div>-->
+</section>
