@@ -111,7 +111,7 @@
       <section class="about-me" *ngIf="data.userDetails?.basic && data.userDetails.basic?.summary">
         <h6 class="title has-text-weight-bold  is-uppercase pb-1">
           About Me </h6>
-        <div class="content" [innerHTML]="data.userDetails.basic.summary"></div>
+        <p [innerHTML]="data.userDetails.basic.summary"></p>
       </section>
 
       <section class="educations pb-1 pt-1 m-1">
