@@ -43,7 +43,7 @@ export class WorkExperiencesComponent {
       startDate: '',
       endDate: '',
       duration: 0,
-      summary: '<ul><li>e.g. made documentation on the project</li></ul>',
+      summary: '',//<ul><li>e.g. made documentation on the project</li></ul>
       showContent: true
     };
 

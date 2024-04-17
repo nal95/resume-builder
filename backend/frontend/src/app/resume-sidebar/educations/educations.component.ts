@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
 import {InputWithIconTextComponent} from "../../utils/input-with-icon-text/input-with-icon-text.component";
 import {QuillComponent} from "../../utils/quill/quill.component";
+import {QuillFormat} from "ngx-quill/config/quill-editor.interfaces";
 
 @Component({
   selector: 'app-educations',
@@ -36,7 +37,9 @@ export class EducationsComponent {
   showDescriptionAndGradeSection$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
-  constructor(public dataStorageService: UserDataStoreService) {
+  constructor(public dataStorageService: UserDataStoreService,
+              // private cdr: ChangeDetectorRef
+  ) {
     this.checkIfMobile();
   }
 
@@ -81,6 +84,10 @@ export class EducationsComponent {
     let userData = this.dataStorageService.userData;
     const index = userData.userDetails.educations.indexOf(education);
 
+    console.log('INDEX', index);
+    console.log('OPTION', option);
+    console.log('VAL', val);
+
     if (this.options.includes(option)) {
       if (index !== -1) {
         switch (option) {
@@ -95,6 +102,8 @@ export class EducationsComponent {
         }
       }
 
+      console.log('DDD', userData.userDetails.educations[index].description)
+      console.log('AAA', userData.userDetails.educations[index].grade)
       this.dataStorageService.setUserData(userData);
     }
   }
@@ -103,13 +112,44 @@ export class EducationsComponent {
     this.showDescriptionAndGradeSection$.next(true);
   }
 
-  onDescriptionChanged(description: string) {
+  onDescriptionChangedWithSelectedOption(description: string) {
     this.inputValue = description;
+  }
+
+  onDescriptionChanged(description: string, education: Education) {
+
+    this.addEducationDescriptionOrGrade(this.options[0], description, education);
   }
 
   resetEducationDescriptionAndGrade() {
     this.showDescriptionAndGradeSection$.next(false);
     this.inputValue = '';
     this.selectedOption = '-';
+  }
+
+
+  selectOption(education: Education) {
+    if (this.selectedOption !== '-') {
+      this.addEducationDescriptionOrGrade(this.selectedOption, ` `, education)
+      this.selectedOption = '-';
+      // this.cdr.detectChanges();
+    }
+  }
+
+  getQuillFormat(description: string, education: Education): QuillFormat {
+    // let format : QuillFormat = undefined;
+    // if(description.trim() === '<p></p>'){
+    //   this.addEducationDescriptionOrGrade(this.options[0], ` `, education)
+    //   return 'text';
+    // }
+    // console.log('getQuillFormat called with:', description);
+    // console.log(description.trim() === '<p></p>' ? 'text' : 'html');
+    return description.trim() === '<p></p>' ? 'text' : 'html';
+  }
+
+
+  closeGradeEditor(grade: string, education: Education) {
+    this.addEducationDescriptionOrGrade(this.selectedOption, grade, education);
+    this.selectedOption = this.options[0];
   }
 }

@@ -1,8 +1,8 @@
 <div *ngIf="(userNetworks$ | async) as networks">
   <ng-container *ngFor="let network of networks">
-    <div class="card m-2">
+    <div class="card m-2 is-size-7">
       <header class="card-header">
-        <p class="card-header-title">{{ network.referenceName }}</p>
+        <h6 class="card-header-title">{{ network.referenceName }}</h6>
         <button class="card-header-icon" aria-label="delete" (click)="deleteNetwork(network)">
           <span class="icon">
             <i class="ri-close-line" aria-hidden="true"></i>
@@ -15,7 +15,7 @@
           </span>
         </button>
       </header>
-      <div class="card-content has-text-centered" [ngClass]="{ 'is-hidden': network.showContent===false }">
+      <div class="card-content m-0 p-2" [ngClass]="{ 'is-hidden': network.showContent===false }">
         <div>
           <app-input-with-icon-text [label]="'User Name'"
                                     [placeholder]="'User Name'"

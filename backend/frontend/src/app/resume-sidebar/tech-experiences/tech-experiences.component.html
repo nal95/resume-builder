@@ -1,8 +1,8 @@
 <div *ngIf="(userTechExperiences$ | async) as techExperiences">
   <ng-container *ngFor="let techExperience of techExperiences">
-    <div class="card m-2">
+    <div class="card m-2 is-size-7">
       <header class="card-header">
-        <p class="card-header-title ml-2 p-2">{{ techExperience.topic }}</p>
+        <p class="card-header-title">{{ techExperience.topic }}</p>
         <button (click)="deleteTechExperiences(techExperience)" aria-label="more options" class="card-header-icon">
           <span class="icon">
             <i aria-hidden="true" class="ri-close-line"></i>
@@ -15,7 +15,7 @@
           </span>
         </button>
       </header>
-      <div class="card-content is-centered" [ngClass]="{ 'is-hidden': techExperience.showContent===false }">
+      <div class="card-content m-0 p-2" [ngClass]="{ 'is-hidden': techExperience.showContent===false }">
         <div class="field">
           <div class="field-body is-justify-content-center">
             <p class="control">
@@ -53,7 +53,8 @@
                 <tbody>
                 <tr *ngFor="let technicalDetail of techExperience.technicalDetails">
                   <td class="is-vcentered pt-2">
-                    <app-input-with-icon-text name="name"
+                    <app-input-with-icon-text [label]="'Tech'"
+                                              name="name"
                                               ngDefaultControl
                                               type="text"
                                               [inputValue]="technicalDetail.name"
@@ -68,16 +69,17 @@
                                                   type="number"
                                                   [minNumber]="1"
                                                   [step]="1"
+                                                  style="padding: 0"
                                                   [inputValue]="technicalDetail.level"
                                                   [(ngModel)]="technicalDetail.level">
                         </app-input-with-icon-text>
                       </p>
                       <p class="control is-justify-content-center is-align-content-center"
                          *ngIf="(technicalDetail.name.length > 0 && techExperience.topic.length > 0) ">
-                        <a class="is-text  has-text-danger"
+                        <button class="button p-0 is-small has-background-grey-dark  has-text-danger"
                            (click)="removeTechDetails(techExperience, technicalDetail)">
                           <i class="ri-close-circle-line"></i>
-                        </a>
+                        </button>
                       </p>
                     </div>
                   </td>

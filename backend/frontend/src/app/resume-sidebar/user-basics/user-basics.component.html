@@ -48,7 +48,9 @@
       <div class="field">
         <label class="label">Summary About you</label>
         <div class="control">
-          <app-quill (textChanged)="onSummaryChanged($event)"
+          <app-quill  [inputType]="'paragraph'"
+                      [placeholder]="'Insert something about yout here...'"
+                      (textChanged)="onSummaryChanged($event)"
                      [text]="basic_data.summary"></app-quill>
         </div>
       </div>
