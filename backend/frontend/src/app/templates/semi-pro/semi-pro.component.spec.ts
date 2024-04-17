@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SemiProComponent } from './semi-pro.component';
+import {SemiProComponent} from './semi-pro.component';
 
 describe('SemiProComponent', () => {
   let component: SemiProComponent;
@@ -11,7 +11,7 @@ describe('SemiProComponent', () => {
       imports: [SemiProComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SemiProComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

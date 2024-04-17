@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ResumeTemplateStoreService } from './resume-template-store.service';
+import {ResumeTemplateStoreService} from './resume-template-store.service';
 
 describe('TemplateStoreService', () => {
   let service: ResumeTemplateStoreService;
