@@ -2,7 +2,7 @@
   <ng-container *ngFor="let techExperience of techExperiences">
     <div class="card m-2">
       <header class="card-header">
-        <p class="card-header-title">{{ techExperience.topic }}</p>
+        <p class="card-header-title ml-2 p-2">{{ techExperience.topic }}</p>
         <button (click)="deleteTechExperiences(techExperience)" aria-label="more options" class="card-header-icon">
           <span class="icon">
             <i aria-hidden="true" class="ri-close-line"></i>
@@ -15,9 +15,9 @@
           </span>
         </button>
       </header>
-      <div class="card-content has-text-centered" [ngClass]="{ 'is-hidden': techExperience.showContent===false }">
+      <div class="card-content is-centered" [ngClass]="{ 'is-hidden': techExperience.showContent===false }">
         <div class="field">
-          <div class="field-body">
+          <div class="field-body is-justify-content-center">
             <p class="control">
               <app-input-with-icon-text [label]="'Topic'"
                                         [placeholder]="'Topic'"
