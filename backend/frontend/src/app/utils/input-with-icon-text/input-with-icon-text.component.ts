@@ -16,6 +16,7 @@ import {FormsModule} from "@angular/forms";
                [name]="name"
                [min]="minNumber"
                [step]="step"
+               [size]="fieldSize"
                [(ngModel)]="inputValue">
         <span class="icon is-small has-text-info-dark is-left"
               [style.width.em]="setIconTextWidth(label.length)">
@@ -45,6 +46,7 @@ export class InputWithIconTextComponent {
   @Input() inputValue: string | number = '';
   @Input() minNumber: number = 1/2;
   @Input() step: number = 1/2;
+  @Input() fieldSize: number = 10;
 
   setInputPaddingLeft(val: number) {
     if(val && val > 0){
