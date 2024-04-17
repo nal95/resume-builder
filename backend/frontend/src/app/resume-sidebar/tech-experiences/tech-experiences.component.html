@@ -15,38 +15,89 @@
           </span>
         </button>
       </header>
-      <div [ngClass]="{ 'is-hidden': techExperience.showContent===false }" class="card-content m-0">
+      <div class="card-content has-text-centered" [ngClass]="{ 'is-hidden': techExperience.showContent===false }">
         <div class="field">
-          <div class="field-body p-1">
-            <div class="field">
-              <input [(ngModel)]="techExperience.topic" class="input control is-small" placeholder="Tech Topic"
-                     type="text">
-            </div>
-            <div class="field" *ngIf="techExperience.topic !== ''">
-              <button (click)="addTechDetails(techExperience)" class="button is-small is-primary is-light">Add Tech</button>
-            </div>
-          </div>
-          <div *ngFor="let technicalDetail of techExperience.technicalDetails" class="field-body p-1">
-            <div class="field">
-              <input [(ngModel)]="technicalDetail.name" class="input control is-small" placeholder="Tech Name"
-                     type="text">
-            </div>
-            <div class="field">
-              <input [(ngModel)]="technicalDetail.level" [max]="10" [min]="1" class="input control is-small"
-                     placeholder="Level"
-                     type="number">
-            </div>
-            <div class="field" *ngIf="technicalDetail.name !== ''">
-              <button (click)="removeTechDetails(techExperience, technicalDetail)" class="button is-small is-danger is-light">Remove Tech
+          <div class="field-body">
+            <p class="control">
+              <app-input-with-icon-text [label]="'Topic'"
+                                        [placeholder]="'Topic'"
+                                        name="topic"
+                                        ngDefaultControl
+                                        type="text"
+                                        [inputValue]="techExperience.topic"
+                                        [(ngModel)]="techExperience.topic">
+              </app-input-with-icon-text>
+            </p>
+            <p class="control" *ngIf="techExperience.topic !== ''">
+              <button class="button ml-1 is-small is-primary  is-light is-rounded is-focused"
+                      title="Add a Tech to this topic"
+                      type="submit"
+                      (click)="addTechDetails(techExperience)">
+                <span class="icon is-small">
+                  <i class="ri-add-box-fill"></i>
+                </span>
               </button>
-            </div>
+            </p>
           </div>
         </div>
+        <fieldset [disabled]="techExperience.topic.length <= 0">
+          <div class="field">
+            <div class="control">
+              <table class="table is-size-7 is-narrow is-fullwidth">
+                <thead>
+                <tr>
+                  <th class="has-text-centered">Name</th>
+                  <th class="has-text-centered">Level</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let technicalDetail of techExperience.technicalDetails">
+                  <td class="is-vcentered pt-2">
+                    <app-input-with-icon-text name="name"
+                                              ngDefaultControl
+                                              type="text"
+                                              [inputValue]="technicalDetail.name"
+                                              [(ngModel)]="technicalDetail.name">
+                    </app-input-with-icon-text>
+                  </td>
+                  <td class="is-grouped is-grouped-centered" style="width: 75px">
+                    <div class="field has-addons">
+                      <p class="control pt-2">
+                        <app-input-with-icon-text name="level"
+                                                  ngDefaultControl
+                                                  type="number"
+                                                  [minNumber]="1"
+                                                  [step]="1"
+                                                  [inputValue]="technicalDetail.level"
+                                                  [(ngModel)]="technicalDetail.level">
+                        </app-input-with-icon-text>
+                      </p>
+                      <p class="control is-justify-content-center is-align-content-center"
+                         *ngIf="(technicalDetail.name.length > 0 && techExperience.topic.length > 0) ">
+                        <a class="is-text  has-text-danger"
+                           (click)="removeTechDetails(techExperience, technicalDetail)">
+                          <i class="ri-close-circle-line"></i>
+                        </a>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+
       </div>
     </div>
   </ng-container>
 </div>
-<div class="field m-1 p-2">
-  <button (click)="addTechExperience()" class="button control is-primary" type="submit">Add Technical Experience</button>
+<div class="field m-1 p-2 is-flex is-justify-content-center">
+  <button class="button is-small is-primary is-light is-rounded is-focused" type="submit" (click)="addTechExperience()">
+    <span class="icon is-small">
+      <i class="ri-add-box-fill"></i>
+    </span>
+    <span>Add</span>
+  </button>
 </div>
 

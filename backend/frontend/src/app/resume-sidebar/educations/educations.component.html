@@ -40,14 +40,14 @@
                                   [inputValue]="education.field"
                                   [(ngModel)]="education.field">
         </app-input-with-icon-text>
-        <app-input-with-icon-text [label]="'Start Date'"
+        <app-input-with-icon-text [label]="'Start'"
                                   name="start date"
                                   ngDefaultControl
                                   type="month"
                                   [inputValue]="education.startDate"
                                   [(ngModel)]="education.startDate">
         </app-input-with-icon-text>
-        <app-input-with-icon-text [label]="'End Date'"
+        <app-input-with-icon-text [label]="'End'"
                                   name="end date"
                                   ngDefaultControl
                                   type="month"
@@ -89,7 +89,7 @@
 
           <div class="field" *ngIf=" selectedOption == options[0]">
             <div class="field-body is-grouped">
-              <div class="field is-rounded">
+              <div class="field">
                 <label class="label is-small">Add The Description your Faculty</label>
                 <div class="control">
                   <app-quill (textChanged)="onDescriptionChanged($event)"

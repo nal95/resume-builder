@@ -11,11 +11,15 @@ import {FormsModule} from "@angular/forms";
     <div class="field">
       <div class="control has-icons-left">
         <input class="input" [style.padding-left.em]="setInputPaddingLeft(label.length)"
-               [type]="type" [placeholder]="placeholder" [name]="name" [min]="1/2" [step]="1/2"
+               [type]="type"
+               [placeholder]="placeholder"
+               [name]="name"
+               [min]="minNumber"
+               [step]="step"
                [(ngModel)]="inputValue">
         <span class="icon is-small has-text-info-dark is-left"
               [style.width.em]="setIconTextWidth(label.length)">
-          <i class="icon-text is-size-7 pb-3">{{ label }}:</i>
+          <i class="icon-text is-size-7 pb-3">{{ label ? (label + ':') : label }}</i>
         </span>
       </div>
     </div>
@@ -39,13 +43,20 @@ export class InputWithIconTextComponent {
   @Input() name: string = '' ;
   @Input() type: string = '' ;
   @Input() inputValue: string | number = '';
+  @Input() minNumber: number = 1/2;
+  @Input() step: number = 1/2;
 
   setInputPaddingLeft(val: number) {
-    return val && val > 6 ? 7 : 6;
+    if(val && val > 0){
+      if( val > 6) return 7;
+      if( val > 0 && val <= 5) return 5;
+    }else if (val == 0) return 0.5
+
+    return 6;
   }
 
   setIconTextWidth(val: number) {
-    return val && val > 6 ? 6 : val;
+    return val && val > 6 ? 6 : 5;
   }
 
 }

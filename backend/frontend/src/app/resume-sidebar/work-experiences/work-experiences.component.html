@@ -16,63 +16,74 @@
         </button>
       </header>
       <div class="card-content m-0 p-2" [ngClass]="{ 'is-hidden': workExperience.showContent===false }">
+        <app-input-with-icon-text [label]="'Company'"
+                                  [placeholder]="'e.g Company XYZ'"
+                                  name="company"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="workExperience.company"
+                                  [(ngModel)]="workExperience.company">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Position'"
+                                  [placeholder]="'e.g Software Developer'"
+                                  name="position"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="workExperience.occupiedPosition"
+                                  [(ngModel)]="workExperience.occupiedPosition">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Year'"
+                                  [placeholder]="'4 Year'"
+                                  name="duration"
+                                  ngDefaultControl
+                                  type="number"
+                                  [inputValue]="workExperience.duration"
+                                  [(ngModel)]="workExperience.duration">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Location'"
+                                  [placeholder]="'Company Location'"
+                                  name="location"
+                                  ngDefaultControl
+                                  type="text"
+                                  [inputValue]="workExperience.companyCity"
+                                  [(ngModel)]="workExperience.companyCity">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Home Page'"
+                                  [placeholder]="'Company Home Page'"
+                                  name="companyLink"
+                                  ngDefaultControl
+                                  type="url"
+                                  [inputValue]="workExperience.companyLink"
+                                  [(ngModel)]="workExperience.companyLink">
+        </app-input-with-icon-text>
+        <app-input-with-icon-text [label]="'Start'"
+                                  [placeholder]="'Start Date'"
+                                  name="startDate"
+                                  ngDefaultControl
+                                  type="month"
+                                  [inputValue]="workExperience.startDate"
+                                  [(ngModel)]="workExperience.startDate">
+        </app-input-with-icon-text>
+
+        <app-input-with-icon-text *ngIf="!workExperience.actual; else actual"
+                                  [label]="'End'"
+                                  [placeholder]="'End Date'"
+                                  name="endDate"
+                                  ngDefaultControl
+                                  type="month"
+                                  [inputValue]="workExperience.endDate"
+                                  [(ngModel)]="workExperience.endDate">
+        </app-input-with-icon-text>
+
+        <button class="button is-small is-ghost" *ngIf="!workExperience.actual"
+                (click)="makeDateActual(workExperience)">
+          <p class="is-text is-small">Still work by <strong> {{ workExperience.company }} ?</strong></p>
+        </button>
+
         <div class="field">
-          <div class="field-body m-1 p-1">
-            <div class="field">
-              <label class="label" *ngIf="showLabel(workExperience.company.length)">Company</label>
-              <input class="input control" type="text" placeholder="e.g Company XYZ"
-                     [(ngModel)]="workExperience.company" name="company">
-            </div>
-          </div>
-          <div class="field-body m-1 p-1">
-            <div class="field">
-              <label class="label" *ngIf="showLabels(workExperience.occupiedPosition.length , workExperience.duration.length)">Position</label>
-              <input class="input control" type="text" placeholder="e.g Software Developer"
-                     [(ngModel)]="workExperience.occupiedPosition" name="position">
-            </div>
-            <div class="field">
-              <label class="label" *ngIf="showLabels(workExperience.occupiedPosition.length , workExperience.duration.length)">Duration</label>
-              <input class="input control" type="text" [size]="workExperience.duration.length +1"
-                     placeholder="e.g 5 years" [(ngModel)]="workExperience.duration" name="duration">
-            </div>
-          </div>
-          <div class="field-body m-1 p-1">
-            <div class="field">
-              <label class="label" *ngIf="showLabels(workExperience.companyCity.length, workExperience.companyLink.length)">City</label>
-              <input class="input control" type="text" placeholder="e.g Berlin"
-                     [(ngModel)]="workExperience.companyCity" name="companyCity">
-            </div>
-            <div class="field">
-              <label class="label" *ngIf="showLabels(workExperience.companyCity.length, workExperience.companyLink.length)">Link</label>
-              <input class="input control" type="text" placeholder="Company URL"
-                     [(ngModel)]="workExperience.companyLink" name="companyLink">
-            </div>
-          </div>
-          <div class="field-body m-1 p-1">
-            <div class="field">
-              <div class="control has-icons-left">
-                <input class="input w-input " type="month"  placeholder="start date"
-                       [(ngModel)]="workExperience.startDate" name="startDate" >
-                <span class="icon is-left">
-                  <i class="is-text is-align-content-space-between"> Start: </i>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="field-body m-1 p-1">
-            <div class="field">
-              <div class="control has-icons-left">
-                <input class="input w-input " type="month"  placeholder="start date"
-                       [(ngModel)]="workExperience.endDate" name="endDate" >
-                <span class="icon is-left">
-                  <i class="is-text"> End: </i>
-                </span>
-              </div>
-            </div>
-          </div>
           <div class="field-body m-1 p-1 is-grouped">
             <div class="field">
-              <label class="label">Few points on this work experience:</label>
+              <label class="label is-small">Few points from your experience:</label>
               <div class="control">
                 <app-quill (textChanged)="onSummaryChanged(workExperience,$event)"
                            [text]="workExperience.summary"></app-quill>
@@ -85,6 +96,20 @@
   </ng-container>
 </div>
 
-<div class="field m-1 p-2">
-  <button (click)="addWorkExperience()" class="button control is-primary" type="submit">Add Work Experience</button>
+<ng-template #actual>
+  <app-input-with-icon-text [label]="'Actual'"
+                            [placeholder]="'End Date'"
+                            name="endDate"
+                            ngDefaultControl
+                            type="text"
+                            [inputValue]="'Present'">
+  </app-input-with-icon-text>
+</ng-template>
+<div class="field m-1 p-2 is-flex is-justify-content-center">
+  <button class="button is-small is-primary is-light is-rounded is-focused" type="submit" (click)="addWorkExperience()">
+    <span class="icon is-small">
+      <i class="ri-add-box-fill"></i>
+    </span>
+    <span>Add</span>
+  </button>
 </div>

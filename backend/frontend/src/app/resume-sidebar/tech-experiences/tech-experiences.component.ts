@@ -4,6 +4,7 @@ import {UserDataStoreService} from "../../services/user-data-store/user-data-sto
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {TechnicalDetail, TechnicalExperience} from "../../resume-data/user.data";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputWithIconTextComponent} from "../../utils/input-with-icon-text/input-with-icon-text.component";
 
 @Component({
   selector: 'app-tech-experiences',
@@ -14,7 +15,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NgIf,
     NgForOf,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    InputWithIconTextComponent
   ],
   templateUrl: './tech-experiences.component.html',
   styleUrl: './tech-experiences.component.css'
