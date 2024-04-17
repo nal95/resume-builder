@@ -59,9 +59,10 @@ export interface WorkExperience {
   occupiedPosition: string,
   startDate: string,
   endDate: string,
-  duration: string,
+  duration: number,
   summary: string,
-  showContent?: boolean
+  showContent?: boolean,
+  actual?: boolean
 }
 
 export interface TechnicalDetail {

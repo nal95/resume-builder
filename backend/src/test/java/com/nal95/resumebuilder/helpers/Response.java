@@ -47,10 +47,10 @@ public class Response {
     }
 
     public UserDetails getUserDetails() {
-        UserBasic b = new UserBasic("New York","Experienced software engineer","Senior Software Engineer","Software Development","+1234567890",5);
+        UserBasic b = new UserBasic("New York", "About Me", "B. Eng", "Senior Software Engineer", "+1234567890", "www.ab@tes.de", 5);
         Network n = new Network("john doe","Linkedin", "https://linkedin.com/in/johndoe");
-        Education e = new Education("University of XYZ", "Computer Science", "Bachelor's", LocalDate.of(2020, 1, 1), LocalDate.of(2024, 1, 1), 4, "Graduated with honors");
-        WorkExperience w = new WorkExperience("ABC Inc.", "New York", "https://abcinc.com", "Software Engineer", LocalDate.of(2024, 2, 1), LocalDate.of(2025, 2, 1), "1", "Developed cutting-edge software");
+        Education e = new Education("University of XYZ", "Computer Science", "Bachelor's", LocalDate.of(2020, 1, 1), LocalDate.of(2024, 1, 1), 4, "Graduated with honors", "About this faculty");
+        WorkExperience w = new WorkExperience("ABC Inc.", "New York", "https://abcinc.com", "Software Engineer", LocalDate.of(2024, 2, 1), LocalDate.of(2025, 2, 1), 1, "Developed cutting-edge software", false);
         TechnicalExperience t = new TechnicalExperience("PROGRAMMING", Set.of(TechnicalDetail.builder().name("java").level(5).build(), TechnicalDetail.builder().name("JavaScript").level(4).build()));
         Language l = new Language("french","beginner");
         Certification c = new Certification("myCertification", LocalDate.of(2020, 1, 1));

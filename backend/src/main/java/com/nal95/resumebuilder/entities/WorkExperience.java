@@ -18,6 +18,7 @@ public class WorkExperience {
     private String occupiedPosition;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String duration;
+    private int duration;
     private String summary;
+    private boolean actual;
 }

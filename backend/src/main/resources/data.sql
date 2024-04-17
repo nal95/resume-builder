@@ -56,7 +56,8 @@ VALUES ('John',
               "startDate": "2020-01-01",
               "endDate": "2024-01-01",
               "duration": 4,
-              "summary": "Graduated with honors"
+              "grade": "Graduated with honors",
+              "description": "<p>About this faculty</p>"
             },
             {
               "school": "University of XYZ",
@@ -65,7 +66,8 @@ VALUES ('John',
               "startDate": "2020-01-01",
               "endDate": "2024-01-01",
               "duration": 4,
-              "summary": "Graduated with honors"
+              "grade": null,
+              "description": null
             }
           ],
           "workExperiences": [
@@ -76,8 +78,9 @@ VALUES ('John',
               "occupiedPosition": "Software Engineer",
               "startDate": "2024-02-01",
               "endDate": "2025-02-01",
-              "duration": "1 year",
-              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>"
+              "duration": 1,
+              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>",
+              "actual": true
             },
             {
               "company": "ABC Inc.",
@@ -86,8 +89,9 @@ VALUES ('John',
               "occupiedPosition": "Software Engineer",
               "startDate": "2024-02-01",
               "endDate": "2025-02-01",
-              "duration": "1 year",
-              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>"
+              "duration": 1,
+              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>",
+              "actual": false
             },
             {
               "company": "ABC Inc.",
@@ -96,8 +100,9 @@ VALUES ('John',
               "occupiedPosition": "Software Engineer",
               "startDate": "2024-02-01",
               "endDate": "2025-02-01",
-              "duration": "1 year",
-              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>"
+              "duration": 1,
+              "summary": "<ul><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li><li>Developed cutting-edge software</li></ul>",
+              "actual": false
             }
           ],
           "technicalExperiences": [

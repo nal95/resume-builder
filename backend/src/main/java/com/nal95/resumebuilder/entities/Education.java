@@ -18,6 +18,7 @@ public class Education {
     private LocalDate startDate;
     private LocalDate endDate;
     private int duration;
-    private String summary;
+    private String grade;
+    private String description;
 }
 
