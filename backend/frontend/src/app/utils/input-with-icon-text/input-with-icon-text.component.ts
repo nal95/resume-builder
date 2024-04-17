@@ -48,17 +48,24 @@ export class InputWithIconTextComponent {
   @Input() step: number = 1/2;
   @Input() fieldSize: number = 10;
 
+  // TODO: bien revoir ces 2 setters
   setInputPaddingLeft(val: number) {
     if(val && val > 0){
       if( val > 6) return 7;
-      if( val > 0 && val <= 5) return 5;
+      if( val > 4 && val <= 6) return 5;
+      if( val > 0 && val <= 4) return 3.5;
     }else if (val == 0) return 0.5
 
     return 6;
   }
 
   setIconTextWidth(val: number) {
-    return val && val > 6 ? 6 : 5;
+    if(val && val >= 0){
+      if( val > 6) return 6;
+      if( val >= 0 && val <= 4) return 2.5;
+    }
+
+    return 5;
   }
 
 }
