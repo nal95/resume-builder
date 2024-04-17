@@ -70,8 +70,8 @@ body{
   float: right;
 }
 
-#main h6:not(:last-child),
-#sidebar h6:not(:last-child) {
+#main h6,
+#sidebar h6 {
   margin-bottom: 0.3rem;
   font-size: 0.75rem;
   color:  #946c00;
@@ -102,13 +102,13 @@ body{
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+
 .item {
   margin-right: 5px;
   font-size: 0.70rem;
   text-decoration: underline;
   background-color: #eff5fb;
   margin-bottom: 5px;
-
 }
 
 #highlights{

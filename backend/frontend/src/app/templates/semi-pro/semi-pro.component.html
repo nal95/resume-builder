@@ -112,8 +112,7 @@
       <h6 class="title has-text-weight-bold  is-uppercase">
         Educations </h6>
       <div class="content m-1 is-small is-flex is-flex-direction-column"
-           *ngFor="let education of data.userDetails?.educations"
-      >
+           *ngFor="let education of data.userDetails?.educations">
         <span class="has-text-weight-bold">{{ education.school}}</span>
         <span class="has-text-weight-semibold">{{ education.degree}}, {{ education.field}}</span>
         <span>{{ education.startDate}} - {{ education.endDate}} | {{ education.duration}} Years</span>
