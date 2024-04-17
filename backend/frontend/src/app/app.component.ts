@@ -1,27 +1,27 @@
 import {ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {UserComponent} from "./resume-sidebar/user/user.component";
-import {UserBasicsComponent} from "./resume-sidebar/user-basics/user-basics.component";
-import {NetworksComponent} from "./resume-sidebar/networks/networks.component";
-import {EducationsComponent} from "./resume-sidebar/educations/educations.component";
-import {WorkExperiencesComponent} from "./resume-sidebar/work-experiences/work-experiences.component";
-import {TechExperiencesComponent} from "./resume-sidebar/tech-experiences/tech-experiences.component";
-import {SkillsComponent} from "./resume-sidebar/skills/skills.component";
-import {ToolsComponent} from "./resume-sidebar/tools/tools.component";
-import {MethodologiesComponent} from "./resume-sidebar/methodologies/methodologies.component";
-import {HobbiesComponent} from "./resume-sidebar/hobbies/hobbies.component";
-import {TrainingsComponent} from "./resume-sidebar/trainings/trainings.component";
-import {LanguagesComponent} from "./resume-sidebar/languages/languages.component";
 import {BehaviorSubject, catchError, of, retry, Subject, takeUntil} from "rxjs";
 import {ResumePreviewComponent} from "./resume-preview/resume-preview.component";
 import {UserDataService} from "./services/user-data/user-data.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserDataStoreService} from "./services/user-data-store/user-data-store.service";
 import {User} from "./resume-data/user.data";
-import {CertificationsComponent} from "./resume-sidebar/certifications/certifications.component";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ResumeTemplate} from "./resume-data/template-data";
+import {UserComponent} from "./sidebar-options/user/user.component";
+import {UserBasicsComponent} from "./sidebar-options/user-basics/user-basics.component";
+import {NetworksComponent} from "./sidebar-options/networks/networks.component";
+import {EducationsComponent} from "./sidebar-options/educations/educations.component";
+import {WorkExperiencesComponent} from "./sidebar-options/work-experiences/work-experiences.component";
+import {TechExperiencesComponent} from "./sidebar-options/tech-experiences/tech-experiences.component";
+import {SkillsComponent} from "./sidebar-options/skills/skills.component";
+import {ToolsComponent} from "./sidebar-options/tools/tools.component";
+import {MethodologiesComponent} from "./sidebar-options/methodologies/methodologies.component";
+import {HobbiesComponent} from "./sidebar-options/hobbies/hobbies.component";
+import {CertificationsComponent} from "./sidebar-options/certifications/certifications.component";
+import {TrainingsComponent} from "./sidebar-options/trainings/trainings.component";
+import {LanguagesComponent} from "./sidebar-options/languages/languages.component";
 
 @Component({
   selector: 'app-root',
@@ -30,7 +30,7 @@ import {ResumeTemplate} from "./resume-data/template-data";
     NetworksComponent, EducationsComponent, WorkExperiencesComponent,
     TechExperiencesComponent, SkillsComponent, ToolsComponent,
     MethodologiesComponent, HobbiesComponent, TrainingsComponent,
-    LanguagesComponent, AsyncPipe, ResumePreviewComponent, NgClass, JsonPipe, CertificationsComponent, NavbarComponent, NgForOf, NgOptimizedImage],
+    LanguagesComponent, AsyncPipe, ResumePreviewComponent, NgClass, JsonPipe, CertificationsComponent, NavbarComponent, NgForOf, NgOptimizedImage, UserComponent, UserBasicsComponent, NetworksComponent, EducationsComponent, WorkExperiencesComponent, TechExperiencesComponent, SkillsComponent, ToolsComponent, MethodologiesComponent, HobbiesComponent, CertificationsComponent, TrainingsComponent, LanguagesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
