@@ -44,8 +44,9 @@ export class ResumePreviewComponent {
 
   @Input() selectedTemplate!: ResumeTemplate;
 
-  getImageUrl(image: string) {
-    const newImage = 'data:image/svg+xml;base64,' + image;
-    return this._sanitizer.bypassSecurityTrustResourceUrl(newImage);
-  }
+  // TODO: look of how to handle the images
+  // getImageUrl(image: string) {
+  //   const newImage = 'data:image/svg+xml;base64,' + image;
+  //   return this._sanitizer.bypassSecurityTrustResourceUrl(newImage);
+  // }
 }
