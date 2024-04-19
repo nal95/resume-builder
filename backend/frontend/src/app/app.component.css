@@ -27,6 +27,19 @@ a.actualSection :active {
   color: #485fc7;
 }
 
+.text-container {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 600px) {
+  .text-container {
+    text-overflow: ellipsis;
+    width: 80%; /* Adjust width as needed */
+  }
+}
+
 /*.container .xd {*/
 /*  margin: 0 auto;*/
 /*}*/
