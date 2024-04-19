@@ -1,53 +1,113 @@
-<ng-container *ngIf="isSimpleTyp() , else ComposedValues">
-  <div *ngIf="(getSimpleValues$() | async) as simpleValues">
-    <div class="field is-grouped is-grouped-multiline m-2 p-2">
-      <div *ngFor="let simpleValue of simpleValues" class="control">
-        <div class="tags has-addons">
-          <span class="tag is-black is-light  is-medium" type="text">{{ simpleValue }}</span>
-          <span (click)="deleteSimpleValue(simpleValues, simpleValue)"
-                class="tag is-delete is-medium is-danger is-light"></span>
-        </div>
-      </div>
-    </div>
-    <div class="field has-addons has-addons-centered m-2 p-2">
-      <div class="control">
-        <input [(ngModel)]="newSimpleValue" class="input" placeholder="{{originTyp}}" type="text">
-      </div>
-      <div class="control ">
-        <button (click)="addSimpleValue(simpleValues)" class="button is-primary" type="submit">
-          Add
-        </button>
-      </div>
-    </div>
-  </div>
-</ng-container>
 
-<ng-template #ComposedValues>
-  <div *ngIf="(getComposedValues$() | async) as composedValues">
-    <div class="field is-grouped is-grouped-multiline m-2 p-2">
-      <div *ngFor="let composedValue of composedValues" class="control">
-        <div class="tags has-addons">
-          <span class="tag is-info is-light has-text-black-bis is-medium">{{ composedValue.name }}</span>
-          <span class="tag  is-medium">{{ composedValue.compound }}</span>
-          <a (click)="deleteComposedValue(composedValue)" class="tag is-delete is-medium is-danger is-light"></a>
+  <ng-container *ngIf="(data$ | async) as values">
+    <div class="field is-grouped is-grouped-multiline ml-4 ">
+      <ng-container *ngFor="let value of values">
+        <div class="control mb-2">
+          <div class="tags has-addons">
+            <span class="tag is-dark">{{ value }}</span>
+            <span (click)="deleteValue(values, value)" class="tag is-delete"></span>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
-    <div class="field has-addons has-addons-centered m-2 p-2">
-      <div class="control">
-        <input [(ngModel)]="newComposedValue.name" class="input" placeholder="{{originTyp}}" type="text">
-      </div>
-      <div *ngIf="isCertification" class="control">
-        <input [(ngModel)]="newComposedValue.compound" class="input" type="month">
-      </div>
-      <div *ngIf="!isCertification" class="control">
-        <input [(ngModel)]="newComposedValue.compound" class="input" type="text">
-      </div>
-      <div class="control ">
-        <button (click)="addComposedValue()" class="button is-primary" type="submit">
-          Add {{ originTyp }}
+    <div class="field is-grouped is-grouped-centered">
+      <p class="control is-expanded mr-1 ml-1">
+        <app-input-with-icon-text [(ngModel)]="newSimpleValue"
+                                  [inputValue]="newSimpleValue"
+                                  [label]="''"
+                                  [placeholder]="'Add a new ' + valuesType + ' ...'"
+                                  ngDefaultControl
+                                  type="text">
+        </app-input-with-icon-text>
+      </p>
+      <p class="control mr-1">
+        <button (click)="addValue(values)"
+                class="button is-small is-primary  is-light is-rounded is-focused"
+                title="Add a new {{valuesType}}"
+                type="submit">
+                <span class="icon is-small">
+                  <i class="ri-add-box-fill"></i>
+                </span>
         </button>
-      </div>
+      </p>
     </div>
-  </div>
-</ng-template>
+  </ng-container>
+
+<!--<ng-template #ComposedValues>-->
+<!--    <div *ngIf="(getComposedValues$() | async) as composedValues">-->
+<!--      <div class="field is-grouped is-grouped-multiline m-2 p-2">-->
+<!--        <div *ngFor="let composedValue of composedValues" class="control">-->
+<!--          <div class="tags has-addons">-->
+<!--            <span class="tag is-info is-light has-text-black-bis is-medium">{{ composedValue.name }}</span>-->
+<!--            <span class="tag  is-medium">{{ composedValue.compound }}</span>-->
+<!--            <a (click)="deleteComposedValue(composedValue)" class="tag is-delete is-medium is-danger is-light"></a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="field has-addons has-addons-centered m-2 p-2">-->
+<!--        <div class="control">-->
+<!--          <input [(ngModel)]="newComposedValue.name" class="input" placeholder="{{originTyp}}" type="text">-->
+<!--        </div>-->
+<!--        <div *ngIf="isCertification" class="control">-->
+<!--          <input [(ngModel)]="newComposedValue.compound" class="input" type="month">-->
+<!--        </div>-->
+<!--        <div *ngIf="!isCertification" class="control">-->
+<!--          <input [(ngModel)]="newComposedValue.compound" class="input" type="text">-->
+<!--        </div>-->
+<!--        <div class="control ">-->
+<!--          <button (click)="addComposedValue()" class="button is-primary" type="submit">-->
+<!--            Add {{ originTyp }}-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--    <div class="field">-->
+<!--      <div class="control">-->
+<!--        <table class="table is-size-7 is-narrow is-fullwidth">-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th class="has-text-centered">Name</th>-->
+<!--            <th class="has-text-centered">Level</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr *ngFor="let technicalDetail of techExperience.technicalDetails">-->
+<!--            <td class="is-vcentered pt-2">-->
+<!--              <app-input-with-icon-text [label]="'Tech'"-->
+<!--                                        name="name"-->
+<!--                                        ngDefaultControl-->
+<!--                                        type="text"-->
+<!--                                        [inputValue]="technicalDetail.name"-->
+<!--                                        [(ngModel)]="technicalDetail.name">-->
+<!--              </app-input-with-icon-text>-->
+<!--            </td>-->
+<!--            <td class="is-grouped is-grouped-centered" style="width: 75px">-->
+<!--              <div class="field has-addons">-->
+<!--                <p class="control pt-2">-->
+<!--                  <app-input-with-icon-text name="level"-->
+<!--                                            ngDefaultControl-->
+<!--                                            type="number"-->
+<!--                                            [minNumber]="1"-->
+<!--                                            [step]="1"-->
+<!--                                            style="padding: 0"-->
+<!--                                            [inputValue]="technicalDetail.level"-->
+<!--                                            [(ngModel)]="technicalDetail.level">-->
+<!--                  </app-input-with-icon-text>-->
+<!--                </p>-->
+<!--  &lt;!&ndash;              <p class="control is-justify-content-center is-align-content-center"&ndash;&gt;-->
+<!--  &lt;!&ndash;                 *ngIf="(technicalDetail.name.length > 0 && techExperience.topic.length > 0) ">&ndash;&gt;-->
+<!--  &lt;!&ndash;                <button class="button p-0 is-small has-background-grey-dark  has-text-danger"&ndash;&gt;-->
+<!--  &lt;!&ndash;                        (click)="removeTechDetails(techExperience, technicalDetail)">&ndash;&gt;-->
+<!--  &lt;!&ndash;                  <i class="ri-close-circle-line"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;                </button>&ndash;&gt;-->
+<!--  &lt;!&ndash;              </p>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--</ng-template>-->

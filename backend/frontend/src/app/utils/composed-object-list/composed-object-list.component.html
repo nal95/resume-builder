@@ -1,0 +1,68 @@
+<ng-container *ngIf="(data$ | async) as values">
+  <div class="field">
+    <div class="control">
+      <table class="table is-fullwidth is-size-7">
+        <thead>
+        <tr>
+          <th class="has-text-centered">{{ tableHeaderColOne }}</th>
+          <th class="has-text-centered">{{ tableHeaderColTwo }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let value of values" class="has-text-centered">
+          <td class="is-justify-content-start ">
+            <span class="text-container tag is-dark">{{ value.name }}</span>
+          </td>
+          <td>
+                <span class="tags is-justify-content-end">
+                  <span [ngClass]="{'is-hidden': (value.name.length > 25 && isSmall)}" class="tag is-dark">
+                    {{ value.compound }}
+                  </span>
+                  <span (click)="deleteComposedValue(value)" class="tag has-text-danger is-danger is-delete">
+                  </span>
+                </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>
+
+<div class="field is-flex is-justify-content-space-between is-align-content-space-between">
+  <p class="control is-fullwidth">
+    <app-input-with-icon-text [(ngModel)]="composedValue.name"
+                              [fieldSize]="15"
+                              [inputValue]="composedValue.name"
+                              [label]="''"
+                              [placeholder]="valuesType + ' ...'"
+                              ngDefaultControl
+                              type="text">
+    </app-input-with-icon-text>
+  </p>
+  <p *ngIf="valuesType == 'Languages'" class="control">
+    <span class="select is-fullwidth is-small is-rounded">
+      <select [(ngModel)]="composedValue.compound">
+        <option *ngFor="let level of languageLevels | keyvalue" [value]="level.value">{{ level.key }}</option>
+      </select>
+    </span>
+  </p>
+  <p *ngIf="valuesType != 'Languages'" class="control is-small">
+    <app-input-with-icon-text [(ngModel)]="composedValue.compound"
+                              [inputValue]="composedValue.compound"
+                              [label]="''"
+                              [placeholder]="tableHeaderColTwo"
+                              ngDefaultControl
+                              type="{{valuesType == 'Certifications'? 'month' : 'text'}}">
+    </app-input-with-icon-text>
+  </p>
+  <p class="control is-centered">
+    <button (click)="addComposedValue()"
+            [disabled]="!composedValue.name || !composedValue.compound"
+            class="button is-small is-primary is-light is-rounded is-focused">
+        <span class="icon is-small">
+          <i class="ri-add-box-fill"></i>
+        </span>
+    </button>
+  </p>
+</div>
