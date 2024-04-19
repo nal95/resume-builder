@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {UserDataType} from "../../resume-data/user.data";
 import {EasyListComponent} from "../../utils/easy-list/easy-list.component";
+import {ResumeDataOptions} from "../../resume-data/resume-options-type";
 
 @Component({
   selector: 'app-methodologies',
@@ -13,5 +13,5 @@ import {EasyListComponent} from "../../utils/easy-list/easy-list.component";
   `,
 })
 export class MethodologiesComponent {
-  valuesType: UserDataType = UserDataType.TOOLS;
+  valuesType: ResumeDataOptions = ResumeDataOptions.METHODOLOGIES;
 }

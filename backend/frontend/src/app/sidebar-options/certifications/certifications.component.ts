@@ -1,17 +1,17 @@
 import {Component} from '@angular/core';
-import {UserDataType} from "../../resume-data/user.data";
-import {EasyListComponent} from "../../utils/easy-list/easy-list.component";
+import {ResumeDataOptions} from "../../resume-data/resume-options-type";
+import {ComposedObjectListComponent} from "../../utils/composed-object-list/composed-object-list.component";
 
 @Component({
   selector: 'app-certifications',
   standalone: true,
   imports: [
-    EasyListComponent
+    ComposedObjectListComponent
   ],
   template: `
-    <app-easy-list [valuesType]="valuesType"></app-easy-list>
+    <app-composed-object-list [valuesType]="valuesType"></app-composed-object-list>
   `
 })
 export class CertificationsComponent {
-  valuesType: UserDataType = UserDataType.CERTIFICATIONS;
+  valuesType: ResumeDataOptions = ResumeDataOptions.CERTIFICATIONS;
 }

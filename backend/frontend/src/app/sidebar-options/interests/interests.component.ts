@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {UserDataType} from "../../resume-data/user.data";
 import {EasyListComponent} from "../../utils/easy-list/easy-list.component";
+import {ResumeDataOptions} from "../../resume-data/resume-options-type";
 
 @Component({
-  selector: 'app-hobbies',
+  selector: 'app-interests',
   standalone: true,
   imports: [
     EasyListComponent
@@ -12,6 +12,6 @@ import {EasyListComponent} from "../../utils/easy-list/easy-list.component";
     <app-easy-list [valuesType]="valuesType"></app-easy-list>
   `
 })
-export class HobbiesComponent {
-  valuesType: UserDataType = UserDataType.HOBBIES_AND_INTEREST;
+export class InterestsComponent {
+  valuesType: ResumeDataOptions = ResumeDataOptions.INTERESTS;
 }

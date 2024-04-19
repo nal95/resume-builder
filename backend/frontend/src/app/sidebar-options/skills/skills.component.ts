@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {EasyListComponent} from "../../utils/easy-list/easy-list.component";
-import {UserDataType} from "../../resume-data/user.data";
+import {ResumeDataOptions} from "../../resume-data/resume-options-type";
 
 @Component({
   selector: 'app-skills',
@@ -20,5 +20,5 @@ import {UserDataType} from "../../resume-data/user.data";
   `
 })
 export class SkillsComponent {
-  valuesType: UserDataType = UserDataType.SKILLS;
+  valuesType: ResumeDataOptions = ResumeDataOptions.SKILLS;
 }
