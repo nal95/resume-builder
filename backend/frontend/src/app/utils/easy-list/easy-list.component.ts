@@ -7,11 +7,6 @@ import {InputWithIconTextComponent} from "../input-with-icon-text/input-with-ico
 import {ResumeDataOptions} from "../../resume-data/resume-options-type";
 import {User} from "../../resume-data/user-options.data.model";
 
-interface ComposedTyp {
-  name: string,
-  compound: string,
-}
-
 @Component({
   selector: 'app-easy-list',
   standalone: true,
@@ -33,8 +28,6 @@ export class EasyListComponent implements OnInit, OnDestroy{
   isEasyList: boolean = false;
 
   newValue: string = '';
-  // newComposedValue: ComposedTyp = {} as ComposedTyp;
-  // isCertification = this.valuesType == ResumeDataOptions.CERTIFICATIONS;
 
   constructor(private dataStorageService: UserDataStoreService) {
   }

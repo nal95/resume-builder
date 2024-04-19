@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
-import {ResumeTemplateStoreService} from "../../services/templates/resume-template-store.service";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
