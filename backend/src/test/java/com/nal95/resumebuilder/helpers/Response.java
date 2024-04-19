@@ -66,7 +66,7 @@ public class Response {
                 .tools(Set.of("Git", "Jira", "Webpack", "TDD", "MVC"))
                 .methodologies(Set.of("Agile", "Scrum"))
                 .skills(Set.of("SQL", "Firebase", "Algorithm"))
-                .hobbiesAndInterest(Set.of("Sport", "Travel"))
+                .interests(Set.of("Sport", "Travel"))
                 .languages(Set.of(l))
                 .certifications(Set.of(c))
                 .trainings(Set.of(tn))

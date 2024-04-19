@@ -26,16 +26,6 @@ VALUES ('John',
             "website": "www.johndoe.com",
             "relevantExperienceYears": 5
           },
-          "languages": [
-            {
-              "name": "German",
-              "level": "Beginner"
-            },
-            {
-              "name": "French",
-              "level": "Proficiency"
-            }
-          ],
           "networks": [
             {
               "name": "johndoe",
@@ -251,9 +241,19 @@ VALUES ('John',
               ]
             }
           ],
+          "languages": [
+            {
+              "name": "German",
+              "level": "Beginner"
+            },
+            {
+              "name": "French",
+              "level": "Proficiency"
+            }
+          ],
           "certifications": [
             {
-              "name": "Google Cloud Associate Cloud Engineer",
+              "name": "Google Associate Cloud Engineer",
               "validity": "2026-01-01"
             }
           ],
@@ -278,7 +278,7 @@ VALUES ('John',
             "Firebase",
             "Algorithm"
           ],
-          "hobbiesAndInterest": [
+          "interests": [
             "Sport",
             "Reading",
             "Playing the Piano",

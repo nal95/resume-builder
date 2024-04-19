@@ -1,6 +1,7 @@
 // Main export interface representing the entire user data for the resume
+
 export interface User {
-  id?: number,
+  id: number,
   firstName: string,
   lastName: string,
   email: string,
@@ -10,14 +11,14 @@ export interface User {
 export interface UserDetails {
   basic: UserBasic,
   image:string,
-  languages: Language[],
   networks: Network[],
   educations: Education[],
   workExperiences: WorkExperience[],
   technicalExperiences: TechnicalExperience[],
+  languages: Language[],
   certifications: Certification[],
   trainings: Training[],
-  hobbiesAndInterest: string[],
+  interests: string[],
   tools: string[],
   methodologies: string[],
   skills: string[],
@@ -91,24 +92,3 @@ export interface TechnicalExperience {
   technicalDetails: TechnicalDetail[],
 }
 
-export enum UserDataType {
-  //simple type
-  TOOLS,
-  METHODOLOGIES,
-  SKILLS,
-  HOBBIES_AND_INTEREST,
-
-  //composed type
-  CERTIFICATIONS,
-  TRAININGS,
-  LANGUAGES,
-}
-
-export enum LanguageLevel {
-  'A1' = 'Beginner',
-  'A2' = 'Elementary',
-  'B1' = 'Intermediate',
-  'B2' = 'Upper Intermediate',
-  'C1' = 'Advanced',
-  'C2' = 'Proficiency'
-}

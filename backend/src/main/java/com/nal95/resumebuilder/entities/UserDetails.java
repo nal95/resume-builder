@@ -12,15 +12,15 @@ import java.util.Set;
 public class UserDetails {
     private UserBasic basic;
     private String image; // this is convert to base64
-    private Set<Language> languages;
     private Set<Network> networks;
     private Set<Education> educations;
     private Set<WorkExperience> workExperiences;
     private Set<TechnicalExperience> technicalExperiences;
+    private Set<Language> languages;
     private Set<Certification> certifications;
     private Set<Training> trainings;
+    private Set<String> interests;
     private Set<String> tools;
     private Set<String> methodologies;
     private Set<String> skills;
-    private Set<String> hobbiesAndInterest;
 }
