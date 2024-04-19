@@ -1,6 +1,6 @@
 .hero {
   width: 100%;
-  position: fixed;
+  /*position: fixed;*/
   min-height: 100vh;
   background-color: #777777;
 }
@@ -20,9 +20,6 @@
   justify-content: center;
 }
 
-/*a.actualSection :hover{*/
-/*  color: #485fc7;*/
-/*}*/
 a.actualSection :active {
   color: #485fc7;
 }
@@ -40,11 +37,34 @@ a.actualSection :active {
   }
 }
 
-/*.container .xd {*/
-/*  margin: 0 auto;*/
-/*}*/
+.sidebar {
+  height: 80vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
 
-/*.hero-body {*/
-/*  max-height: 20cm;*/
-/*  overflow-y: auto; !* Enable sidebar scrolling if needed *!*/
-/*}*/
+/*!* Hide scrollbar for Firefox *!*/
+.sidebar::-webkit-scrollbar,
+.template-image::-webkit-scrollbar {
+  display: none;
+}
+
+.template-image {
+  width: 30%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow-y: auto;
+}
+
+.card-footer-item {
+  border-right: none;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .template-image {
+    width: 70%;
+  }
+}

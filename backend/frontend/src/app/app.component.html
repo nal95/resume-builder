@@ -1,42 +1,13 @@
-<section class="hero is-small">
+<section class="hero">
   <!-- Hero head: will stick at the top -->
   <div class="hero-head">
-    <nav class="navbar">
-      <div class="container is-fluid">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <img src="https://bulma.io/assets/images/bulma-type-white.png" alt="Logo" />
-          </a>
-          <span class="navbar-burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item is-active"> Home </a>
-            <a class="navbar-item"> Examples </a>
-            <a class="navbar-item"> Documentation </a>
-            <span class="navbar-item">
-              <a class="button is-primary is-inverted">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Download</span>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <app-navbar [isModalOpen$]=(isModalOpen$)></app-navbar>
   </div>
 
   <!-- Hero content: will be in the middle -->
-  <div class="hero-body">
+  <div class="hero-body has-navbar-fixed-top">
       <div class="columns is-2 is-fullheight pt-3">
-        <div class="modal" [ngClass]="{'is-active' : (isModalOpen$ | async)}">
+        <div [ngClass]="{'is-active' : (isModalOpen$ | async)}" class="modal" id="template-selection">
           <div class="modal-background"></div>
           <div class="modal-content template-image">
             <div class="columns is-multiline is-centered">
@@ -49,21 +20,21 @@
                   </div>
                   <footer class=" is-flex is-justify-content-between">
                     <div class="card-footer-item">
-                  <span class="icon is-small" [ngClass]="{'is-clickable' : resumeTemplates.length > 1 }"
-                        (click)="previousTemplate()">
-                    <i class="ri-arrow-left-circle-fill"></i>
-                  </span>
+                      <span (click)="previousTemplate()" [ngClass]="{'is-clickable' : resumeTemplates.length > 1 }"
+                            class="icon is-small">
+                        <i class="ri-arrow-left-circle-fill"></i>
+                      </span>
                     </div>
                     <div class="card-footer-item">
-                  <span class="is-text is-small">
-                   {{selectedTemplate.name}}
-                  </span>
+                      <span class="is-text is-small">
+                       {{ selectedTemplate.name }}
+                      </span>
                     </div>
                     <div class="card-footer-item">
-                  <span class="icon is-small" [ngClass]="{'is-clickable' : resumeTemplates.length > 1 }"
-                        (click)="nextTemplate()">
-                    <i class="ri-arrow-right-circle-fill"></i>
-                  </span>
+                      <span (click)="nextTemplate()" [ngClass]="{'is-clickable' : resumeTemplates.length > 1 }"
+                            class="icon is-small">
+                        <i class="ri-arrow-right-circle-fill"></i>
+                      </span>
                     </div>
                   </footer>
                 </div>
@@ -72,7 +43,7 @@
           </div>
           <button class="modal-close is-large" (click)="closeModal()" aria-label="close"></button>
         </div>
-        <div class="column is-one-fifth" [ngClass]="{'is-3': isSmall}" id="sidebar">
+        <div [ngClass]="{'is-3': isSmall}" class="column sidebar is-one-fifth">
           <aside class="menu">
             <p class="menu-label">Settings</p>
             <ng-container *ngIf="showSideBar">
@@ -228,8 +199,8 @@
             <app-networks *ngIf="!showSideBar && actualSection == 'networks'"></app-networks>
             <app-educations *ngIf="!showSideBar && actualSection == 'educations'"></app-educations>
             <app-work-experiences *ngIf="!showSideBar && actualSection == 'work experiences'"></app-work-experiences>
-            <app-tech-experiences
-              *ngIf="!showSideBar && actualSection == 'technical experiences'"></app-tech-experiences>
+            <app-tech-experiences *ngIf="!showSideBar && actualSection == 'technical experiences'">
+            </app-tech-experiences>
             <app-skills *ngIf="!showSideBar && actualSection == 'skills'"></app-skills>
             <app-tools *ngIf="!showSideBar && actualSection == 'tools'"></app-tools>
             <app-methodologies *ngIf="!showSideBar && actualSection == 'methodologies'"></app-methodologies>
@@ -241,15 +212,7 @@
           </aside>
         </div>
         <div class="column">
-<!--          <app-resume-preview [selectedTemplate] = "(selectedTemplate)" ></app-resume-preview>-->
-          <div class="columns is-multiline">
-            <div class="column is-full is-centered">
-              zoom
-            </div>
-            <div class="column">
-              <app-resume-preview [selectedTemplate] = "(selectedTemplate)" ></app-resume-preview>
-            </div>
-          </div>
+          <app-resume-preview [selectedTemplate]="(selectedTemplate)"></app-resume-preview>
         </div>
 
       </div>

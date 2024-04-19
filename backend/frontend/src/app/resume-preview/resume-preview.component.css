@@ -1,0 +1,17 @@
+.preview {
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: auto;
+  height: 90vh; /* Hauteur de la page A4 */
+  max-height: 100vh;
+}
+
+.preview::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .preview {
+    width: 70%;
+  }
+}

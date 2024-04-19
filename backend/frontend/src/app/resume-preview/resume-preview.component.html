@@ -1,9 +1,26 @@
-<ng-container [ngSwitch]="selectedTemplate.name">
-  <app-simple *ngSwitchDefault></app-simple>
-  <app-semi-pro *ngSwitchCase="'Semi Pro'"></app-semi-pro>
-</ng-container>
-
-<!--<div class=" box" style="position: fixed">-->
-<!--  zoom-->
-<!--</div>-->
-<!--<app-semi-pro></app-semi-pro>-->
+<div class="columns is-multiline">
+  <div class="column is-full is-centered">
+    <div class="field is-grouped is-grouped-centered">
+      <p class="control">
+        <button (click)="zoomIn()" class="button is-small is-light is-rounded is-focused" type="submit">
+          <span class="icon is-small">
+            <i class="ri-add-fill"></i>
+          </span>
+        </button>
+      </p>
+      <p class="control">
+        <button (click)="zoomOut()" class="button is-small is-light is-rounded is-focused" type="submit">
+          <span class="icon is-small">
+            <i class="ri-subtract-fill"></i>
+          </span>
+        </button>
+      </p>
+    </div>
+  </div>
+  <div [style.zoom]="zoomLevel" class="column preview">
+    <ng-container [ngSwitch]="selectedTemplate.name">
+      <app-simple *ngSwitchDefault></app-simple>
+      <app-semi-pro *ngSwitchCase="'Semi Pro'"></app-semi-pro>
+    </ng-container>
+  </div>
+</div>

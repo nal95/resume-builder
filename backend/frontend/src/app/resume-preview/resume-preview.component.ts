@@ -38,11 +38,23 @@ import {ResumeTemplate} from "../resume-data/template-data";
 })
 export class ResumePreviewComponent {
 
+  @Input() selectedTemplate!: ResumeTemplate;
+
   constructor(private _sanitizer: DomSanitizer,
               private dataStorageService: UserDataStoreService) {
   }
 
-  @Input() selectedTemplate!: ResumeTemplate;
+  zoomLevel: number = 1; // Initial zoom level
+
+  zoomIn() {
+    this.zoomLevel += 0.1; // Increase zoom level by 10%
+  }
+
+  zoomOut() {
+    if (this.zoomLevel > 0.1) {
+      this.zoomLevel -= 0.1; // Decrease zoom level by 10%, but ensure it doesn't go below 10%
+    }
+  }
 
   // TODO: look of how to handle the images
   // getImageUrl(image: string) {
