@@ -15,7 +15,7 @@ export class UserDataStoreService {
     return this._userData.getValue();
   }
 
-  private set userData(val: User) {
+  set userData(val: User) {
     this._userData.next(val);
   }
 

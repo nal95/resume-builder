@@ -27,7 +27,7 @@ export class TechExperiencesComponent {
     map(user => user.userDetails.technicalExperiences)
   );
 
-  constructor(public dataStorageService: UserDataStoreService) {
+  constructor(private dataStorageService: UserDataStoreService) {
   }
 
   toggleTechExperience(techExperience: TechnicalExperience) {

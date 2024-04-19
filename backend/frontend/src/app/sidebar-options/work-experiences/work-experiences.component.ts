@@ -28,10 +28,7 @@ export class WorkExperiencesComponent {
     map(user => user.userDetails.workExperiences)
   );
 
-  isActual$: BehaviorSubject<boolean> = new BehaviorSubject(false)
-
-  constructor(public dataStorageService: UserDataStoreService) {
-  }
+  constructor(private dataStorageService: UserDataStoreService) {}
 
   addWorkExperience() {
     let userData = this.dataStorageService.userData;

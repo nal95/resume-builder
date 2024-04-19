@@ -19,7 +19,7 @@ export class SimpleComponent {
 
   data$ = this.data.userData$;
 
-  constructor(public data: UserDataStoreService, private template: ResumeTemplateStoreService) {
+  constructor(private data: UserDataStoreService) {
   }
 
   checkRead(val: string) {

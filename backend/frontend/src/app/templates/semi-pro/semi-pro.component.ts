@@ -19,7 +19,7 @@ export class SemiProComponent {
 
   data$ = this.data.userData$;
 
-  constructor(private data: UserDataStoreService, private template: ResumeTemplateStoreService) {
+  constructor(private data: UserDataStoreService) {
   }
 
 

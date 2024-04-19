@@ -39,7 +39,7 @@ import {ResumeTemplate} from "../resume-data/template-data";
 export class ResumePreviewComponent {
 
   constructor(private _sanitizer: DomSanitizer,
-              public dataStorageService: UserDataStoreService) {
+              private dataStorageService: UserDataStoreService) {
   }
 
   @Input() selectedTemplate!: ResumeTemplate;

@@ -3,6 +3,7 @@ import {AsyncPipe, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
 import {InputWithIconTextComponent} from "../../utils/input-with-icon-text/input-with-icon-text.component";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-user',
@@ -17,6 +18,9 @@ import {InputWithIconTextComponent} from "../../utils/input-with-icon-text/input
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  constructor(public userData: UserDataStoreService) {
+
+  userData$ = this.dataStorageService.userData$;
+
+  constructor(private dataStorageService: UserDataStoreService) {
   }
 }

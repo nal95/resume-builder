@@ -27,7 +27,7 @@ export class NetworksComponent {
     map(user => user.userDetails.networks)
   );
 
-  constructor(public dataStorageService: UserDataStoreService) {
+  constructor(private dataStorageService: UserDataStoreService) {
   }
 
   addNetwork() {

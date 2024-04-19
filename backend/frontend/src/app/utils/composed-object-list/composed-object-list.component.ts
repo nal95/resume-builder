@@ -64,7 +64,7 @@ export class ComposedObjectListComponent implements OnInit, OnDestroy {
   tableHeaderColTwo = '';
   languageLevels = LanguageLevel;
 
-  constructor(public dataStorageService: UserDataStoreService) {
+  constructor(private dataStorageService: UserDataStoreService) {
     this.checkIfMobile();
   }
 

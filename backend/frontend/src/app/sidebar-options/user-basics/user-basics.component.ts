@@ -26,23 +26,12 @@ export class UserBasicsComponent {
     map(user => user.userDetails.basic)
   );
 
-  constructor(public dataStorageService: UserDataStoreService) {
-  }
+  constructor(private dataStorageService: UserDataStoreService) {}
 
   onSummaryChanged(summary: string) {
     let userData = this.dataStorageService.userData;
     userData.userDetails.basic.summary = summary;
 
     this.dataStorageService.setUserData(userData);
-  }
-
-  getEM(val: number) {
-    if (val && val > 6) return 7;
-    return 6;
-  }
-
-  getEMIcon(val: number) {
-    if (val && val > 6) return 6
-    return val;
   }
 }

@@ -35,7 +35,7 @@ export class EducationsComponent {
   isSmall: boolean = false;
 
 
-  constructor(public dataStorageService: UserDataStoreService,) {
+  constructor(private dataStorageService: UserDataStoreService,) {
     this.checkIfMobile();
   }
 

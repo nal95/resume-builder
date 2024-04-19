@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(private resumeDataService: UserDataService,
-              public dataStorageService: UserDataStoreService,
+              private dataStorageService: UserDataStoreService,
               private cdr: ChangeDetectorRef
               ) {
     this.checkIfMobile();
