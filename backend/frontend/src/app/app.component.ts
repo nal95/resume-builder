@@ -6,7 +6,7 @@ import {ResumePreviewComponent} from "./resume-preview/resume-preview.component"
 import {UserDataService} from "./services/user-data/user-data.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {UserDataStoreService} from "./services/user-data-store/user-data-store.service";
-import {User} from "./resume-data/user.data";
+import {User} from "./resume-data/user-options.data.model";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ResumeTemplate} from "./resume-data/template-data";
 import {UserComponent} from "./sidebar-options/user/user.component";
@@ -18,10 +18,11 @@ import {TechExperiencesComponent} from "./sidebar-options/tech-experiences/tech-
 import {SkillsComponent} from "./sidebar-options/skills/skills.component";
 import {ToolsComponent} from "./sidebar-options/tools/tools.component";
 import {MethodologiesComponent} from "./sidebar-options/methodologies/methodologies.component";
-import {HobbiesComponent} from "./sidebar-options/hobbies/hobbies.component";
+import {InterestsComponent} from "./sidebar-options/interests/interests.component";
 import {CertificationsComponent} from "./sidebar-options/certifications/certifications.component";
 import {TrainingsComponent} from "./sidebar-options/trainings/trainings.component";
 import {LanguagesComponent} from "./sidebar-options/languages/languages.component";
+import {ResumeDataType} from "./resume-data/resume-options-type";
 
 @Component({
   selector: 'app-root',
@@ -29,8 +30,8 @@ import {LanguagesComponent} from "./sidebar-options/languages/languages.componen
   imports: [RouterOutlet, NgIf, UserComponent, UserBasicsComponent,
     NetworksComponent, EducationsComponent, WorkExperiencesComponent,
     TechExperiencesComponent, SkillsComponent, ToolsComponent,
-    MethodologiesComponent, HobbiesComponent, TrainingsComponent,
-    LanguagesComponent, AsyncPipe, ResumePreviewComponent, NgClass, JsonPipe, CertificationsComponent, NavbarComponent, NgForOf, NgOptimizedImage, UserComponent, UserBasicsComponent, NetworksComponent, EducationsComponent, WorkExperiencesComponent, TechExperiencesComponent, SkillsComponent, ToolsComponent, MethodologiesComponent, HobbiesComponent, CertificationsComponent, TrainingsComponent, LanguagesComponent],
+    MethodologiesComponent, InterestsComponent, TrainingsComponent,
+    LanguagesComponent, AsyncPipe, ResumePreviewComponent, NgClass, JsonPipe, CertificationsComponent, NavbarComponent, NgForOf, NgOptimizedImage, UserComponent, UserBasicsComponent, NetworksComponent, EducationsComponent, WorkExperiencesComponent, TechExperiencesComponent, SkillsComponent, ToolsComponent, MethodologiesComponent, InterestsComponent, CertificationsComponent, TrainingsComponent, LanguagesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -121,10 +122,10 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  collectDetailsOf(sectionElement: HTMLElement) {
+  collectDetailsOf(sectionElement: ResumeDataType) {
     if (this.userDataIsLoaded$.getValue()) {
       this.showSideBar = !this.showSideBar;
-      this.actualSection = sectionElement.id
+      this.actualSection = sectionElement;
     }
   }
 

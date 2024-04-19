@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "../../resume-data/user.data";
+import {User} from "../../resume-data/user-options.data.model";
 import {GET_USER} from "../../backend/api-endpoints";
 
 @Injectable({

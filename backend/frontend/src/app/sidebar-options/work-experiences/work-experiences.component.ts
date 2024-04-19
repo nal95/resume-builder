@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {BehaviorSubject, map} from "rxjs";
-import {WorkExperience} from "../../resume-data/user.data";
+import {WorkExperience} from "../../resume-data/user-options.data.model";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgTemplateOutlet} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";

@@ -68,4 +68,22 @@ export class InputWithIconTextComponent {
     return 5;
   }
 
+  // TODO: bien revoir cette methode et bien choisir l' $event pout la validation
+  // (keyup)="controlTheInput($event)" ?
+  // controlTheInput($event: KeyboardEvent) {
+  //   const inputValueIsNumber = this.type === 'number';
+  //   const inputValueIsFloat = this.step === 1/2;
+  //   const inputValueIsInteger = this.step !== 1/2;
+  //
+  //   if (inputValueIsNumber ) {
+  //     if (inputValueIsFloat) {
+  //       if (typeof this.inputValue == 'number' && this.inputValue > 0)
+  //     }
+  //     if ($event.key === '0' || ($event.key.length > 1 && $event.key.includes('.') && inputValueIsFloat)) {
+  //       this.inputValue = this.minNumber;
+  //     } else if ($event.key.length > 1 && !inputValueIsFloat) {
+  //       this.inputValue = this.minNumber;
+  //     }
+  //   }
+  // }
 }

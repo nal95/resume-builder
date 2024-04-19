@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {map} from "rxjs";
 import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {TechnicalDetail, TechnicalExperience} from "../../resume-data/user.data";
+import {TechnicalDetail, TechnicalExperience} from "../../resume-data/user-options.data.model";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputWithIconTextComponent} from "../../utils/input-with-icon-text/input-with-icon-text.component";
 

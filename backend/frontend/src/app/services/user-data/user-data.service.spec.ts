@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {UserDataService} from './user-data.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {User} from "../../resume-data/user.data";
+import {User} from "../../resume-data/user-options.data.model";
 import {GET_USER} from "../../backend/api-endpoints";
 
 describe('ResumeDataService', () => {

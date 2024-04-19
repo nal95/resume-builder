@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {map} from "rxjs";
-import {Education} from "../../resume-data/user.data";
+import {Education} from "../../resume-data/user-options.data.model";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {UserDataStoreService} from "../../services/user-data-store/user-data-store.service";
